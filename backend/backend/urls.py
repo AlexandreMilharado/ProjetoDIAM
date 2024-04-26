@@ -17,8 +17,14 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
+from . import views
 
+app_name = 'backend'
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include("myapi.urls")),
+    path("", views.index, name='index'),
+    path("login", views.loginView, name='login'),
+    path("registar", views.registar, name='registar')
+
 ]
