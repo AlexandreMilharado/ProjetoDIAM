@@ -1,5 +1,7 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
+
 
 
 class Tag(models.Model):
@@ -9,7 +11,7 @@ class Tag(models.Model):
 class Utilizador(models.Model):
     birthday = models.DateField()
     profileImage = models.ImageField(default="")
-
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
 
 class Place(models.Model):
     title = models.CharField(max_length=50)

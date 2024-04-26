@@ -1,0 +1,227 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing:border-box;
+}
+:root {
+  --text-primary:#383838;
+  --detail-color:#5BB8FB;
+  --primarybg-color:#F9F9F9;
+  --secondarybg-color:#386BA7;
+  background-color: #ECECEC;
+  color: var(--text-primary);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+header {
+  background-color: var(--secondarybg-color);
+  color: white;
+  height: 7rem;
+  display: flex;
+  align-items: center;
+}
+
+
+header figure {
+  font-family: 'Kaushan Script';
+  height: 100%;
+  width: 40%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 55px;
+  cursor: pointer;
+}
+header figure span {
+  color: var(--detail-color);
+}
+
+header svg {
+  color: var(--detail-color);
+  height: 4rem;
+}
+
+header nav {
+  display: flex;
+  margin-left: auto;
+  margin-right: 50px;
+  gap: 50px;
+  justify-content: space-between;
+}
+
+header nav a {
+  color: white;
+  font-size: 20px;
+  transition: ease 200ms;
+}
+header nav a:hover {
+  color: var(--detail-color);
+}
+
+.place-card {
+  width: 430px;
+  height: 450px;
+  background-color: var(--primarybg-color);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.place-card img {
+  width: 100%;
+  height: 60%;
+  border-radius: 6px;
+}
+
+
+.login {
+   width: 100vw;
+   height: 100vh;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   background-image: linear-gradient( rgba(0, 0, 0, 0.21), rgba(0, 0, 0, 0.182) ),url('https://upload.wikimedia.org/wikipedia/commons/f/f8/View_of_the_Alfama_quarter_in_Lisbon_Portugal.JPG');
+   background-position: center; /* Center the image */
+   background-repeat: no-repeat; /* Do not repeat the image */
+   background-size: cover; /* Resize the background image to cover the entire container */}
+
+.login form {
+  background-color:white;
+  padding: 15px 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  border-radius: 2px;
+  scale: 1.5;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    gap: 10px ;
+}
+.login form a {
+  font-size:x-small;
+  width: 100%;
+  text-align: end;
+  color: var(--detail-color);
+  cursor: pointer;
+}
+.login a:hover {
+  text-decoration: underline var(--detail-color);
+}
+
+.login form figure {
+  display: flex;
+  font-family: 'Kaushan Script';
+  font-size: 30px;
+  justify-content: center;
+  color: var(--detail-color);
+  align-items: center;
+  margin-bottom: 30px;
+}
+.login form figure svg{
+  height: 2rem;
+}
+.login form figure span {
+  color: rgb(87, 87, 87);
+}
+
+.input-box{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+  height: 2.75rem;
+  position: relative;
+}
+
+.form-input{
+  border: none;
+  padding: 6px 5px 2px 5px;
+  cursor: text;
+  transition: .25s ease;
+  border-bottom:  1px solid rgb(154, 154, 154) ;
+  color: rgb(48, 48, 48);
+  font-size: 12px;
+}
+
+.form-input:focus{
+  border:1px solid var(--detail-color);
+  border-radius: 6px;
+}
+.form-label{
+  position: absolute;
+  top: -7px;
+  left: 3px ;
+  z-index: 10;
+  background-color: white;
+  color: rgb(163, 163, 163);
+  border-radius: 100px;
+  font-size: 10px;
+  cursor: text;
+  transition: .25s ease;
+}
+.form-input:placeholder-shown ~ .form-label{
+  font-size: 14px;
+  top: 4px;
+  left: 5px;
+}
+.form-input:focus ~ .form-label {
+  position: absolute;
+  top: -7px;
+  left: 3px ;
+  z-index: 10;
+  background-color: white;
+  border-radius: 100px;
+  font-size: 10px;
+  cursor: text;
+  transition: .25s ease;
+  color: var(--detail-color);
+}
+.form-input:focus{
+  outline: none;
+}
+
+.login button{
+  background-color: var(--detail-color);
+  border: 1px solid transparent;
+  border-radius: .75rem;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  flex: 0 0 auto;
+  font-family: "Inter var",ui-sans-serif,system-ui,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 5px 5px;
+  text-align: center;
+  text-decoration: none #6B7280 solid;
+  text-decoration-thickness: auto;
+  transition-duration: .2s;
+  transition-property: background-color,border-color,color,fill,stroke;
+  transition-timing-function: cubic-bezier(.4, 0, 0.2, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: auto;
+}
+
+.login button:hover {
+  background-color: var(--secondarybg-color);
+}
+
+@media (min-width: 768px) {
+  .login button {
+    padding: 5px 5px;
+  }
+}
+
+#username-text {
+  font-weight: bolder;
+  text-decoration: none;
+}
+
+
