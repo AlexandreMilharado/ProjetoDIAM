@@ -3,12 +3,39 @@ from django.urls import reverse
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
-from myapi.models import Utilizador
+from myapi.models import Utilizador, Place
 from django.utils.dateparse import parse_datetime
 
 
 def index(request):
-    return render(request, 'backend/index.html')
+    places = [Place(title='Place de test atrás da cozinha da casa da tia do meu pai mais belho',rating=4,
+                    description='Descrição do sitio de teste ao pé da cidade Teste Da santa teste',
+                    location='ISCTE', reviewNumber=3), 
+                    Place(title='Place de test',rating=9,
+                    description='Descrição do sitio de teste ao pé da cidade Teste Da santa teste',
+                    location='ISCTE', reviewNumber=3),
+                    Place(title='Place de test',rating=7,
+                    description='Descrição do sitio de teste ao pé da cidade Teste Da santa teste',
+                    location='ISCTE', reviewNumber=3),
+                    Place(title='Place de test',rating=9,
+                    description='Descrição do sitio de teste ao pé da cidade Teste Da santa teste',
+                    location='ISCTE', reviewNumber=3),
+                    Place(title='Place de test',rating=7,
+                    description='Descrição do sitio de teste ao pé da cidade Teste Da santa teste',
+                    location='ISCTE', reviewNumber=3),
+                    Place(title='Place de test',rating=9,
+                    description='Descrição do sitio de teste ao pé da cidade Teste Da santa teste',
+                    location='ISCTE', reviewNumber=3),
+                    Place(title='Place de test',rating=7,
+                    description='Descrição do sitio de teste ao pé da cidade Teste Da santa teste',
+                    location='ISCTE', reviewNumber=3),
+                    Place(title='Place de test',rating=2,
+                    description='Descrição do sitio de teste ao pé da cidade Teste Da santa teste',
+                    location='ISCTE', reviewNumber=3)]
+    hearts = []
+    for p in places:
+        hearts.append(range(p.rating//2))
+    return render(request, 'backend/index.html',{'placeList':places,'hearts':hearts })
 
 def loginView(request):
     if request.method == 'POST':
@@ -50,3 +77,10 @@ def registar(request):
 
     else:
         return render(request, 'backend/registar.html')
+    
+def profile(request):
+    if request.user.is_authenticated:
+        utilizador = Utilizador.objects.get(user=request.user)
+        return render(request, "backend/profile.html",{'user' : utilizador})
+    else:
+       return HttpResponseRedirect(reverse('login'))

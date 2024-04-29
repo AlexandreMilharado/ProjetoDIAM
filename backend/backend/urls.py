@@ -24,6 +24,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include("myapi.urls")),
     path("", views.index, name='index'),
+    path("profile", views.profile, name='profile'),
     path("login", views.loginView, name='login'),
     path("registar", views.registar, name='registar')
 
