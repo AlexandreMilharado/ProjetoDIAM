@@ -32,10 +32,8 @@ def index(request):
                     Place(title='Place de test',rating=2,
                     description='Descrição do sitio de teste ao pé da cidade Teste Da santa teste',
                     location='ISCTE', reviewNumber=3)]
-    hearts = []
-    for p in places:
-        hearts.append(range(p.rating//2))
-    return render(request, 'backend/index.html',{'placeList':places,'hearts':hearts })
+    
+    return render(request, 'website/index.html',{'placeList':places})
 
 def loginView(request):
     if request.method == 'POST':
@@ -43,7 +41,7 @@ def loginView(request):
             username = request.POST['username']
             password = request.POST['password']
         except KeyError:
-            return render(request, 'backend/login.html')
+            return render(request, 'website/login.html')
         if username and password:
             user = authenticate(username= username,password=password)
             if user is not None:
@@ -51,12 +49,12 @@ def loginView(request):
                 request.session['votos'] = 0
                 return HttpResponseRedirect(reverse('index'))
             else:
-                return render(request,'backend/login.html',{'error_message':'Credenciais incorretas'})
+                return render(request,'website/login.html',{'error_message':'Credenciais incorretas'})
         else:
-            return HttpResponseRedirect(reverse('login'))
+            return HttpResponseRedirect(reverse('website:login'))
 
     else:
-        return render(request, 'backend/login.html')
+        return render(request, 'website/login.html')
 
 def registar(request):
     if request.method == 'POST':
@@ -66,21 +64,21 @@ def registar(request):
             password = request.POST['password']
             birthday = request.POST['birthday']
         except KeyError:
-            return render(request, 'backend/registar.html')
+            return render(request, 'website/registar.html')
         if username and password and email:
             aluno = Utilizador(user=User.objects.create_user(username, email, password),birthday=parse_datetime(birthday))
             aluno.save()
 
-            return HttpResponseRedirect(reverse('login'))
+            return HttpResponseRedirect(reverse('website:login'))
         else:
-            return HttpResponseRedirect(reverse('registar'))
+            return HttpResponseRedirect(reverse('website:registar'))
 
     else:
-        return render(request, 'backend/registar.html')
+        return render(request, 'website/registar.html')
     
 def profile(request):
     if request.user.is_authenticated:
         utilizador = Utilizador.objects.get(user=request.user)
-        return render(request, "backend/profile.html",{'user' : utilizador})
+        return render(request, "website/profile.html",{'user' : utilizador})
     else:
-       return HttpResponseRedirect(reverse('login'))
+       return HttpResponseRedirect(reverse('website:login'))
