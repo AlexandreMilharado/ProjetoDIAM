@@ -123,13 +123,10 @@ def registar(request):
         return render(request, "website/registar.html")
 
 
-@login_required(login_url="/website/login")
+@login_required(login_url="/login")
 def profile(request):
-    if request.user.is_authenticated:
-        utilizador = Utilizador.objects.get(user=request.user)
-        return render(request, "website/profile.html", {"user": utilizador})
-    else:
-        return HttpResponseRedirect(reverse("website:login"))
+    utilizador = Utilizador.objects.get(user=request.user)
+    return render(request, "website/profile.html", {"user": utilizador})
 
 
 def logoutView(request):
