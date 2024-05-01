@@ -6,10 +6,9 @@
 :root {
   --text-primary:#383838;
   --detail-color:#5BB8FB;
-  --primarybg-color:#F9F9F9;
+  --primarybg-color:#fcfcfc;
   --secondarybg-color:#386BA7;
-  background-color: #ECECEC;
-  background-color: #f6f4f4;
+  background-color: #fcfcfc;
 
   color: var(--text-primary);
   font-synthesis: none;
@@ -74,13 +73,13 @@ header nav a:hover {
   position: relative;
   width: 100%;
   height: 100%;
+  min-height: 380px;
   background-color: var(--primarybg-color);
   padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  min-height: 380px;
+  /* box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; */
 }
 
 
@@ -134,11 +133,11 @@ header nav a:hover {
 .rating-container svg {
   width: 30px;
   height: auto;
-  fill: rgb(241, 48, 55);
-  color: rgba(220, 35, 41, 0.101);
+  fill: rgb(255, 204, 0);
+  color: rgb(255, 204, 0);
 }
 .rating-container span{
-  margin-left: 5px;
+  margin-left: 10px;
   font-size: 18px;
   color: rgb(51, 51, 51) ;
 }
@@ -315,7 +314,7 @@ header nav a:hover {
   border: 2px solid var(--detail-color);
 }
 .search-input-container{
-  margin: 2rem 0 0 1rem;
+  margin: 2rem 0 0 11rem;
   width: 400px;
   height: 30px;
   position: relative;
@@ -331,6 +330,80 @@ header nav a:hover {
   width: 28px;
 }
 
+.places {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 2rem;
+  padding: 2rem 10rem
+}
+
+.place {
+  display: flex;
+  padding: 0 1rem;
+  width: 100%;
+  justify-content: space-around;
+  gap: 6rem;
+}
+.place-title {
+  color: #000000;
+  font: normal 800 22px/28px "Trip Sans VF", "Trip Sans", Arial, sans-serif;
+}
+
+.place-image-container{
+  position: relative;
+  flex: 1;
+  border-radius: 10px;
+  max-height: 446px;
+  max-width: 520px;
+}
+.place-image-container img{
+  border-radius: 8px;
+  width: 100%;
+  aspect-ratio: 4/3;
+}
+.place-image-container .heart{
+  position: absolute;
+  right: 25px;
+  top: 15px;
+  padding: 4px;
+  background-color: rgb(255, 255, 255);
+  color: #000000;
+  border-radius: 100%;
+  width: 28px;
+  height: auto;
+}
+
+.place aside {
+  flex: 1;  
+}
+.place-location {
+  font-weight: 200;
+  text-decoration: underline;
+  font-size: 15px;
+  color: #4a4a4a;
+}
+.place-location svg {
+  width: 14px;
+  margin-top:10px ;
+  margin-right: 5px;
+  color: var(--detail-color);
+}
+.place aside .rating-container{
+  margin-top: 2rem;
+  font-weight: lighter;
+  color: #383838;
+}
+
+.place aside p {
+  font: normal 400 16px/22px "Trip Sans VF", "Trip Sans", Arial, sans-serif;
+  -webkit-line-clamp: 3;
+  line-break: normal;
+  cursor: pointer;
+  color: #333;
+  margin: 15px  0;
+}
+
 
   
 #username-text {
@@ -341,7 +414,9 @@ header nav a:hover {
 
 #places-container {
   margin: 2rem 1rem;
+  padding: 0 9rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 275px),1fr));
   gap: 10px;
 }
+

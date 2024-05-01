@@ -22,6 +22,10 @@ class Place(models.Model):
     reviewNumber = models.IntegerField(default=0)
     userID = models.ForeignKey(Utilizador, null=True, on_delete=models.SET_NULL)
     favoritePlaces = models.ManyToManyField(Utilizador, related_name="favoritePlaces")
+    def getRatingRange(self):
+        return range(self.rating//2)
+    def hasOddRating(self):
+        return self.rating%2==1
 
 
 class Review(models.Model):
