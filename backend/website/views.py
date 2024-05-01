@@ -6,6 +6,8 @@ from django.contrib.auth.models import User
 from myapi.models import Utilizador, Place
 from django.utils.dateparse import parse_datetime
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.core.files.storage import FileSystemStorage
+import datetime
 
 
 def index(request):
@@ -134,3 +136,33 @@ def logoutView(request):
     request.session.flush()
     logout(request)
     return HttpResponseRedirect(reverse("website:index"))
+
+
+def myPlaces(request):
+    if request.method() == "POST":
+        try:
+            title = request.POST["title"]
+            description = request.POST["description"]
+            location = request.POST["location"]
+            mainImage = request.POST["mainImage"]
+            if title and description and location:
+                p = Place(
+                    title=title,
+                    description=description,
+                    location=location,
+                    mainImage=saveAndGetImage(
+                        mainImage, request.user, "defaultPlace.jpg"
+                    ),
+                )
+                p.save()
+        except KeyError:
+            return render(request, "website/myPlaces.html")
+
+
+def saveAndGetImage(file, user, defaultFile):
+    if not file:
+        return f"/images/{defaultFile}"
+
+    fs = FileSystemStorage()
+    filename = fs.save(f"{user}|{datetime.datetime.now()}", file)
+    return f"/media{fs.url(filename)}"
