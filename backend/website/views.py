@@ -47,7 +47,7 @@ def loginView(request):
             if user is not None:
                 login(request, user)
                 request.session['votos'] = 0
-                return HttpResponseRedirect(reverse('index'))
+                return HttpResponseRedirect(reverse('website:index'))
             else:
                 return render(request,'website/login.html',{'error_message':'Credenciais incorretas'})
         else:

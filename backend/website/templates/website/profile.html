@@ -1,0 +1,22 @@
+{% extends "website/base.html" %}
+{% load static %}
+{% block content %}
+<section>
+    <figure>
+        <img id="main-profile-photo" class="profile-photo" src="{% static 'images/no-profile-img.png'%}"
+            alt="profile Image" width="250" height="250">
+    </figure>
+    <label>
+        Email:{{ request.user.email }}
+    </label>
+    <label>
+        Username:{{ request.user.username }}
+    </label>
+    <label>
+        Birthday:{{ request.user.Utilizador.birthday }}
+    </label>
+    <label>
+        Password: ******
+    </label>
+</section>
+{% endblock %}

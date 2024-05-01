@@ -10,7 +10,7 @@ class Tag(models.Model):
 
 class Utilizador(models.Model):
     birthday = models.DateField()
-    profileImage = models.ImageField(default="")
+    profileImage = models.ImageField(default="ProjetoDIAM\backend\website\static\images\no-profile-img.png")
     user = models.OneToOneField(User,on_delete=models.CASCADE)
 
 class Place(models.Model):
