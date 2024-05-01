@@ -18,11 +18,11 @@ Including another URLconf
 from django.urls import path
 from . import views
 
-app_name = 'website'
+app_name = "website"
 urlpatterns = [
-    path("", views.index, name='index'),
-    path("profile", views.profile, name='profile'),
-    path("login", views.loginView, name='login'),
-    path("registar", views.registar, name='registar'),
-
+    path("", views.index, name="index"),
+    path("profile", views.profile, name="profile"),
+    path("login", views.loginView, name="login"),
+    path("registar", views.registar, name="registar"),
+    path("logout", views.logoutView, name="logout"),
 ]
