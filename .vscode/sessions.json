@@ -1,0 +1,64 @@
+{
+  "$schema": "https://cdn.statically.io/gh/nguyenngoclongdev/cdn/main/schema/v10/terminal-keeper.json",
+  "theme": "tribe",
+  "active": "saved-session",
+  "activateOnStartup": true,
+  "keepExistingTerminals": false,
+  "sessions": {
+    "default": [
+      {
+        "name": "hello",
+        "autoExecuteCommands": true,
+        "icon": "person",
+        "color": "terminal.ansiGreen",
+        "commands": [
+          "echo hello"
+        ]
+      },
+      [
+        {
+          "name": "docker:ros",
+          "commands": [
+            ""
+          ]
+        },
+        {
+          "name": "docker:k8s",
+          "commands": [
+            ""
+          ]
+        }
+      ],
+      [
+        {
+          "name": "docker:nats",
+          "commands": [
+            ""
+          ]
+        },
+        {
+          "name": "docker:fleet",
+          "commands": [
+            ""
+          ]
+        }
+      ]
+    ],
+    "saved-session": [
+      {
+        "name": "connect",
+        "autoExecuteCommands": true,
+        "commands": [
+          ".\\.venv\\Scripts\\Activate.ps1 ; cd backend ; py manage.py runserver"
+        ]
+      },
+      {
+        "name": "open site",
+        "autoExecuteCommands": true,
+        "commands": [
+          "start msedge http://127.0.0.1:8000/"
+        ]
+      }
+    ]
+  }
+}

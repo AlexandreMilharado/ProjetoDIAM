@@ -1,46 +1,45 @@
 from django.db import models
+from django.utils import timezone
+from django.contrib.auth.models import User
+
 
 
 class Tag(models.Model):
     name = models.CharField(max_length=50)
 
 
-class Explorer(models.Model):
+class Utilizador(models.Model):
     birthday = models.DateField()
     profileImage = models.ImageField(default="")
-
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
 
 class Place(models.Model):
     title = models.CharField(max_length=50)
-    rating = models.DecimalField(max_digits=2, decimal_places=1)
+    rating = models.SmallIntegerField(null=True)
     description = models.CharField(max_length=300)
     location = models.CharField(max_length=200)
     mainImage = models.ImageField(default="")
-    tags = models.ManyToManyField(Tag, related_name="places")
-    userID = models.ForeignKey(Explorer, null=True, on_delete=models.SET_NULL)
-    favoritePlaces = models.ManyToManyField(Explorer, related_name="favoritePlaces")
+    reviewNumber = models.IntegerField(default=0)
+    userID = models.ForeignKey(Utilizador, null=True, on_delete=models.SET_NULL)
+    favoritePlaces = models.ManyToManyField(Utilizador, related_name="favoritePlaces")
+    def getRatingRange(self):
+        return range(self.rating//2)
+    def hasOddRating(self):
+        return self.rating%2==1
 
 
-class Post(models.Model):
-    title = models.CharField(max_length=50)
+class Review(models.Model):
+    comment = models.CharField(max_length=300, null=True)
+    rating = models.SmallIntegerField(null=True)
     mainImage = models.ImageField(default="")
-    numLikes = models.IntegerField(default=0)
-    numDisLikes = models.IntegerField(default=0)
+    data = models.DateField(default=timezone.now())
     placeID = models.ForeignKey(Place, on_delete=models.CASCADE)
-    userID = models.ForeignKey(Explorer, on_delete=models.CASCADE)
+    userID = models.ForeignKey(Utilizador, on_delete=models.CASCADE)
+    reviewID = models.ForeignKey("self", on_delete=models.CASCADE, null=True)
+    likedTags = models.ManyToManyField(Tag, related_name="likedTags")
 
 
-class Comment(models.Model):
-    message = models.CharField(max_length=300)
-    numLikes = models.IntegerField(default=0)
-    numDisLikes = models.IntegerField(default=0)
-    postID = models.ForeignKey(Post, on_delete=models.CASCADE)
-
-
-class Reaction(models.Model):
-    userID = models.ForeignKey(Explorer, on_delete=models.CASCADE)
-    rating = models.DecimalField(max_digits=2, decimal_places=1, null=True)
-    like = models.BooleanField(null=True)
-    commentID = models.ForeignKey(Comment, null=True, on_delete=models.CASCADE)
-    postID = models.ForeignKey(Post, null=True, on_delete=models.CASCADE)
-    placeID = models.ForeignKey(Place, null=True, on_delete=models.CASCADE)
+class TagPlace(models.Model):
+    likeNumber = models.IntegerField(default=1)
+    placeID = models.ForeignKey(Place, on_delete=models.CASCADE)
+    tagID = models.ForeignKey(Tag, on_delete=models.CASCADE)
