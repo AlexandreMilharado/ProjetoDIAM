@@ -1,0 +1,82 @@
+* {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  text-decoration: none;
+}
+:root {
+  --text-primary:white;
+  --detail-color:#29a19c;
+  --primarybg-color:#27323a;
+  background-color: #435055;
+  color: var(--text-primary);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+header {
+  background-color: var(--primarybg-color);
+  height: 7rem;
+  display: flex;
+  align-items: center;
+}
+
+
+header figure {
+  height: 100%;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 55px;
+  cursor: pointer;
+}
+
+header svg {
+  color: #29a19c;
+  height: 4rem;
+}
+
+header nav {
+  display: flex;
+  margin-left: auto;
+  margin-right: 50px;
+  gap: 50px;
+  justify-content: space-between;
+}
+
+header nav a {
+  color: var(--text-primary);
+  font-size: 20px;
+  transition: ease 200ms;
+}
+header nav a:hover {
+  color: var(--detail-color);
+}
+
+.place-card {
+  width: 430px;
+  height: 450px;
+  background-color: var(--primarybg-color);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.place-card img {
+  width: 100%;
+  height: 60%;
+  border-radius: 6px;
+}
+
+.detailed {
+  color: var(--detail-color);
+}
+.test-div {
+  margin-top: 5rem;
+  margin-left: 5rem;
+}

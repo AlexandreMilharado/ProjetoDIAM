@@ -15,7 +15,7 @@
 
 <body>
     <header>
-        <figure>
+        <a href="{% url 'website:index' %}" class='logo'>
             <a class="header-logo" href="{% url 'website:index' %}">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlSpace="preserve" viewBox="0 0 64 64">
                 <path fill="currentColor"
@@ -23,7 +23,7 @@
                 </svg>
                 <legend>On<span>Spot</span></legend>
             </a>
-        </figure>
+        </a>
         <nav>
             <a href="{% url 'website:myPlaces' %}">Adicionados por mim</a>
             <a href="#">Favoritos</a>
