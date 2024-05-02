@@ -6,12 +6,14 @@ from django.contrib.auth.models import User
 from myapi.models import Utilizador, Place
 from django.utils.dateparse import parse_datetime
 from django.contrib.auth.decorators import login_required, user_passes_test
-
+from django.core.files.storage import FileSystemStorage
+import datetime
+from myapi.views import searchOfensiveWords
 
 
 def index(request):
-    places = Place.objects.all()
-    return render(request, "website/index.html", {"placeList": places})
+    placeList = Place.objects.all()  # TODO Buscar os melhores
+    return render(request, "website/index.html", {"placeList": placeList})
 
 
 def loginView(request):
@@ -74,3 +76,55 @@ def logoutView(request):
     request.session.flush()
     logout(request)
     return HttpResponseRedirect(reverse("website:index"))
+
+
+@login_required(login_url="/login")
+def myPlaces(request):
+    if request.method == "POST":
+        title = request.POST["title"]
+        description = request.POST["description"]
+        location = request.POST["location"]
+        try:
+            mainImage = request.FILES["image"]
+        except KeyError:
+            mainImage = None
+
+        if title and location:
+            print("a criar")
+            p = Place(
+                title=title,
+                description=description,
+                location=location,
+                mainImage=saveAndGetImage(mainImage, request.user, "defaultPlace.jpg"),
+                userID=request.user.utilizador,
+            )
+            p.save()
+    placeList = Place.objects.filter(userID=request.user.id)
+    return render(
+        request,
+        "website/myPlaces.html",
+        {"placeList": placeList, "textedOfensive": False},  # TODO mudar
+    )
+
+
+def saveAndGetImage(file, user, defaultFile):
+    if not file:
+        return f"/images/{defaultFile}"
+
+    fs = FileSystemStorage()
+    filename = fs.save(
+        f"{user.id}/{datetime.datetime.now().timestamp()}.{getExtension(file)}", file
+    )
+    return f"/media{fs.url(filename)}"
+
+
+def getExtension(file):
+    return file.name.split(".")[-1]
+
+
+def isTextOfensive(text):  # TODO Add pop up
+    bannedWords = searchOfensiveWords().split("\n")
+    for word in bannedWords:
+        if word in text:
+            return True
+    return False
