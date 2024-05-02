@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Varta:wght@300..700&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -25,6 +26,23 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+  font-family: 'Varta';
+  font-weight: 400;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Varta';
+  font-weight: 700;
+}
+h1 {font-size: 4.210rem; /* 67.36px */}
+
+h2 {font-size: 3.158rem; /* 50.56px */}
+
+h3 {font-size: 2.369rem; /* 37.92px */}
+
+h4 {font-size: 1.777rem; /* 28.48px */}
+
+h5 {font-size: 1.333rem; /* 21.28px */}
 
 header {
   background-color: var(--secondarybg-color);
@@ -38,17 +56,18 @@ header {
   padding: 0% 2%;
 }
 
-.header-logo {
-  font-family: "Kaushan Script" !important;
-  color: white !important;
+header figure {
+  font-family: "Kaushan Script";
+  height: 100%;
+  width: 40%;
 
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  font-size: 55px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 55px;
+  cursor: pointer;
 }
-
-.header-logo span {
+header .logo span {
   color: var(--detail-color);
 }
 
@@ -240,6 +259,7 @@ header nav a:hover {
   top: -7px;
   left: 3px;
   z-index: 10;
+  padding: 0 1px;
   background-color: white;
   color: rgb(163, 163, 163);
   border-radius: 100px;
@@ -251,6 +271,7 @@ header nav a:hover {
   font-size: 14px;
   top: 4px;
   left: 5px;
+  background-color: transparent;
 }
 .form-input:focus ~ .form-label {
   position: absolute;
@@ -354,7 +375,6 @@ header nav a:hover {
 }
 .place-title {
   color: #000000;
-  font: normal 800 22px/28px "Trip Sans VF", "Trip Sans", Arial, sans-serif;
 }
 
 .place-image-container {
@@ -403,8 +423,6 @@ header nav a:hover {
 }
 
 .place aside p {
-  font: normal 400 16px/22px "Trip Sans VF", "Trip Sans", Arial, sans-serif;
-  -webkit-line-clamp: 3;
   line-break: normal;
   cursor: pointer;
   color: #333;

@@ -8,6 +8,7 @@ from django.utils.dateparse import parse_datetime
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.files.storage import FileSystemStorage
 import datetime
+from myapi.views import searchOfensiveWords
 
 
 def index(request):
@@ -87,7 +88,15 @@ def myPlaces(request):
             mainImage = request.FILES["image"]
         except KeyError:
             mainImage = None
-        if title and location:
+
+        if (
+            title
+            and location
+            and not isTextOfensive(title)
+            and not isTextOfensive(location)
+            and not isTextOfensive(description)
+        ):
+            print("a criar")
             p = Place(
                 title=title,
                 description=description,
@@ -97,7 +106,11 @@ def myPlaces(request):
             )
             p.save()
     placeList = Place.objects.filter(userID=request.user.id)
-    return render(request, "website/myPlaces.html", {"placeList": placeList})
+    return render(
+        request,
+        "website/myPlaces.html",
+        {"placeList": placeList, "textedOfensive": False},  # TODO mudar
+    )
 
 
 def saveAndGetImage(file, user, defaultFile):
@@ -108,10 +121,16 @@ def saveAndGetImage(file, user, defaultFile):
     filename = fs.save(
         f"{user.id}/{datetime.datetime.now().timestamp()}.{getExtension(file)}", file
     )
-    fs
-    print(filename)
     return f"/media{fs.url(filename)}"
 
 
 def getExtension(file):
     return file.name.split(".")[-1]
+
+
+def isTextOfensive(text):  # TODO Add pop up
+    bannedWords = searchOfensiveWords().split("\n")
+    for word in bannedWords:
+        if word in text:
+            return True
+    return False
