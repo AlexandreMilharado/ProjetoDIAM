@@ -1,22 +1,52 @@
 {% extends "website/base.html" %}
 {% load static %}
 {% block content %}
-<section>
-    <figure>
-        <img id="main-profile-photo" class="profile-photo" src="{% static 'images/no-profile-img.png'%}"
-            alt="profile Image" width="250" height="250">
-    </figure>
-    <label>
-        Email:{{ request.user.email }}
-    </label>
-    <label>
-        Username:{{ request.user.username }}
-    </label>
-    <label>
-        Birthday:{{ request.user.Utilizador.birthday }}
-    </label>
-    <label>
-        Password: ******
-    </label>
-</section>
+<main class="profile">
+    <section id="profile-photo">
+        <figure>
+            <img class="profile-photo" src="{% static 'images/no-profile-img.png'%}"
+                alt="profile Image">
+                <form id="edit-profile-photo" style="display:none" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input id="file-upload" type="file">
+                    <label for="file-upload" class="custom-file-upload">
+                        <img src="{% static 'images/selection.png'%}" width="50" height="50">
+                    </label>
+                    <button type="submit" value="Submit">
+                        <img src="{% static 'images/submit.png'%}" width="50" height="50">
+                    </button>
+                </form>
+        </figure>
+    </section>
+    <section id="profile-description">
+        <form method="POST" action="{% url 'website:profile' %}"> 
+            {% csrf_token %}
+            <p>
+                Email:
+                <input class="profile-description-input" placeholder= "{{ request.user.email }}" name ="email">
+            </p>
+            <p>
+                Username:
+                <input class="profile-description-input" placeholder= "{{ request.user.username }}" name ="username">
+            </p>
+            <p>
+                Birthday:
+                <input class="profile-description-input" placeholder= "{{ request.user.utilizador.birthday }}" name ="birthday">
+            </p>
+            <p>
+                Password:
+                <input class="profile-description-input" placeholder= "*****" name ="password">
+            </p>
+            <button id="edit-profile-description">
+                Editar
+            </button>
+            <input id="submit-profile-description" type="submit" value="Salvar" style="display:none">
+        </form>
+
+    </section>
+</main>
+{% endblock %}
+{% block scripts %}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/profile.js'%}"></script>
 {% endblock %}

@@ -1,13 +1,14 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing:border-box;
+  box-sizing: border-box;
 }
+
 :root {
-  --text-primary:#383838;
-  --detail-color:#5BB8FB;
-  --primarybg-color:#fcfcfc;
-  --secondarybg-color:#386BA7;
+  --text-primary: #383838;
+  --detail-color: #5BB8FB;
+  --primarybg-color: #fcfcfc;
+  --secondarybg-color: #386BA7;
   background-color: #fcfcfc;
 
   color: var(--text-primary);
@@ -24,8 +25,8 @@ header {
   height: 7rem;
   display: flex;
   align-items: center;
-  box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px,  rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px;
-   border-bottom: 1px solid #969696;
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px;
+  border-bottom: 1px solid #969696;
 }
 
 
@@ -40,6 +41,7 @@ header figure {
   font-size: 55px;
   cursor: pointer;
 }
+
 header figure span {
   color: var(--detail-color);
 }
@@ -63,6 +65,7 @@ header nav a {
   font-size: 20px;
   transition: ease 200ms;
 }
+
 header nav a:hover {
   color: var(--detail-color);
   text-decoration: underline var(--detail-color);
@@ -90,11 +93,13 @@ header nav a:hover {
   border-radius: 6px;
   transition: cubic-bezier(0.165, 0.84, 0.44, 1) 150ms;
 }
+
 .place-card img:hover {
   scale: 1.05;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
-.place-card:has( img:hover ) {
+
+.place-card:has(img:hover) {
   opacity: 0.9;
 }
 
@@ -103,15 +108,14 @@ header nav a:hover {
   align-items: baseline;
   cursor: pointer;
   width: 100%;
-  margin: 10px 0 10px 0 ;
+  margin: 10px 0 10px 0;
   font-size: 20px;
   gap: 3px;
   color: #383838;
-  font-family: "Roboto","Arial",sans-serif
-  
+  font-family: "Roboto", "Arial", sans-serif
 }
 
-.place-card:hover p{
+.place-card:hover p {
   color: var(--secondarybg-color);
 }
 
@@ -130,16 +134,18 @@ header nav a:hover {
   justify-content: start;
   align-items: center;
 }
+
 .rating-container svg {
   width: 30px;
   height: auto;
   fill: rgb(255, 204, 0);
   color: rgb(255, 204, 0);
 }
-.rating-container span{
+
+.rating-container span {
   margin-left: 10px;
   font-size: 18px;
-  color: rgb(51, 51, 51) ;
+  color: rgb(51, 51, 51);
 }
 
 .fav-star {
@@ -150,6 +156,7 @@ header nav a:hover {
   color: var(--detail-color);
   cursor: pointer;
 }
+
 .fav-star:hover {
   color: rgb(245, 237, 20);
   fill: rgb(245, 237, 20);
@@ -158,18 +165,22 @@ header nav a:hover {
 
 
 .login {
-   width: 100vw;
-   height: 100vh;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   background-image: linear-gradient( rgba(0, 0, 0, 0.21), rgba(0, 0, 0, 0.182) ),url('https://upload.wikimedia.org/wikipedia/commons/f/f8/View_of_the_Alfama_quarter_in_Lisbon_Portugal.JPG');
-   background-position: center; /* Center the image */
-   background-repeat: no-repeat; /* Do not repeat the image */
-   background-size: cover; /* Resize the background image to cover the entire container */}
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.21), rgba(0, 0, 0, 0.182)), url('https://upload.wikimedia.org/wikipedia/commons/f/f8/View_of_the_Alfama_quarter_in_Lisbon_Portugal.JPG');
+  background-position: center;
+  /* Center the image */
+  background-repeat: no-repeat;
+  /* Do not repeat the image */
+  background-size: cover;
+  /* Resize the background image to cover the entire container */
+}
 
 .login form {
-  background-color:white;
+  background-color: white;
   padding: 15px 1rem;
   display: flex;
   flex-direction: column;
@@ -177,15 +188,17 @@ header nav a:hover {
   border-radius: 2px;
   scale: 1.5;
   box-shadow: rgba(0, 0, 0, 0.35) 20px 5px 15px;
-    gap: 10px ;
+  gap: 10px;
 }
+
 .login form a {
-  font-size:x-small;
+  font-size: x-small;
   width: 100%;
   text-align: end;
   color: var(--detail-color);
   cursor: pointer;
 }
+
 .login a:hover {
   text-decoration: underline var(--detail-color);
 }
@@ -199,14 +212,16 @@ header nav a:hover {
   align-items: center;
   margin-bottom: 30px;
 }
-.login form figure svg{
+
+.login form figure svg {
   height: 2rem;
 }
+
 .login form figure span {
   color: rgb(87, 87, 87);
 }
 
-.input-box{
+.input-box {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -215,24 +230,25 @@ header nav a:hover {
   position: relative;
 }
 
-.form-input{
+.form-input {
   border: none;
   padding: 6px 5px 2px 5px;
   cursor: text;
   transition: .25s ease;
-  border-bottom:  1px solid rgb(154, 154, 154) ;
+  border-bottom: 1px solid rgb(154, 154, 154);
   color: rgb(48, 48, 48);
   font-size: 12px;
 }
 
-.form-input:focus{
-  border:1px solid var(--detail-color);
+.form-input:focus {
+  border: 1px solid var(--detail-color);
   border-radius: 6px;
 }
-.form-label{
+
+.form-label {
   position: absolute;
   top: -7px;
-  left: 3px ;
+  left: 3px;
   z-index: 10;
   background-color: white;
   color: rgb(163, 163, 163);
@@ -241,15 +257,17 @@ header nav a:hover {
   cursor: text;
   transition: .25s ease;
 }
-.form-input:placeholder-shown ~ .form-label{
+
+.form-input:placeholder-shown~.form-label {
   font-size: 14px;
   top: 4px;
   left: 5px;
 }
-.form-input:focus ~ .form-label {
+
+.form-input:focus~.form-label {
   position: absolute;
   top: -7px;
-  left: 3px ;
+  left: 3px;
   z-index: 10;
   background-color: white;
   border-radius: 100px;
@@ -258,11 +276,12 @@ header nav a:hover {
   transition: .25s ease;
   color: var(--detail-color);
 }
-.form-input:focus{
+
+.form-input:focus {
   outline: none;
 }
 
-.login button{
+.login button {
   background-color: var(--detail-color);
   border: 1px solid transparent;
   border-radius: .75rem;
@@ -270,7 +289,7 @@ header nav a:hover {
   color: #FFFFFF;
   cursor: pointer;
   flex: 0 0 auto;
-  font-family: "Inter var",ui-sans-serif,system-ui,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-family: "Inter var", ui-sans-serif, system-ui, -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-size: 1rem;
   font-weight: 600;
   padding: 5px 5px;
@@ -278,7 +297,7 @@ header nav a:hover {
   text-decoration: none #6B7280 solid;
   text-decoration-thickness: auto;
   transition-duration: .2s;
-  transition-property: background-color,border-color,color,fill,stroke;
+  transition-property: background-color, border-color, color, fill, stroke;
   transition-timing-function: cubic-bezier(.4, 0, 0.2, 1);
   user-select: none;
   -webkit-user-select: none;
@@ -302,31 +321,35 @@ header nav a:hover {
   width: 100%;
   border: solid 1px rgb(170, 170, 170);
   border-radius: 6px;
-  padding: 7px 10px ;
+  padding: 7px 10px;
   outline: none;
   font-size: 16px;
   color: rgb(69, 69, 69);
 }
+
 .search-input::placeholder {
   color: rgb(170, 170, 170);
 }
+
 .search-input:focus {
   border: 2px solid var(--detail-color);
 }
-.search-input-container{
+
+.search-input-container {
   margin: 2rem 0 0 11rem;
   width: 400px;
   height: 30px;
   position: relative;
   height: 30px;
 }
-.search-input-container svg{
+
+.search-input-container svg {
   position: absolute;
   color: var(--detail-color);
   cursor: text;
   right: 8px;
   top: 1px;
-  height: 28px ;
+  height: 28px;
   width: 28px;
 }
 
@@ -345,24 +368,27 @@ header nav a:hover {
   justify-content: space-around;
   gap: 6rem;
 }
+
 .place-title {
   color: #000000;
   font: normal 800 22px/28px "Trip Sans VF", "Trip Sans", Arial, sans-serif;
 }
 
-.place-image-container{
+.place-image-container {
   position: relative;
   flex: 1;
   border-radius: 10px;
   max-height: 446px;
   max-width: 520px;
 }
-.place-image-container img{
+
+.place-image-container img {
   border-radius: 8px;
   width: 100%;
   aspect-ratio: 4/3;
 }
-.place-image-container .heart{
+
+.place-image-container .heart {
   position: absolute;
   right: 25px;
   top: 15px;
@@ -375,21 +401,24 @@ header nav a:hover {
 }
 
 .place aside {
-  flex: 1;  
+  flex: 1;
 }
+
 .place-location {
   font-weight: 200;
   text-decoration: underline;
   font-size: 15px;
   color: #4a4a4a;
 }
+
 .place-location svg {
   width: 14px;
-  margin-top:10px ;
+  margin-top: 10px;
   margin-right: 5px;
   color: var(--detail-color);
 }
-.place aside .rating-container{
+
+.place aside .rating-container {
   margin-top: 2rem;
   font-weight: lighter;
   color: #383838;
@@ -401,11 +430,11 @@ header nav a:hover {
   line-break: normal;
   cursor: pointer;
   color: #333;
-  margin: 15px  0;
+  margin: 15px 0;
 }
 
 
-  
+
 #username-text {
   font-weight: bolder;
   color: var(--detail-color);
@@ -416,7 +445,81 @@ header nav a:hover {
   margin: 2rem 1rem;
   padding: 0 9rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 275px),1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 275px), 1fr));
   gap: 10px;
 }
 
+body {
+  min-height: 100vh;
+}
+
+
+.profile {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  height: 50vh;
+  flex: 1 1 0px;
+
+  &>section,
+  form {
+    width: 35%;
+    font-size: 1.5vw;
+    align-items: center;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+
+    &:hover {
+      box-shadow: 0 0 11px rgba(33, 33, 33, .2);
+    }
+
+    &>p {
+      padding: 5px 5px;
+
+      &>input {
+        background: transparent;
+        border-width: 0;
+
+        &::placeholder {
+          opacity: 1;
+          color: #000000;
+        }
+      }
+    }
+  }
+}
+
+#profile-description form {
+  width: 100%;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+#profile-photo figure {
+  &>img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: relative;
+  }
+}
+
+#profile-photo figure {
+  &>img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: relative;
+  }
+}
