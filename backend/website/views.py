@@ -88,7 +88,7 @@ def myPlaces(request):
             mainImage = request.FILES["image"]
         except KeyError:
             mainImage = None
-        
+
         if (
             title
             and location
@@ -106,7 +106,11 @@ def myPlaces(request):
             )
             p.save()
     placeList = Place.objects.filter(userID=request.user.id)
-    return render(request, "website/myPlaces.html", {"placeList": placeList, "textedOfensive" : })
+    return render(
+        request,
+        "website/myPlaces.html",
+        {"placeList": placeList, "textedOfensive": False},  # TODO mudar
+    )
 
 
 def saveAndGetImage(file, user, defaultFile):
@@ -124,7 +128,7 @@ def getExtension(file):
     return file.name.split(".")[-1]
 
 
-def isTextOfensive(text): # TODO Add pop up
+def isTextOfensive(text):  # TODO Add pop up
     bannedWords = searchOfensiveWords().split("\n")
     for word in bannedWords:
         if word in text:
