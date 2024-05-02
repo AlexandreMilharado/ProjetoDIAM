@@ -89,13 +89,7 @@ def myPlaces(request):
         except KeyError:
             mainImage = None
 
-        if (
-            title
-            and location
-            and not isTextOfensive(title)
-            and not isTextOfensive(location)
-            and not isTextOfensive(description)
-        ):
+        if title and location:
             print("a criar")
             p = Place(
                 title=title,
