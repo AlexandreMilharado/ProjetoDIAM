@@ -8,66 +8,9 @@ from django.utils.dateparse import parse_datetime
 from django.contrib.auth.decorators import login_required, user_passes_test
 
 
-def index(request):
-    places = [
-        Place(
-            title="Place de test atrás da cozinha da casa da tia do meu pai mais belho",
-            rating=4,
-            description="Descrição do sitio de teste ao pé da cidade Teste Da santa teste",
-            location="ISCTE",
-            reviewNumber=3,
-        ),
-        Place(
-            title="Place de test",
-            rating=9,
-            description="Descrição do sitio de teste ao pé da cidade Teste Da santa teste",
-            location="ISCTE",
-            reviewNumber=3,
-        ),
-        Place(
-            title="Place de test",
-            rating=7,
-            description="Descrição do sitio de teste ao pé da cidade Teste Da santa teste",
-            location="ISCTE",
-            reviewNumber=3,
-        ),
-        Place(
-            title="Place de test",
-            rating=9,
-            description="Descrição do sitio de teste ao pé da cidade Teste Da santa teste",
-            location="ISCTE",
-            reviewNumber=3,
-        ),
-        Place(
-            title="Place de test",
-            rating=7,
-            description="Descrição do sitio de teste ao pé da cidade Teste Da santa teste",
-            location="ISCTE",
-            reviewNumber=3,
-        ),
-        Place(
-            title="Place de test",
-            rating=9,
-            description="Descrição do sitio de teste ao pé da cidade Teste Da santa teste",
-            location="ISCTE",
-            reviewNumber=3,
-        ),
-        Place(
-            title="Place de test",
-            rating=7,
-            description="Descrição do sitio de teste ao pé da cidade Teste Da santa teste",
-            location="ISCTE",
-            reviewNumber=3,
-        ),
-        Place(
-            title="Place de test",
-            rating=2,
-            description="Descrição do sitio de teste ao pé da cidade Teste Da santa teste",
-            location="ISCTE",
-            reviewNumber=3,
-        ),
-    ]
 
+def index(request):
+    places = Place.objects.all()
     return render(request, "website/index.html", {"placeList": places})
 
 
