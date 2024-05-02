@@ -11,66 +11,8 @@ import datetime
 
 
 def index(request):
-    places = [
-        Place(
-            title="Place de test atrás da cozinha da casa da tia do meu pai mais belho",
-            rating=4,
-            description="Descrição do sitio de teste ao pé da cidade Teste Da santa teste",
-            location="ISCTE",
-            reviewNumber=3,
-        ),
-        Place(
-            title="Place de test",
-            rating=9,
-            description="Descrição do sitio de teste ao pé da cidade Teste Da santa teste",
-            location="ISCTE",
-            reviewNumber=3,
-        ),
-        Place(
-            title="Place de test",
-            rating=7,
-            description="Descrição do sitio de teste ao pé da cidade Teste Da santa teste",
-            location="ISCTE",
-            reviewNumber=3,
-        ),
-        Place(
-            title="Place de test",
-            rating=9,
-            description="Descrição do sitio de teste ao pé da cidade Teste Da santa teste",
-            location="ISCTE",
-            reviewNumber=3,
-        ),
-        Place(
-            title="Place de test",
-            rating=7,
-            description="Descrição do sitio de teste ao pé da cidade Teste Da santa teste",
-            location="ISCTE",
-            reviewNumber=3,
-        ),
-        Place(
-            title="Place de test",
-            rating=9,
-            description="Descrição do sitio de teste ao pé da cidade Teste Da santa teste",
-            location="ISCTE",
-            reviewNumber=3,
-        ),
-        Place(
-            title="Place de test",
-            rating=7,
-            description="Descrição do sitio de teste ao pé da cidade Teste Da santa teste",
-            location="ISCTE",
-            reviewNumber=3,
-        ),
-        Place(
-            title="Place de test",
-            rating=2,
-            description="Descrição do sitio de teste ao pé da cidade Teste Da santa teste",
-            location="ISCTE",
-            reviewNumber=3,
-        ),
-    ]
-
-    return render(request, "website/index.html", {"placeList": places})
+    placeList = Place.objects.all()  # TODO Buscar os melhores
+    return render(request, "website/index.html", {"placeList": placeList})
 
 
 def loginView(request):
@@ -135,25 +77,27 @@ def logoutView(request):
     return HttpResponseRedirect(reverse("website:index"))
 
 
+@login_required(login_url="/login")
 def myPlaces(request):
-    if request.method() == "POST":
+    if request.method == "POST":
+        title = request.POST["title"]
+        description = request.POST["description"]
+        location = request.POST["location"]
         try:
-            title = request.POST["title"]
-            description = request.POST["description"]
-            location = request.POST["location"]
-            mainImage = request.POST["mainImage"]
-            if title and description and location:
-                p = Place(
-                    title=title,
-                    description=description,
-                    location=location,
-                    mainImage=saveAndGetImage(
-                        mainImage, request.user, "defaultPlace.jpg"
-                    ),
-                )
-                p.save()
+            mainImage = request.FILES["image"]
         except KeyError:
-            return render(request, "website/myPlaces.html")
+            mainImage = None
+        if title and location:
+            p = Place(
+                title=title,
+                description=description,
+                location=location,
+                mainImage=saveAndGetImage(mainImage, request.user, "defaultPlace.jpg"),
+                userID=request.user.utilizador,
+            )
+            p.save()
+    placeList = Place.objects.filter(userID=request.user.id)
+    return render(request, "website/myPlaces.html", {"placeList": placeList})
 
 
 def saveAndGetImage(file, user, defaultFile):
@@ -161,5 +105,13 @@ def saveAndGetImage(file, user, defaultFile):
         return f"/images/{defaultFile}"
 
     fs = FileSystemStorage()
-    filename = fs.save(f"{user}|{datetime.datetime.now()}", file)
+    filename = fs.save(
+        f"{user.id}/{datetime.datetime.now().timestamp()}.{getExtension(file)}", file
+    )
+    fs
+    print(filename)
     return f"/media{fs.url(filename)}"
+
+
+def getExtension(file):
+    return file.name.split(".")[-1]
