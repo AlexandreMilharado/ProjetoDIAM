@@ -30,21 +30,12 @@
         </svg>
     </section>
 
-    <form id="create-place-form" class="form-group create-place">
-        <label class="create-place-label" for="title">Título:<br />
-            <input class="form-control create-place-input" type="text" id="title" placeholder="Dá um nome ao teu lugar">
-        </label>
-        <label class="create-place-label" for="photo">Foto:<br />
-            <input class="create-place-input" type="file" id="photo" name="mainImage" accept="image/*">
-        </label>
-        <label class="create-place-label" for="location">Localização:<br />
-            <input class="form-control create-place-input" type="text" id="location" placeholder="Onde é o lugar">
-        </label>
-        <label class="create-place-label" for="description">Descrição:<br />
-            <textarea class="form-control create-place-input" id="description" rows="3"></textarea>
-        </label>
-        <button type="submit" class="create-place-submit">Criar Lugar!</button>
-    </form>
+    <aside id="modal" class="modal-content">
+        <div class="modal-content">
+            <h2 class="modal-text">Username ou Password incorretos</h2>
+            <button class="btn-login extra-margin btn-modal " _="on click trigger closeModal">Close</button>
+        </div>
+    </aside>
     <button type="submit" class="btn btn-primary create-place-submit">Criar Lugar!</button><button type="submit"
         class="btn btn-primary create-place-submit">Criar Lugar!</button> <button type="submit"
         class="btn btn-primary create-place-submit">Criar Lugar!</button><button type="submit"
