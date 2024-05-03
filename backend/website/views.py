@@ -80,6 +80,7 @@ def logoutView(request):
 
 @login_required(login_url="/login")
 def myPlaces(request):
+    context = {}
     if request.method == "POST":
         title = request.POST["title"]
         description = request.POST["description"]
@@ -89,8 +90,16 @@ def myPlaces(request):
         except KeyError:
             mainImage = None
 
-        if title and location:
-            print("a criar")
+        if (
+            isTextOfensive(title)
+            or isTextOfensive(location)
+            or isTextOfensive(description)
+        ):
+            context["modalMessage"] = {
+                "msg": "Texto previamente inserido é potencialmente ofensivo",
+                "image": "/images/censorship.svg",
+            }
+        else:
             p = Place(
                 title=title,
                 description=description,
@@ -99,12 +108,10 @@ def myPlaces(request):
                 userID=request.user.utilizador,
             )
             p.save()
+
     placeList = Place.objects.filter(userID=request.user.id)
-    return render(
-        request,
-        "website/myPlaces.html",
-        {"placeList": placeList, "textedOfensive": False},  # TODO mudar
-    )
+    context["placeList"] = placeList
+    return render(request, "website/myPlaces.html", context)
 
 
 def saveAndGetImage(file, user, defaultFile):
@@ -122,9 +129,10 @@ def getExtension(file):
     return file.name.split(".")[-1]
 
 
-def isTextOfensive(text):  # TODO Add pop up
+def isTextOfensive(text):
+    textToFind = text.lower()
     bannedWords = searchOfensiveWords().split("\n")
     for word in bannedWords:
-        if word in text:
+        if word in textToFind and word and textToFind:
             return True
     return False

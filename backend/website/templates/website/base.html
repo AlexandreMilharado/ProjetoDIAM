@@ -33,10 +33,22 @@
             {% endif %}
         </nav>
     </header>
+    {% if modalMessage %}
+       <aside id="modal" class="modal-content">
+            <div class="modal-content">
+                <h2 class="modal-text">{{modalMessage.msg}}</h2>
+                <figure class="modal-image">
+                    <img  src="{% static modalMessage.image %}" alt="action image" width="250" height="250">
+                </figure>
+                <button id="modal-close" class="create-place-submit" style="margin-top: 15px">Close</button>
+            </div>
+        </aside>
+    {% endif %}
     {% block relevantInformation %} {% endblock %}
     {% block content %} {% endblock %}
 
     {% block scripts%}
+    <script type="text/javascript" src="{% static 'js/base.js'%}" ></script>
     {% endblock %}
 </body>
 

@@ -53,4 +53,5 @@
 {% block scripts%}
     {% load static %}
     <script type="text/javascript" src="{% static 'js/myPlaces.js'%}" ></script>
+    {{ block.super }}
 {% endblock %}
