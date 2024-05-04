@@ -2,6 +2,8 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 import requests
+from django.shortcuts import get_object_or_404
+from myapi.models import Place
 
 
 # TODO Mudar bixo
@@ -13,6 +15,12 @@ def hello_world(request):
 @api_view(["GET"])
 def getOfenseWords(request):
     return Response({"message": searchOfensiveWords()})
+
+
+@api_view(["GET"])
+def isFavoritePlace(request, place_id):
+    place = get_object_or_404(Place, pk=place_id)
+    return Response({"result": place.isFavoritePlace(request.user)})
 
 
 def searchOfensiveWords():

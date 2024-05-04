@@ -47,6 +47,15 @@ class Place(models.Model):
         )
         return [tag.name for tag in top_tags]
 
+    def isFavoritePlace(self, utilizador):
+        return self.favoritePlaces.filter(id=utilizador.id).exists()
+
+    def favoriteOrUnFavoritePlace(self, utilizador):
+        if self.isFavoritePlace(utilizador):
+            self.favoritePlaces.remove(utilizador)
+        else:
+            self.favoritePlaces.add(utilizador)
+
 
 class Review(models.Model):
     comment = models.CharField(max_length=300, null=True)

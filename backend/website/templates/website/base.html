@@ -24,7 +24,7 @@
         </a>
         <nav>
             <a href="{% url 'website:myPlaces' %}">Adicionados por mim</a>
-            <a href="#">Favoritos</a>
+            <a href="{% url 'website:favoritePlaces' %}">Favoritos</a>
             {% if not request.user.is_authenticated %}
             <a href="{% url 'website:login' %}">Log in</a>
             {% else %}
@@ -48,7 +48,8 @@
     {% block content %} {% endblock %}
 
     {% block scripts%}
-    <script type="text/javascript" src="{% static 'js/base.js'%}" ></script>
+        <script type="module" src="{% static 'js/utils.js'%}"></script>
+        <script type="text/javascript" src="{% static 'js/base.js'%}" ></script>
     {% endblock %}
 </body>
 
