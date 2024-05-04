@@ -9,11 +9,17 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.files.storage import FileSystemStorage
 import datetime
 from myapi.views import searchOfensiveWords
+from django.shortcuts import get_object_or_404
+from django.shortcuts import redirect
 
 
 def index(request):
     placeList = Place.objects.all()  # TODO Buscar os melhores
-    return render(request, "website/index.html", {"placeList": placeList})
+    return render(
+        request,
+        "website/index.html",
+        {"placeList": placeList, "emptyPlaces": "Sem lugares? Crie um!"},
+    )
 
 
 def loginView(request):
@@ -111,9 +117,28 @@ def myPlaces(request):
 
     placeList = Place.objects.filter(userID=request.user.id)
     context["placeList"] = placeList
+    context["emptyPlaces"] = "Sem lugares? Crie um!"
     return render(request, "website/myPlaces.html", context)
 
 
+@login_required(login_url="/login")
+def favoritePlaces(request):
+    placeList = Place.objects.filter(favoritePlaces=request.user.utilizador)
+    return render(
+        request,
+        "website/genericPage.html",
+        {"placeList": placeList, "emptyPlaces": "Sem lugares? Adicione um!"},
+    )
+
+
+@login_required(login_url="/login")
+def favoriteOrUnFavoritePlace(request, place_id):
+    place = get_object_or_404(Place, pk=place_id)
+    place.favoriteOrUnFavoritePlace(request.user.utilizador)
+    return redirect(request.META.get("HTTP_REFERER", "http://127.0.0.1:8000/"))
+
+
+# File Functions
 def saveAndGetImage(file, user, defaultFile):
     if not file:
         return f"/images/{defaultFile}"
