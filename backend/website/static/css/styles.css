@@ -415,7 +415,7 @@ header nav a:hover {
   gap: 6rem;
 }
 .place-title {
-  color: #000000;
+  color: var(--secondarybg-color);
 }
 
 .place-image-container {
@@ -685,4 +685,15 @@ header nav a:hover {
   100% {
     transform: scale(0.9);
   }
+}
+
+.text {
+  color: var(--text-primary);
+}
+
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-content: space-around;
 }
