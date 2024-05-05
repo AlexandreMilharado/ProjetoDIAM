@@ -22,7 +22,7 @@
     <section class="form-group">
         <form id="create-place-form" class="form-group create-place" style="display: none" action="{% url 'website:myPlaces' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <h1 class="place-title" style="color: var(--secondarybg-color)">Adicionar um Lugar</h1>
+            <h1 class="place-title" >Adicionar um Lugar</h1>
             <br/>
             <label  class="create-place-label" for="title">Título:<br />
                 <input class="form-control create-place-input" type="text" id="title" name="title" placeholder="Dá um nome ao teu lugar" required>

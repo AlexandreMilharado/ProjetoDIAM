@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
-from myapi.models import Utilizador, Place
+from myapi.models import Utilizador, Place, Tag
 from django.utils.dateparse import parse_datetime
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.files.storage import FileSystemStorage
@@ -13,6 +13,12 @@ from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 
 
+# Test decorators
+def isSuperUser(user):
+    return user.is_superuser
+
+
+# Views
 def index(request):
     placeList = Place.objects.all()  # TODO Buscar os melhores
     return render(
@@ -33,8 +39,13 @@ def loginView(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                request.session["votos"] = 0
-                return HttpResponseRedirect(reverse("website:index"))
+                request.session["votos"] = 0  # TODO Retirar e meter outra coisa
+                reverseTo = request.environ["HTTP_REFERER"].split("=")
+                return HttpResponseRedirect(
+                    reverse(
+                        f"website:{'index' if len(reverseTo) == 1 else reverseTo[1][1:]}"
+                    )
+                )
             else:
                 return render(
                     request,
@@ -129,6 +140,29 @@ def favoritePlaces(request):
         "website/genericPage.html",
         {"placeList": placeList, "emptyPlaces": "Sem lugares? Adicione um!"},
     )
+
+
+@user_passes_test(test_func=isSuperUser, login_url="/login")
+def createTag(request):
+    if request.method == "POST":
+        try:
+            tagName = request.POST["tagName"]
+            t = Tag(name=tagName)
+            t.save()
+        except KeyError:
+            return render(
+                request,
+                "website/createTag.html",
+                {
+                    "modalMessage": {
+                        "msg": "Erro ao criar a Tag",
+                        "image": "/images/censorship.svg",
+                    }
+                },
+            )
+
+    tags = Tag.objects.all().order_by("-id")
+    return render(request, "website/createTag.html", {"tags": tags})
 
 
 @login_required(login_url="/login")
