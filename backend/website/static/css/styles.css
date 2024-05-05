@@ -692,8 +692,20 @@ header nav a:hover {
 }
 
 .tags-container {
+  padding: 1% 8%;
+}
+
+.tag-list {
+  list-style: none;
   display: flex;
+  gap: 10px;
+  align-items: baseline;
+  margin-top: 10px;
   flex-wrap: wrap;
-  flex-direction: column;
-  align-content: space-around;
+}
+
+.tag {
+  padding: 4px 10px 1px 10px;
+  background-color: rgb(233, 203, 147);
+  border-radius: 20px;
 }
