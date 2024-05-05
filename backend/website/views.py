@@ -21,7 +21,11 @@ def isSuperUser(user):
 # Views
 def index(request):
     placeList = Place.objects.all()  # TODO Buscar os melhores
-    return render(request, "website/index.html", {"placeList": placeList})
+    return render(
+        request,
+        "website/index.html",
+        {"placeList": placeList, "emptyPlaces": "Sem lugares? Crie um!"},
+    )
 
 
 def loginView(request):
@@ -124,6 +128,7 @@ def myPlaces(request):
 
     placeList = Place.objects.filter(userID=request.user.id)
     context["placeList"] = placeList
+    context["emptyPlaces"] = "Sem lugares? Crie um!"
     return render(request, "website/myPlaces.html", context)
 
 
