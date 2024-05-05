@@ -26,4 +26,11 @@ urlpatterns = [
     path("registar", views.registar, name="registar"),
     path("logout", views.logoutView, name="logout"),
     path("myPlaces", views.myPlaces, name="myPlaces"),
+    path("favoritePlaces", views.favoritePlaces, name="favoritePlaces"),
+    path("createTag", views.createTag, name="createTag"),
+    path(
+        "<int:place_id>/favorite",
+        views.favoriteOrUnFavoritePlace,
+        name="favoriteOperation",
+    ),
 ]

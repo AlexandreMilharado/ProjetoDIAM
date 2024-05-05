@@ -3,14 +3,22 @@ from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
-from myapi.models import Utilizador, Place
+from myapi.models import Utilizador, Place, Tag
 from django.utils.dateparse import parse_datetime
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.files.storage import FileSystemStorage
 import datetime
 from myapi.views import searchOfensiveWords
+from django.shortcuts import get_object_or_404
+from django.shortcuts import redirect
 
 
+# Test decorators
+def isSuperUser(user):
+    return user.is_superuser
+
+
+# Views
 def index(request):
     placeList = Place.objects.all()  # TODO Buscar os melhores
     return render(request, "website/index.html", {"placeList": placeList})
@@ -27,8 +35,13 @@ def loginView(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                request.session["votos"] = 0
-                return HttpResponseRedirect(reverse("website:index"))
+                request.session["votos"] = 0  # TODO Retirar e meter outra coisa
+                reverseTo = request.environ["HTTP_REFERER"].split("=")
+                return HttpResponseRedirect(
+                    reverse(
+                        f"website:{'index' if len(reverseTo) == 1 else reverseTo[1][1:]}"
+                    )
+                )
             else:
                 return render(
                     request,
@@ -114,6 +127,47 @@ def myPlaces(request):
     return render(request, "website/myPlaces.html", context)
 
 
+@login_required(login_url="/login")
+def favoritePlaces(request):
+    placeList = Place.objects.filter(favoritePlaces=request.user.utilizador)
+    return render(
+        request,
+        "website/genericPage.html",
+        {"placeList": placeList, "emptyPlaces": "Sem lugares? Adicione um!"},
+    )
+
+
+@user_passes_test(test_func=isSuperUser, login_url="/login")
+def createTag(request):
+    if request.method == "POST":
+        try:
+            tagName = request.POST["tagName"]
+            t = Tag(name=tagName)
+            t.save()
+        except KeyError:
+            return render(
+                request,
+                "website/createTag.html",
+                {
+                    "modalMessage": {
+                        "msg": "Erro ao criar a Tag",
+                        "image": "/images/censorship.svg",
+                    }
+                },
+            )
+
+    tags = Tag.objects.all().order_by("-id")
+    return render(request, "website/createTag.html", {"tags": tags})
+
+
+@login_required(login_url="/login")
+def favoriteOrUnFavoritePlace(request, place_id):
+    place = get_object_or_404(Place, pk=place_id)
+    place.favoriteOrUnFavoritePlace(request.user.utilizador)
+    return redirect(request.META.get("HTTP_REFERER", "http://127.0.0.1:8000/"))
+
+
+# File Functions
 def saveAndGetImage(file, user, defaultFile):
     if not file:
         return f"/images/{defaultFile}"
