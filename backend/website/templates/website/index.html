@@ -65,7 +65,7 @@
     {% endif %}
 {% endblock %}
 
-{% block content %}
+{% comment %} {% block content %}
     <main id="places-container">
 
         {% for place in placeList %}
@@ -86,7 +86,7 @@
             </figure>
          {% endfor %}
     </main>
-{% endblock %}
+{% endblock %} {% endcomment %}
 
 {% block scripts%}
     {{ block.super }}
