@@ -3,7 +3,8 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 import requests
 from django.shortcuts import get_object_or_404
-from myapi.models import Place
+from myapi.models import Place, Tag
+from .serializers import *
 
 
 # TODO Mudar bixo
@@ -21,6 +22,12 @@ def getOfenseWords(request):
 def isFavoritePlace(request, place_id):
     place = get_object_or_404(Place, pk=place_id)
     return Response({"result": place.isFavoritePlace(request.user)})
+
+
+@api_view(["GET"])
+def getTags(request):
+    serializer = TagSerializer(Tag.objects.all(), many=True)
+    return Response({"result": serializer.data})
 
 
 def searchOfensiveWords():
