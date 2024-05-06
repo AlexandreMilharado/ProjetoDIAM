@@ -28,10 +28,5 @@ urlpatterns = [
     path("myPlaces", views.myPlaces, name="myPlaces"),
     path("favoritePlaces", views.favoritePlaces, name="favoritePlaces"),
     path("createTag", views.createTag, name="createTag"),
-    path(
-        "<int:place_id>/favorite",
-        views.favoriteOrUnFavoritePlace,
-        name="favoriteOperation",
-    ),
     path("<int:place_id>/detalhe", views.detalhePlace, name="detalhe"),
 ]

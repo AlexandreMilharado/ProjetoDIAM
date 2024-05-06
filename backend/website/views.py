@@ -11,6 +11,7 @@ import datetime
 from myapi.views import searchOfensiveWords
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
+from django.utils import timezone
 
 
 # Test decorators
@@ -41,6 +42,7 @@ def loginView(request):
                 login(request, user)
                 request.session["votos"] = 0  # TODO Retirar e meter outra coisa
                 reverseTo = request.environ["HTTP_REFERER"].split("=")
+                firstTimeLoginSuperUser(user)
                 return HttpResponseRedirect(
                     reverse(
                         f"website:{'index' if len(reverseTo) == 1 else reverseTo[1][1:]}"
@@ -156,7 +158,7 @@ def createTag(request):
                 {
                     "modalMessage": {
                         "msg": "Erro ao criar a Tag",
-                        "image": "/images/censorship.svg",
+                        "image": "/images/errorInput.svg",
                     }
                 },
             )
@@ -168,13 +170,6 @@ def createTag(request):
 def detalhePlace(request, place_id):
     place = get_object_or_404(Place, id=place_id)
     return render(request, "website/detalhe.html", {"place": place})
-
-
-@login_required(login_url="/login")
-def favoriteOrUnFavoritePlace(request, place_id):
-    place = get_object_or_404(Place, pk=place_id)
-    place.favoriteOrUnFavoritePlace(request.user.utilizador)
-    return redirect(request.META.get("HTTP_REFERER", "http://127.0.0.1:8000/"))
 
 
 # File Functions
@@ -200,6 +195,19 @@ def isTextOfensive(text):
         if word in textToFind and word and textToFind:
             return True
     return False
+
+
+# SuperUser Functions
+def firstTimeLoginSuperUser(user):
+    if user.is_superuser:
+        try:
+            Utilizador.objects.get(user=user)
+        except Utilizador.DoesNotExist:
+            u = Utilizador(
+                user=user,
+                birthday=timezone.now(),
+            )
+            u.save()
 
 
 # Utils
