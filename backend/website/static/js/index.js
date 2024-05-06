@@ -1,6 +1,6 @@
 $(document).ready(function () {
   let hearts = $(".heart");
-  for (var i = 0; i < hearts.length; i += 2) {
+  for (let i = 0; i < hearts.length; i += 2) {
     addFavoriteOrUnfavorite($(hearts[i]), $(hearts[i + 1]));
     setFavoritePlace($(hearts[i]), $(hearts[i + 1]));
   }

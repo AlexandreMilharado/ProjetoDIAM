@@ -33,4 +33,5 @@ urlpatterns = [
         views.favoriteOrUnFavoritePlace,
         name="favoriteOperation",
     ),
+    path("<int:place_id>/detalhe", views.detalhePlace, name="detalhe"),
 ]
