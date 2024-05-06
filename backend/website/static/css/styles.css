@@ -140,6 +140,7 @@ header nav a {
   height: 100%;
   display: flex;
   align-items: center;
+  text-align: center;
 }
 header nav a:hover {
   color: var(--text-primary);

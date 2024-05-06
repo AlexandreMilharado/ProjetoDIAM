@@ -61,7 +61,7 @@ class Review(models.Model):
     comment = models.CharField(max_length=300, null=True)
     rating = models.SmallIntegerField(null=True)
     mainImage = models.ImageField(default="")
-    data = models.DateField(default=timezone.now())
+    data = models.DateField(default=timezone.now)
     placeID = models.ForeignKey(Place, on_delete=models.CASCADE)
     userID = models.ForeignKey(Utilizador, on_delete=models.CASCADE)
     reviewID = models.ForeignKey("self", on_delete=models.CASCADE, null=True)
