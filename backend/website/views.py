@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
-from myapi.models import Utilizador, Place, Tag
+from myapi.models import Utilizador, Place, Tag, TagPlace
 from django.utils.dateparse import parse_datetime
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.files.storage import FileSystemStorage
@@ -125,9 +125,9 @@ def myPlaces(request):
                 userID=request.user.utilizador,
             )
             p.save()
+            addTagsToPlace(request, p)
 
-    placeList = Place.objects.filter(userID=request.user.id)
-    context["placeList"] = placeList
+    context["placeList"] = Place.objects.filter(userID=request.user.id)
     context["emptyPlaces"] = "Sem lugares? Crie um!"
     return render(request, "website/myPlaces.html", context)
 
@@ -165,6 +165,11 @@ def createTag(request):
     return render(request, "website/createTag.html", {"tags": tags})
 
 
+def detalhePlace(request, place_id):
+    place = get_object_or_404(Place, id=place_id)
+    return render(request, "website/detalhe.html", {"place": place})
+
+
 @login_required(login_url="/login")
 def favoriteOrUnFavoritePlace(request, place_id):
     place = get_object_or_404(Place, pk=place_id)
@@ -195,3 +200,20 @@ def isTextOfensive(text):
         if word in textToFind and word and textToFind:
             return True
     return False
+
+
+# Utils
+def addTagsToPlace(request, place):
+    tagsID = []
+    try:
+        for i in range(Tag.objects.all().count()):
+            if request.POST[f"tag-{i}"] != "None":
+                tagsID.append(request.POST[f"tag-{i}"])
+    except KeyError:
+        pass
+
+    uniqueTagsID = set(tagsID)
+
+    for tagID in uniqueTagsID:
+        t = TagPlace(placeID=place, tagID=get_object_or_404(Tag, id=tagID))
+        t.save()

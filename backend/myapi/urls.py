@@ -10,4 +10,5 @@ urlpatterns = [
         views.isFavoritePlace,
         name="isFavoritePlace",
     ),
+    path("tags", views.getTags, name="getTags"),
 ]
