@@ -47,12 +47,21 @@ class Place(models.Model):
         )
         return [tag.name for tag in top_tags]
 
+    def isFavoritePlace(self, utilizador):
+        return self.favoritePlaces.filter(id=utilizador.id).exists()
+
+    def favoriteOrUnFavoritePlace(self, utilizador):
+        if self.isFavoritePlace(utilizador):
+            self.favoritePlaces.remove(utilizador)
+        else:
+            self.favoritePlaces.add(utilizador)
+
 
 class Review(models.Model):
     comment = models.CharField(max_length=300, null=True)
     rating = models.SmallIntegerField(null=True)
     mainImage = models.ImageField(default="")
-    data = models.DateField(default=timezone.now())
+    data = models.DateField(default=timezone.now)
     placeID = models.ForeignKey(Place, on_delete=models.CASCADE)
     userID = models.ForeignKey(Utilizador, on_delete=models.CASCADE)
     reviewID = models.ForeignKey("self", on_delete=models.CASCADE, null=True)

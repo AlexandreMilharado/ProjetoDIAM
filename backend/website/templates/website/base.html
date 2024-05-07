@@ -3,6 +3,7 @@
 <html lang="en">
 
 <head>
+    <meta id="csrf-token" content="{{ csrf_token }}">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     {% block imports %}  {% endblock %}
@@ -23,20 +24,36 @@
             <legend>On<span>Spot</span></legend>
         </a>
         <nav>
+            {%if request.user.is_superuser %}
+                <a href="{% url 'website:createTag' %}">Criar Tags</a>
+            {% endif %}
             <a href="{% url 'website:myPlaces' %}">Adicionados por mim</a>
-            <a href="#">Favoritos</a>
+            <a href="{% url 'website:favoritePlaces' %}">Favoritos</a>
             {% if not request.user.is_authenticated %}
-            <a href="{% url 'website:login' %}">Log in</a>
+                <a href="{% url 'website:login' %}">Log in</a>
             {% else %}
             <a id="username-text" href="{% url 'website:profile' %}">{{ request.user.username }}</a>
             <a id="username-text" href="{% url 'website:logout' %}">Logout</a>
             {% endif %}
         </nav>
     </header>
+    {% if modalMessage %}
+       <aside id="modal" class="modal-content">
+            <div class="modal-content">
+                <h2 class="modal-text">{{modalMessage.msg}}</h2>
+                <figure class="modal-image">
+                    <img  src="{% static modalMessage.image %}" alt="action image" width="250" height="250">
+                </figure>
+                <button id="modal-close" class="create-place-submit" style="margin-top: 15px">Close</button>
+            </div>
+        </aside>
+    {% endif %}
     {% block relevantInformation %} {% endblock %}
     {% block content %} {% endblock %}
 
     {% block scripts%}
+        <script type="module" src="{% static 'js/utils.js'%}"></script>
+        <script type="text/javascript" src="{% static 'js/base.js'%}" ></script>
     {% endblock %}
 </body>
 </html>
