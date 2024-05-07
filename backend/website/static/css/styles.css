@@ -1,10 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Varta:wght@300..700&display=swap");
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   text-decoration: none;
-  cursor: auto; /* This is annoying me */
+  cursor: auto;
+  /* This is annoying me */
 }
 
 html,
@@ -36,24 +38,30 @@ h5 {
   font-family: "Varta";
   font-weight: 700;
 }
+
 h1 {
-  font-size: 4.21rem; /* 67.36px */
+  font-size: 4.21rem;
+  /* 67.36px */
 }
 
 h2 {
-  font-size: 3.158rem; /* 50.56px */
+  font-size: 3.158rem;
+  /* 50.56px */
 }
 
 h3 {
-  font-size: 2.369rem; /* 37.92px */
+  font-size: 2.369rem;
+  /* 37.92px */
 }
 
 h4 {
-  font-size: 1.777rem; /* 28.48px */
+  font-size: 1.777rem;
+  /* 28.48px */
 }
 
 h5 {
-  font-size: 1.333rem; /* 21.28px */
+  font-size: 1.333rem;
+  /* 21.28px */
 }
 
 h1,
@@ -64,24 +72,30 @@ h5 {
   font-family: "Varta";
   font-weight: 700;
 }
+
 h1 {
-  font-size: 4.21rem; /* 67.36px */
+  font-size: 4.21rem;
+  /* 67.36px */
 }
 
 h2 {
-  font-size: 3.158rem; /* 50.56px */
+  font-size: 3.158rem;
+  /* 50.56px */
 }
 
 h3 {
-  font-size: 2.369rem; /* 37.92px */
+  font-size: 2.369rem;
+  /* 37.92px */
 }
 
 h4 {
-  font-size: 1.777rem; /* 28.48px */
+  font-size: 1.777rem;
+  /* 28.48px */
 }
 
 h5 {
-  font-size: 1.333rem; /* 21.28px */
+  font-size: 1.333rem;
+  /* 21.28px */
 }
 
 header {
@@ -108,6 +122,7 @@ header .logo {
   font-size: 55px;
   cursor: pointer;
 }
+
 header .logo span {
   color: var(--detail-color);
 }
@@ -124,7 +139,7 @@ header nav {
   margin-left: 30%;
   width: 100%;
 
-  & > * {
+  &>* {
     width: 20%;
     display: flex;
     justify-content: space-around;
@@ -142,6 +157,7 @@ header nav a {
   align-items: center;
   text-align: center;
 }
+
 header nav a:hover {
   color: var(--text-primary);
   background-color: var(--primarybg-color);
@@ -166,12 +182,14 @@ header nav a:hover {
   border-radius: 6px;
   transition: cubic-bezier(0.165, 0.84, 0.44, 1) 150ms;
 }
+
 .place-card img:hover {
   scale: 1.05;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
     rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
     rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
+
 .place-card:has(img:hover) {
   opacity: 0.9;
 }
@@ -207,12 +225,14 @@ header nav a:hover {
   justify-content: start;
   align-items: center;
 }
+
 .rating-container svg {
   width: 30px;
   height: auto;
   fill: rgb(255, 204, 0);
   color: rgb(255, 204, 0);
 }
+
 .rating-container span {
   margin-left: 10px;
   font-size: 18px;
@@ -227,6 +247,7 @@ header nav a:hover {
   color: var(--detail-color);
   cursor: pointer;
 }
+
 .fav-star:hover {
   color: rgb(245, 237, 20);
   fill: rgb(245, 237, 20);
@@ -240,9 +261,12 @@ header nav a:hover {
   align-items: center;
   background-image: linear-gradient(rgba(0, 0, 0, 0.21), rgba(0, 0, 0, 0.182)),
     url("https://upload.wikimedia.org/wikipedia/commons/f/f8/View_of_the_Alfama_quarter_in_Lisbon_Portugal.JPG");
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat; /* Do not repeat the image */
-  background-size: cover; /* Resize the background image to cover the entire container */
+  background-position: center;
+  /* Center the image */
+  background-repeat: no-repeat;
+  /* Do not repeat the image */
+  background-size: cover;
+  /* Resize the background image to cover the entire container */
 }
 
 .login form {
@@ -256,6 +280,7 @@ header nav a:hover {
   box-shadow: rgba(0, 0, 0, 0.35) 20px 5px 15px;
   gap: 10px;
 }
+
 .login form a {
   font-size: x-small;
   width: 100%;
@@ -263,6 +288,7 @@ header nav a:hover {
   color: var(--detail-color);
   cursor: pointer;
 }
+
 .login a:hover {
   text-decoration: underline var(--detail-color);
 }
@@ -276,9 +302,11 @@ header nav a:hover {
   align-items: center;
   margin-bottom: 30px;
 }
+
 .login form figure svg {
   height: 2rem;
 }
+
 .login form figure span {
   color: rgb(87, 87, 87);
 }
@@ -306,6 +334,7 @@ header nav a:hover {
   border: 1px solid var(--detail-color);
   border-radius: 6px;
 }
+
 .form-label {
   position: absolute;
   top: -7px;
@@ -319,13 +348,15 @@ header nav a:hover {
   cursor: text;
   transition: 0.25s ease;
 }
-.form-input:placeholder-shown ~ .form-label {
+
+.form-input:placeholder-shown~.form-label {
   font-size: 14px;
   top: 4px;
   left: 5px;
   background-color: transparent;
 }
-.form-input:focus ~ .form-label {
+
+.form-input:focus~.form-label {
   position: absolute;
   top: -7px;
   left: 3px;
@@ -337,6 +368,7 @@ header nav a:hover {
   transition: 0.25s ease;
   color: var(--detail-color);
 }
+
 .form-input:focus {
   outline: none;
 }
@@ -387,12 +419,15 @@ header nav a:hover {
   font-size: 16px;
   color: rgb(69, 69, 69);
 }
+
 .search-input::placeholder {
   color: rgb(170, 170, 170);
 }
+
 .search-input:focus {
   border: 2px solid var(--detail-color);
 }
+
 .search-input-container {
   margin: 2rem 0 0 11rem;
   width: 400px;
@@ -400,6 +435,7 @@ header nav a:hover {
   position: relative;
   height: 30px;
 }
+
 .search-input-container svg {
   position: absolute;
   color: var(--detail-color);
@@ -425,6 +461,7 @@ header nav a:hover {
   justify-content: space-around;
   gap: 6rem;
 }
+
 .place-title {
   color: var(--secondarybg-color);
 }
@@ -436,11 +473,13 @@ header nav a:hover {
   max-height: 446px;
   max-width: 520px;
 }
+
 .place-image-container img {
   border-radius: 8px;
   width: 100%;
   aspect-ratio: 4/3;
 }
+
 .place-image-container .heart {
   position: absolute;
   right: 25px;
@@ -456,18 +495,21 @@ header nav a:hover {
 .place aside {
   flex: 1;
 }
+
 .place-location {
   font-weight: 200;
   text-decoration: underline;
   font-size: 15px;
   color: #4a4a4a;
 }
+
 .place-location svg {
   width: 14px;
   margin-top: 10px;
   margin-right: 5px;
   color: var(--detail-color);
 }
+
 .place aside .rating-container {
   margin-top: 2rem;
   font-weight: lighter;
@@ -497,7 +539,7 @@ header nav a:hover {
   margin: 5% 25%;
   align-items: center;
 
-  > * {
+  >* {
     margin-top: 20px;
     width: 100%;
   }
@@ -601,7 +643,7 @@ header nav a:hover {
   animation-timing-function: ease;
 }
 
-#modal > .modal-underlay {
+#modal>.modal-underlay {
   /* underlay takes up the entire viewport. This is only
 	required if you want to click to dismiss the popup */
   position: absolute;
@@ -612,7 +654,7 @@ header nav a:hover {
   right: 0px;
 }
 
-#modal > .modal-content {
+#modal>.modal-content {
   /* Position visible dialog near the top of the window */
   margin-top: 10vh;
 
@@ -641,7 +683,7 @@ header nav a:hover {
   display: none;
 }
 
-#modal.closing > .modal-content {
+#modal.closing>.modal-content {
   /* Animate when closing */
   animation-name: zoomOut;
   animation-duration: 1s;
@@ -664,6 +706,7 @@ header nav a:hover {
   0% {
     opacity: 0;
   }
+
   100% {
     opacity: 1;
   }
@@ -673,6 +716,7 @@ header nav a:hover {
   0% {
     opacity: 1;
   }
+
   100% {
     opacity: 0;
   }
@@ -682,6 +726,7 @@ header nav a:hover {
   0% {
     transform: scale(0.9);
   }
+
   100% {
     transform: scale(1);
   }
@@ -691,6 +736,7 @@ header nav a:hover {
   0% {
     transform: scale(1);
   }
+
   100% {
     transform: scale(0.9);
   }
@@ -735,7 +781,7 @@ header nav a:hover {
   display: flex;
   flex-wrap: wrap;
 
-  & > * {
+  &>* {
     margin-right: 5px;
     padding: 10px;
     margin-top: 6px;
@@ -750,8 +796,110 @@ header nav a:hover {
   font-weight: bold;
   height: 30px;
 
-  & > svg {
+  &>svg {
     width: inherit;
     height: fit-content;
+  }
+}
+
+.profile {
+  height: 100%;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.45)), url("https://images.hdqwalls.com/download/best-nature-image-1920x1080.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+
+  &>#profile-photo figure {
+    position: relative;
+
+    &>img {
+      margin-top: 7vh;
+      width: max(13vw, 25vh);
+      height: max(13vw, 25vh);
+      object-fit: cover;
+      border-radius: 50%;
+      border: 5px solid var(--primarybg-color);
+    }
+
+    &>form button,
+    label {
+      opacity: 0;
+      visibility: hidden;
+      transition: visibility 0s, opacity 0.5s linear;
+
+
+      &>img {
+        position: absolute;
+        bottom: 20px;
+        width: 52px;
+        height: 52px;
+        right: 30px;
+        background-color: rgb(196, 196, 196);
+        object-fit: cover;
+        border-radius: 50%;
+        border: 3px solid var(--primarybg-color);
+
+        &:hover {
+          background-color: rgb(148, 147, 149);
+        }
+      }
+
+
+    }
+  }
+
+  &>#profile-description form {
+    position: relative;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    background-color: var(--primarybg-color);
+    border-radius: 10%;
+
+    &>button,
+    #submit-profile-description {
+      border: 0;
+      border-radius: 50%;
+      position: absolute;
+      right: 8px;
+      bottom: 12px;
+      outline: none;
+      opacity: 0;
+      transition: visibility 0s, opacity 0.5s linear;
+
+      &>img {
+        width: 30px;
+        height: 30px;
+        background-color: rgb(196, 196, 196);
+        object-fit: cover;
+        border-radius: 50%;
+        border: 3px solid var(--primarybg-color);
+
+        &:hover {
+          background-color: rgb(148, 147, 149);
+        }
+      }
+    }
+
+
+    &>p {
+      font-size: 1.5em;
+      padding: 17px;
+      color: var(--text-primary);
+
+      &>input {
+        border: 0;
+        background: transparent;
+        color: var(--text-primary);
+        font-size: 1em;
+        width: 90%;
+
+        &:hover {
+          background-color: rgb(242, 242, 242);
+        }
+      }
+    }
   }
 }
