@@ -1,19 +1,28 @@
 $(document).ready(function () {
 
     $("#profile-photo").mouseout(function () {
-        $("#edit-profile-photo").hide();
+        $(".custom-file-upload").css({ "visibility": "visible", "opacity": "0" });
+        // $("#submit-photo").css({ "visibility": "visible", "opacity": "0" });
     });
 
     $("#profile-photo").mouseover(function () {
-        $("#edit-profile-photo").show();
+        $(".custom-file-upload").css({ "visibility": "visible", "opacity": "1" });
+        $("#submit-photo").css({ "visibility": "visible", "opacity": "1" });
     });
 
     $("#profile-description").mouseover(function () {
-        $("#edit-profile-description").show();
-    });;
+        $("#edit-profile-description").css({ "visibility": "visible", "opacity": "1" })
+    });
 
     $("#profile-description").mouseout(function () {
-        $("#edit-profile-description").hide();
+        $("#edit-profile-description").css({ "visibility": "visible", "opacity": "0" })
+    });
+
+    $(".custom-file-upload").click(async function () {
+        $(this).hide();
+        await new Promise(r => setTimeout(r, 1000));
+        $("#submit-photo").show();
+        $("#submit-photo").css({ "visibility": "visible", "opacity": "1" });
     });
 
     $("#profile-description input").each(function (index, input) {
@@ -24,9 +33,9 @@ $(document).ready(function () {
         $("#profile-description input").each(function (index, input) {
             input.disabled = false;
         });
+        $(this).hide();
         $("#submit-profile-description").show();
-        $(this).remove();
-        // $(this).hide();
+        $("#submit-profile-description").css({ "visibility": "visible", "opacity": "1" });
     });
 
 });

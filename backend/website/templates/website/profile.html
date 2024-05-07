@@ -4,16 +4,16 @@
 <main class="profile">
     <section id="profile-photo">
         <figure>
-            <img class="profile-photo" src="{% static 'images/no-profile-img.png'%}"
+            <img src="{% static request.user.utilizador.profileImage %}"
                 alt="profile Image">
-                <form id="edit-profile-photo" style="display:none" method="POST" enctype="multipart/form-data">
+                <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
-                    <input id="file-upload" type="file">
+                    <input id="file-upload" type="file" accept="image/*" name="myfile" style="display:none;">
                     <label for="file-upload" class="custom-file-upload">
-                        <img src="{% static 'images/selection.png'%}" width="50" height="50">
+                        <img src="{% static 'images/edit.png'%}">
                     </label>
-                    <button type="submit" value="Submit">
-                        <img src="{% static 'images/submit.png'%}" width="50" height="50">
+                    <button id="submit-photo" type="submit" value="Submit" style="display:none">
+                        <img src="{% static 'images/submit.png'%}">
                     </button>
                 </form>
         </figure>
@@ -23,24 +23,27 @@
             {% csrf_token %}
             <p>
                 Email:
-                <input class="profile-description-input" placeholder= "{{ request.user.email }}" name ="email">
+                <input class="profile-description-input" type="email" value= "{{ request.user.email }}" name ="email">
             </p>
             <p>
                 Username:
-                <input class="profile-description-input" placeholder= "{{ request.user.username }}" name ="username">
+                <input class="profile-description-input" value= "{{ request.user.username }}" name ="username">
             </p>
             <p>
                 Birthday:
-                <input class="profile-description-input" placeholder= "{{ request.user.utilizador.birthday }}" name ="birthday">
+                <input class="profile-description-input" type="date" value= "{{ request.user.utilizador.birthday }}" name ="birthday">
             </p>
             <p>
                 Password:
-                <input class="profile-description-input" placeholder= "*****" name ="password">
+                <input class="profile-description-input" type="password" placeholder="*****" required name ="password">
             </p>
             <button id="edit-profile-description">
-                Editar
+                <img src="{% static 'images/edit.png'%}">
             </button>
-            <input id="submit-profile-description" type="submit" value="Salvar" style="display:none">
+            <button id="submit-profile-description" type="submit" value="Submit" style="display:none">
+                <img src="{% static 'images/submit.png'%}">
+            </button>
+            {% comment %} <input id="submit-profile-description" type="submit" value="Salvar" style="display:none" src="{% static 'images/save.png'%}"> {% endcomment %}
         </form>
 
     </section>
