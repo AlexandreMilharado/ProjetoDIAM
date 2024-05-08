@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Varta:wght@300..700&display=swap");
-
 * {
   margin: 0;
   padding: 0;
@@ -30,72 +29,59 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5 {
-  font-family: "Varta";
-  font-weight: 700;
+ul{
+  list-style: none;
 }
 
 h1 {
-  font-size: 4.21rem;
-  /* 67.36px */
+  font-size: 4.21rem; /* 67.36px */
 }
 
 h2 {
-  font-size: 3.158rem;
-  /* 50.56px */
+  font-size: 3.158rem; /* 50.56px */
 }
 
 h3 {
-  font-size: 2.369rem;
-  /* 37.92px */
+  font-size: 2.369rem; /* 37.92px */
 }
 
 h4 {
-  font-size: 1.777rem;
-  /* 28.48px */
+  font-size: 1.777rem; /* 28.48px */
 }
 
 h5 {
-  font-size: 1.333rem;
-  /* 21.28px */
+  font-size: 1.333rem; /* 21.28px */
+}
+h6 {
+  font-size: 18px
 }
 
 h1,
 h2,
 h3,
 h4,
-h5 {
+h5,h6 {
   font-family: "Varta";
   font-weight: 700;
 }
-
 h1 {
-  font-size: 4.21rem;
-  /* 67.36px */
+  font-size: 4.21rem; /* 67.36px */
 }
 
 h2 {
-  font-size: 3.158rem;
-  /* 50.56px */
+  font-size: 3.158rem; /* 50.56px */
 }
 
 h3 {
-  font-size: 2.369rem;
-  /* 37.92px */
+  font-size: 2.369rem; /* 37.92px */
 }
 
 h4 {
-  font-size: 1.777rem;
-  /* 28.48px */
+  font-size: 1.777rem; /* 28.48px */
 }
 
 h5 {
-  font-size: 1.333rem;
-  /* 21.28px */
+  font-size: 1.333rem; /* 21.28px */
 }
 
 header {
@@ -107,7 +93,7 @@ header {
   box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 4px 4px,
     rgba(0, 0, 0, 0.07) 0px 8px 8px;
   border-bottom: 1px solid #969696;
-  padding: 0% 2%;
+  padding: 0 0 0 2%;
 }
 
 header .logo {
@@ -140,7 +126,7 @@ header nav {
   width: 100%;
 
   &>* {
-    width: 20%;
+    
     display: flex;
     justify-content: space-around;
     flex-grow: 1;
@@ -148,8 +134,10 @@ header nav {
 }
 
 header nav a {
+  cursor: pointer;
   color: white;
   text-decoration: none;
+  white-space: nowrap;
   font-size: 20px;
   transition: ease 200ms;
   height: 100%;
@@ -157,11 +145,90 @@ header nav a {
   align-items: center;
   text-align: center;
 }
-
 header nav a:hover {
   color: var(--text-primary);
   background-color: var(--primarybg-color);
 }
+
+
+.footer {
+  margin-top: 25rem;
+  position: relative;
+  width: 100%;
+  background: #3586ff;
+  min-height: 80px;
+  padding: 10px 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+
+.footer p {
+  color: #fff;
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+.wave {
+  position: absolute;
+  top: -80px;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: url("https://i.ibb.co/wQZVxxk/wave.png");
+  background-size: 1200px 100px;
+}
+
+.wave#wave1 {
+  z-index: 1000;
+  opacity: 1;
+  bottom: 0;
+  animation: animateWaves 15s linear infinite;
+}
+
+.wave#wave2 {
+  z-index: 999;
+  opacity: 0.5;
+  bottom: 10px;
+  animation: animate 13s linear infinite !important;
+}
+
+.wave#wave3 {
+  z-index: 1000;
+  opacity: 0.2;
+  bottom: 15px;
+  animation: animateWaves 10s linear infinite;
+}
+
+.wave#wave4 {
+  z-index: 999;
+  opacity: 0.7;
+  bottom: 20px;
+  animation: animate 9s linear infinite;
+}
+
+@keyframes animateWaves {
+  0% {
+    background-position-x: 1200px;
+  }
+  100% {
+    background-positon-x: 0px;
+  }
+}
+
+@keyframes animate {
+  0% {
+    background-position-x: -1200px;
+  }
+  100% {
+    background-positon-x: 0px;
+  }
+}
+
+
 
 .place-card {
   position: relative;
@@ -182,7 +249,6 @@ header nav a:hover {
   border-radius: 6px;
   transition: cubic-bezier(0.165, 0.84, 0.44, 1) 150ms;
 }
-
 .place-card img:hover {
   scale: 1.05;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
@@ -261,12 +327,9 @@ header nav a:hover {
   align-items: center;
   background-image: linear-gradient(rgba(0, 0, 0, 0.21), rgba(0, 0, 0, 0.182)),
     url("https://upload.wikimedia.org/wikipedia/commons/f/f8/View_of_the_Alfama_quarter_in_Lisbon_Portugal.JPG");
-  background-position: center;
-  /* Center the image */
-  background-repeat: no-repeat;
-  /* Do not repeat the image */
-  background-size: cover;
-  /* Resize the background image to cover the entire container */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
 }
 
 .login form {
@@ -482,6 +545,7 @@ header nav a:hover {
 
 .place-image-container .heart {
   position: absolute;
+  cursor: pointer;
   right: 25px;
   top: 15px;
   padding: 4px;
@@ -751,7 +815,6 @@ header nav a:hover {
 }
 
 .tag-list {
-  list-style: none;
   display: flex;
   gap: 10px;
   align-items: baseline;
@@ -903,3 +966,198 @@ header nav a:hover {
     }
   }
 }
+
+.place-detail {
+  width: 100%;
+  height: 100%;
+  padding: 2rem 10%;
+}
+
+
+.place-detail-title ul{
+  display: flex;
+  gap: 25px;
+  align-items: center;
+  color: #6b6b6b;
+  
+  
+}
+
+.place-detail-title ul li{
+  display: flex;
+  align-items: start;
+  gap: 5px;
+  font-size: 18px;
+}
+
+
+.place-detail-title ul svg{
+  width: 21px;
+  height: auto;
+}
+
+.button-like {
+  border: 2px solid #8a8a8a;
+  background-color: transparent;
+  margin-left: auto;
+  text-decoration: none;
+  padding: 8px 10px;
+  position: relative;
+  vertical-align: middle;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  border-radius: 3rem;
+  color: #8a8a8a;
+  transition: all ease 0.4s;
+}
+
+.button-like span {
+  margin-left: 0.5rem;
+}
+
+.button-like .fa,
+.button-like span {
+  transition: all ease 0.4s;
+}
+
+.button-like:focus {
+  background-color: transparent;
+}
+
+.button-like:focus .fa,
+.button-like:focus span {
+  color: #8a8a8a;
+}
+
+.button-like:hover {
+  border-color: #cc4b37;
+  background-color: transparent;
+}
+
+.button-like:hover .fa,
+.button-like:hover span {
+  color: #cc4b37;
+}
+
+.liked {
+  background-color: #cc4b37;
+  border-color: #cc4b37;
+}
+
+.liked .fa,
+.liked span {
+  color: #fefefe;
+}
+
+.liked:focus {
+  background-color: #cc4b37;
+}
+
+.liked:focus .fa,
+.liked:focus span {
+  color: #fefefe;
+}
+
+.liked:hover {
+  background-color: #cc4b37;
+  border-color: #cc4b37;
+}
+
+.liked:hover .fa,
+.liked:hover span {
+  color: #fefefe;
+}
+
+.place-detail img {
+  object-fit:cover;
+  margin-top: 2rem;
+  border-radius: 10px;
+  max-height: 400px;
+  width: 100%;
+  aspect-ratio: 4/3;
+}
+
+.place-detail-info-container {
+  margin:2rem 0 ;
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 2rem;
+  & article {
+    flex: 1;
+
+    & p {
+      text-indent: 50px;
+      color: #2a2a2a;
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 25px;
+      text-align: justify;
+      margin-bottom: 2rem;
+    }
+
+    & ul {
+      overflow-y: auto;
+      & li {
+        margin: 1rem 0;
+      }
+
+      & figure{
+        --profile:40px;
+        display: flex;
+        align-items: center;
+        height: var(--profile);
+        gap: 10px;
+        margin-bottom: 5px;
+        & img {
+          margin: 0;
+          width: var(--profile);
+          height: 100%;
+          border-radius: 100%;
+        }
+        & .rating-container svg {
+          height: 20px;
+          margin-right: -10px;
+        }
+      }
+
+    }
+  
+  }
+  
+  & .place-detail-ratings{
+    max-width: 28%;
+    min-width: 286px;
+    max-height:max-content;
+    align-self: flex-start;
+    flex-grow: 0; 
+    flex-shrink: 1; 
+    padding: 1rem 2rem ;
+    border-radius: 15px;
+    border: 1px solid rgba(90, 90, 90, 0.727);
+    
+    & .rating-container {
+      margin-top: 1rem;
+      position: relative;
+      align-items: flex-start;
+      & .reviews-number{
+        position: absolute;
+        bottom: 2px;
+        right: 12%;
+      }
+      & .big-rating-number{
+        font-size: 50px;
+        font-weight: bold;
+        margin-right: 20px;
+      }
+    }
+    & ul {
+      width: 100%;
+    }
+  
+  }
+
+
+}
+
+

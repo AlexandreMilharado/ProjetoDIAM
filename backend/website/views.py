@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
-from myapi.models import Utilizador, Place, Tag, TagPlace
+from myapi.models import Utilizador, Place, Tag, TagPlace,Review
 from django.utils.dateparse import parse_datetime
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.files.storage import FileSystemStorage
@@ -184,7 +184,10 @@ def createTag(request):
 
 def detalhePlace(request, place_id):
     place = get_object_or_404(Place, id=place_id)
-    return render(request, "website/detalhe.html", {"place": place})
+    tags = TagPlace.objects.filter(placeID=place).order_by("-likeNumber")[:15]
+    reviews = Review.objects.filter(placeID=place)
+    return render(request, "website/detalhe.html", 
+                  {"place": place, "isFavorite": place.isFavoritePlace(request.user), "tags":tags,"reviews":reviews})
 
 
 # File Functions
