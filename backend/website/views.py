@@ -87,6 +87,21 @@ def registar(request):
 
 @login_required(login_url="/login")
 def profile(request):
+    if request.method == "POST":
+        try:
+            request.user.utilizador.email=request.POST["email"]
+            request.user.username=request.POST["username"]
+            print("birthday"+ request.POST["birthday"])
+            request.user.utilizador.birthday=request.POST["birthday"]
+            print("Depois birthday "+request.user.utilizador.birthday)
+            request.user.set_password(request.POST["password"])
+            request.user.utilizador.save()
+        except KeyError:
+            pass
+
+    if request.method == "POST" and request.FILES.get("myfile") is not None:
+        request.user.utilizador.profileImage= saveAndGetImage( request.FILES["myfile"],request.user,"no-profile-img.png")
+        request.user.utilizador.save()
     utilizador = Utilizador.objects.get(user=request.user)
     return render(request, "website/profile.html", {"user": utilizador})
 
