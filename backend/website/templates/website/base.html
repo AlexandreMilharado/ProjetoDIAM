@@ -32,8 +32,8 @@
             {% if not request.user.is_authenticated %}
                 <a href="{% url 'website:login' %}">Log in</a>
             {% else %}
-                <a id="username-text" href="#">{{ request.user.username }}</a>
-                <a id="username-text" href="{% url 'website:logout' %}">Logout</a>
+            <a id="username-text" href="{% url 'website:profile' %}">{{ request.user.username }}</a>
+            <a id="username-text" href="{% url 'website:logout' %}">Logout</a>
             {% endif %}
         </nav>
     </header>
@@ -55,6 +55,21 @@
         <script type="module" src="{% static 'js/utils.js'%}"></script>
         <script type="text/javascript" src="{% static 'js/base.js'%}" ></script>
     {% endblock %}
-</body>
 
+    <footer class="footer">
+        <div class="waves">
+          <div class="wave" id="wave1"></div>
+          <div class="wave" id="wave2"></div>
+          <div class="wave" id="wave3"></div>
+          <div class="wave" id="wave4"></div>
+        </div>
+    
+    
+        <p>&copy; ISCTE DIAM 2024 <br>
+            Alexandre - André - Oleg </p>
+      </footer>
+      <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+      <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
 </html>

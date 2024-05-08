@@ -1,22 +1,55 @@
 {% extends "website/base.html" %}
 {% load static %}
 {% block content %}
-<section>
-    <figure>
-        <img id="main-profile-photo" class="profile-photo" src="{% static 'images/no-profile-img.png'%}"
-            alt="profile Image" width="250" height="250">
-    </figure>
-    <label>
-        Email:{{ request.user.email }}
-    </label>
-    <label>
-        Username:{{ request.user.username }}
-    </label>
-    <label>
-        Birthday:{{ request.user.Utilizador.birthday }}
-    </label>
-    <label>
-        Password: ******
-    </label>
-</section>
+<main class="profile">
+    <section id="profile-photo">
+        <figure>
+            <img src="{% static request.user.utilizador.profileImage %}"
+                alt="profile Image">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input id="file-upload" type="file" accept="image/*" name="myfile" style="display:none;">
+                    <label for="file-upload" class="custom-file-upload">
+                        <img src="{% static 'images/edit.png'%}">
+                    </label>
+                    <button id="submit-photo" type="submit" value="Submit" style="display:none">
+                        <img src="{% static 'images/submit.png'%}">
+                    </button>
+                </form>
+        </figure>
+    </section>
+    <section id="profile-description">
+        <form method="POST" action="{% url 'website:profile' %}"> 
+            {% csrf_token %}
+            <p>
+                Email:
+                <input class="profile-description-input" type="email" value= "{{ request.user.email }}" name ="email">
+            </p>
+            <p>
+                Username:
+                <input class="profile-description-input" value= "{{ request.user.username }}" name ="username">
+            </p>
+            <p>
+                Birthday:
+                <input class="profile-description-input" type="date" value= "{{ request.user.utilizador.birthday }}" name ="birthday">
+            </p>
+            <p>
+                Password:
+                <input class="profile-description-input" type="password" placeholder="*****" required name ="password">
+            </p>
+            <button id="edit-profile-description">
+                <img src="{% static 'images/edit.png'%}">
+            </button>
+            <button id="submit-profile-description" type="submit" value="Submit" style="display:none">
+                <img src="{% static 'images/submit.png'%}">
+            </button>
+            {% comment %} <input id="submit-profile-description" type="submit" value="Salvar" style="display:none" src="{% static 'images/save.png'%}"> {% endcomment %}
+        </form>
+
+    </section>
+</main>
+{% endblock %}
+{% block scripts %}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/profile.js'%}"></script>
 {% endblock %}

@@ -4,3 +4,5 @@ export function showHideElement($targetElement, $trigger, onEvent = "click") {
     else $targetElement.fadeIn();
   });
 }
+
+

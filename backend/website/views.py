@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
-from myapi.models import Utilizador, Place, Tag, TagPlace
+from myapi.models import Utilizador, Place, Tag, TagPlace,Review
 from django.utils.dateparse import parse_datetime
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.files.storage import FileSystemStorage
@@ -88,6 +88,21 @@ def registar(request):
 
 @login_required(login_url="/login")
 def profile(request):
+    if request.method == "POST":
+        try:
+            request.user.utilizador.email=request.POST["email"]
+            request.user.username=request.POST["username"]
+            print("birthday"+ request.POST["birthday"])
+            request.user.utilizador.birthday=request.POST["birthday"]
+            print("Depois birthday "+request.user.utilizador.birthday)
+            request.user.set_password(request.POST["password"])
+            request.user.utilizador.save()
+        except KeyError:
+            pass
+
+    if request.method == "POST" and request.FILES.get("myfile") is not None:
+        request.user.utilizador.profileImage= saveAndGetImage( request.FILES["myfile"],request.user,"no-profile-img.png")
+        request.user.utilizador.save()
     utilizador = Utilizador.objects.get(user=request.user)
     return render(request, "website/profile.html", {"user": utilizador})
 
@@ -175,7 +190,10 @@ def createTag(request):
 
 def detalhePlace(request, place_id):
     place = get_object_or_404(Place, id=place_id)
-    return render(request, "website/detalhe.html", {"place": place})
+    tags = TagPlace.objects.filter(placeID=place).order_by("-likeNumber")[:15]
+    reviews = Review.objects.filter(placeID=place)
+    return render(request, "website/detalhe.html", 
+                  {"place": place, "isFavorite": place.isFavoritePlace(request.user), "tags":tags,"reviews":reviews})
 
 
 # File Functions
