@@ -10,5 +10,8 @@ urlpatterns = [
         views.favoritePlace,
         name="favoritePlace",
     ),
+    path("<int:place_id>/getBestTags", views.getBestTags, name="getBestTags"),
     path("tags", views.getTags, name="getTags"),
+    path("<int:tag_id>/operationTag", views.oprationTag, name="operationTag"),
+    path("getPlaces", views.getPlaces, name="getPlaces"),
 ]

@@ -755,3 +755,8 @@ header nav a:hover {
     height: fit-content;
   }
 }
+
+.tag-update {
+  background: transparent;
+  border: none;
+}
