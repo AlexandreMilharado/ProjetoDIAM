@@ -35,6 +35,17 @@ class Place(models.Model):
 
     def hasOddRating(self):
         return self.rating % 2 == 1
+    
+    def getRatingColor(self):
+        if self.rating < 4:
+            return "#cd2e2e"
+        if self.rating < 7:
+            return "#e7bd3f"
+        else:
+            return "#089638"
+
+    def halfRating(self):
+        return self.rating / 2
 
     def __str__(self):
         return self.title
@@ -68,7 +79,11 @@ class Review(models.Model):
     likedTags = models.ManyToManyField(Tag, related_name="likedTags")
 
     def __str__(self):
-        return f"{Place.objects.get(pk=self.placeID)} {self.pk}"
+        return f"{self.placeID} {self.pk}"
+    def getRatingRange(self):
+        return range(self.rating // 2)
+    def hasOddRating(self):
+        return self.rating % 2 == 1
 
 
 class TagPlace(models.Model):
