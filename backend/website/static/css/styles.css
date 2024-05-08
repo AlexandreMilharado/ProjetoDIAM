@@ -93,7 +93,7 @@ header {
   box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 4px 4px,
     rgba(0, 0, 0, 0.07) 0px 8px 8px;
   border-bottom: 1px solid #969696;
-  padding: 0% 2%;
+  padding: 0 0 0 2%;
 }
 
 header .logo {
@@ -126,7 +126,7 @@ header nav {
   width: 100%;
 
   &>* {
-    width: 20%;
+    
     display: flex;
     justify-content: space-around;
     flex-grow: 1;
@@ -134,8 +134,10 @@ header nav {
 }
 
 header nav a {
+  cursor: pointer;
   color: white;
   text-decoration: none;
+  white-space: nowrap;
   font-size: 20px;
   transition: ease 200ms;
   height: 100%;
@@ -543,6 +545,7 @@ header nav a:hover {
 
 .place-image-container .heart {
   position: absolute;
+  cursor: pointer;
   right: 25px;
   top: 15px;
   padding: 4px;
