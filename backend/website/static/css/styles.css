@@ -111,6 +111,8 @@ header .logo {
 
 header .logo span {
   color: var(--detail-color);
+  cursor: pointer;
+
 }
 
 header svg {
