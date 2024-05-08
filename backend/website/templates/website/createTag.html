@@ -1,4 +1,5 @@
 {% extends "website/base.html" %} 
+{% load static %}
 
 {% block relevantInformation %}
     <section class="form-group">
@@ -18,10 +19,12 @@
 {% block content %}
     <section class="tags-container">
         <h1 class="text" >Tags</h1>
-            <ul class="tag-list">
-                {% for tag in tags %}
-                    <li class="tag">{{ tag}}</li> 
-                {% endfor %}
+            <ul id="tag-list-create" class="tag-list">
             </ul>                    
     </section>
+{% endblock %}
+
+{% block scripts %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'js/createTag.js'%}"></script>
 {% endblock %}

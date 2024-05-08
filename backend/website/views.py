@@ -12,6 +12,7 @@ from myapi.views import searchOfensiveWords
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.utils import timezone
+import re
 
 
 # Test decorators
@@ -21,11 +22,11 @@ def isSuperUser(user):
 
 # Views
 def index(request):
-    placeList = Place.objects.all()  # TODO Buscar os melhores
+    size = Place.objects.all().count()
     return render(
         request,
         "website/index.html",
-        {"placeList": placeList, "emptyPlaces": "Sem lugares? Crie um!"},
+        {"isEmpty": size == 0, "emptyPlaces": "Sem lugares? Crie um!"},
     )
 
 
@@ -144,18 +145,23 @@ def myPlaces(request):
             p.save()
             addTagsToPlace(request, p)
 
-    context["placeList"] = Place.objects.filter(userID=request.user.id)
+    context["isEmpty"] = Place.objects.filter(userID=request.user.id).count() == 0
     context["emptyPlaces"] = "Sem lugares? Crie um!"
+    context["mode"] = "MYPLACES"
     return render(request, "website/myPlaces.html", context)
 
 
 @login_required(login_url="/login")
 def favoritePlaces(request):
-    placeList = Place.objects.filter(favoritePlaces=request.user.utilizador)
+    size = Place.objects.filter(favoritePlaces=request.user.utilizador).count()
     return render(
         request,
         "website/genericPage.html",
-        {"placeList": placeList, "emptyPlaces": "Sem lugares? Adicione um!"},
+        {
+            "isEmpty": size == 0,
+            "emptyPlaces": "Sem lugares? Adicione um!",
+            "mode": "FAVORITE",
+        },
     )
 
 
@@ -207,12 +213,17 @@ def getExtension(file):
 
 
 def isTextOfensive(text):
-    textToFind = text.lower()
-    bannedWords = searchOfensiveWords().split("\n")
-    for word in bannedWords:
-        if word in textToFind and word and textToFind:
-            return True
-    return False
+    palavrao = re.compile(
+        r"((?i)\bm[e3]rd\S+\b)|(?i)\bb[o0]st\S+\b|(?i)\bput[^r]\S*\b|(?i)\bp[o0]rr[a@4]\S*\b|(?i)\bc[uú](\b|z\w+)|(?i)\bv[i1](nh)?[a@4]d[^u]\S*\b|(?i)\b[kc][o0a@4]?r[o0a@4]?l[hi]?[o0a@4]?\S*\b|(?i)\bf[o0u]d\S+\b|\b[fF](\.)?[dD](\.)?[pP]\b|\b[Pp](\.)?[Qq](\.)?[pP]\b|\b[Vv][Ss][Ff]\b|\b[Vv][Tt][Nn][Cc]\b|(?i)b[o0u]c[e3]t\S+\b|(?i)\bpunh[e3]t\S+\b|(?i)\bb[i1](ch|x)[a@4]s?\b|\b(?i)c[o0]c[0ô]s?\b|\b(?i)[e3]scr[o0]t\S+\b|(?i)\bb[a@4]b[a@4][qc]\S+\b|(?i)\bc[a@4]g\S+\b|(?i)\bs[a@4]c[a@4]n[a@4e31i]\S*\b|(?i)\bk[a@4]c[e3]?t[e3]?\S*\b"
+    )
+    palavroes = list(filter(palavrao.match, text.split(" ")))
+    return len(palavroes) >= 1
+    # textToFind = text.lower()
+    # bannedWords = searchOfensiveWords().split("\n")
+    # for word in bannedWords:
+    #     if word in textToFind and word and textToFind:
+    #         return True
+    # return False
 
 
 # SuperUser Functions

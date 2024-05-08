@@ -6,11 +6,14 @@ from django.shortcuts import get_object_or_404
 from myapi.models import Place, Tag
 from .serializers import *
 from rest_framework import status
+from django.db.models import Count
 
 
 # TODO Mudar bixo
 @api_view(["GET"])
 def hello_world(request):
+    get_object_or_404(Place, pk=1).delete()
+
     return Response({"message": "Hello, world!"})
 
 
@@ -45,6 +48,69 @@ def getTags(request):
     return Response({"result": serializer.data})
 
 
+@api_view(["DELETE", "POST"])
+def oprationTag(request, tag_id):  # TODO not a priority
+    if not request.user.is_superuser:
+        return Response(
+            status=status.HTTP_401_UNAUTHORIZED,
+            data="Não tem permissiões para executar operação",
+        )
+
+    tag = get_object_or_404(Tag, pk=tag_id)
+    match request.method:
+        case "DELETE":
+            tag.delete()
+            return Response(status=status.HTTP_200_OK)
+
+        case "POST":
+            try:
+                tag.name = request.POST["name"]
+                tag.save()
+            except KeyError:
+                return Response(status=status.HTTP_400_BAD_REQUEST)
+
+            return Response(status=status.HTTP_200_OK)
+
+        case _:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(["GET"])
+def getPlaces(request):
+    search = request.query_params.get("search")
+    cachedNumber = request.query_params.get("cachedNumber")
+    mode = request.query_params.get("mode")
+    try:
+        cachedNumber = 0 if cachedNumber is None else int(cachedNumber)
+        mode = "" if mode is None else mode
+    except ValueError:
+        cachedNumber = 0
+
+    places = searchPlace(searchPlacePreviousMode(mode, request.user), search)
+
+    if places is None:
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+
+    places = places.order_by("-rating").order_by("-id")[
+        cachedNumber : (cachedNumber + 10)
+    ]
+
+    serializer = PlaceSerializer(places, many=True)
+    return Response({"result": serializer.data})
+
+
+@api_view(["GET"])
+def getBestTags(request, place_id):
+    place = get_object_or_404(Place, pk=place_id)
+    serializer = TagSerializer(
+        Tag.objects.filter(tagplace__placeID=place)
+        .annotate(num_likes=Count("tagplace__likeNumber"))
+        .order_by("-num_likes")[:3],
+        many=True,
+    )
+    return Response({"result": serializer.data})
+
+
 # Filter Language Functions
 def searchOfensiveWords():
     return transformHtmlToText(
@@ -57,3 +123,49 @@ def transformHtmlToText(URL):
     return requests.get(
         URL,
     ).text
+
+
+# Search Places Functions
+def searchPlace(places, search):
+    if search == "" or search is None:
+        return places
+
+    tokens = search.split(":")
+    if len(tokens) == 1:
+        return places.filter(title__contains=tokens[0])
+
+    match tokens[0].upper():
+        case "TITLE":
+            return places.filter(title__contains=tokens[1])
+
+        case "RATING":
+            return places.filter(rating__contains=tokens[1])
+
+        case "LOCATION":
+            return places.filter(location__contains=tokens[1])
+
+        case "TAG":
+            try:
+                return places.filter(
+                    tagplace__tagID=get_object_or_404(Tag, name=tokens[1])
+                )
+            except Tag.DoesNotExist:
+                return []
+
+        case _:
+            return None
+
+
+def searchPlacePreviousMode(search, user):
+    if search == "" or search is None:
+        return Place.objects.all()
+
+    match search.upper():
+        case "FAVORITE":
+            return Place.objects.filter(favoritePlaces=user.utilizador)
+
+        case "MYPLACES":
+            return Place.objects.filter(userID=user.id)
+
+        case _:
+            return Place.objects.all()
