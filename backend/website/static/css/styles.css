@@ -1463,3 +1463,56 @@ header nav a:hover {
   background: transparent;
   border: none;
 }
+
+
+.place-detail-header {
+  display: flex;
+  justify-content: space-between;
+  background-color: transparent;
+  color: var(--text-primary);
+  box-shadow: none;
+  border: none;
+  padding-left: 0;
+}
+
+
+#dropdown-options {
+  display: none;
+  position: absolute;
+  overflow: auto;
+  background-color:#fff;
+  border-radius:5px;
+  box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.4);
+}
+
+.dropdown-activate{
+  align-content: space-between;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  width: fit-content;
+  margin-right: 7px;
+}
+
+.dropdown-activate:hover #dropdown-options {
+  display: block;
+  z-index: 2;
+}
+
+
+#dropdown-options input {
+  width: 100%;
+  display: block;
+  color: #000000;
+  padding: 5px;
+  text-decoration: none;
+  padding:20px 40px;
+  background-color: transparent;
+  border: none;
+}
+
+#dropdown-options input:hover {
+  color: #0a0a23;
+  background-color: #ddd;
+  border-radius:5px;
+}

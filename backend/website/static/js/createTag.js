@@ -91,6 +91,6 @@ function setStyllingTag($tag) {
 
 function setWidth($tag) {
   $tag.css({
-    width: $tag.val().length + 2 + "ch",
+    width: $tag.val().replace(/\s+/g, "").length + 3 + "ch",
   });
 }

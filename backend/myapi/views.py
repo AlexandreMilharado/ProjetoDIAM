@@ -111,6 +111,26 @@ def getBestTags(request, place_id):
     return Response({"result": serializer.data})
 
 
+@api_view(["POST", "DELETE"])
+def operationPlace(request, place_id):
+    place = get_object_or_404(Place, pk=place_id)
+    match request.method:
+        case "DELETE":
+            place.delete()
+            return Response(status=status.HTTP_200_OK)
+        case "POST":
+            try:
+                place.name = request.POST["name"]
+                place.save()
+            except KeyError:
+                return Response(status=status.HTTP_400_BAD_REQUEST)
+
+            return Response(status=status.HTTP_200_OK)
+
+        case _:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
 # Filter Language Functions
 def searchOfensiveWords():
     return transformHtmlToText(
