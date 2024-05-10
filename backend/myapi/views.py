@@ -49,7 +49,7 @@ def getTags(request):
 
 
 @api_view(["DELETE", "POST"])
-def oprationTag(request, tag_id):  # TODO not a priority
+def oprationTag(request, tag_id):
     if not request.user.is_superuser:
         return Response(
             status=status.HTTP_401_UNAUTHORIZED,
@@ -101,14 +101,39 @@ def getPlaces(request):
 
 @api_view(["GET"])
 def getBestTags(request, place_id):
+    limit = request.query_params.get("limit")
     place = get_object_or_404(Place, pk=place_id)
-    serializer = TagSerializer(
+    tags = (
         Tag.objects.filter(tagplace__placeID=place)
         .annotate(num_likes=Count("tagplace__likeNumber"))
-        .order_by("-num_likes")[:3],
+        .order_by("-num_likes")
+    )
+    tags = tags if limit is None else tags[: int(limit)]
+    serializer = TagSerializer(
+        tags,
         many=True,
     )
     return Response({"result": serializer.data})
+
+
+@api_view(["POST", "DELETE"])
+def operationPlace(request, place_id):
+    place = get_object_or_404(Place, pk=place_id)
+    match request.method:
+        case "DELETE":
+            place.delete()
+            return Response(status=status.HTTP_200_OK)
+        case "POST":
+            try:
+                place.name = request.POST["name"]
+                place.save()
+            except KeyError:
+                return Response(status=status.HTTP_400_BAD_REQUEST)
+
+            return Response(status=status.HTTP_200_OK)
+
+        case _:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 # Filter Language Functions

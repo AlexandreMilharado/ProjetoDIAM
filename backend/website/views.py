@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
-from myapi.models import Utilizador, Place, Tag, TagPlace,Review
+from myapi.models import Utilizador, Place, Tag, TagPlace, Review
 from django.utils.dateparse import parse_datetime
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.files.storage import FileSystemStorage
@@ -90,18 +90,20 @@ def registar(request):
 def profile(request):
     if request.method == "POST":
         try:
-            request.user.utilizador.email=request.POST["email"]
-            request.user.username=request.POST["username"]
-            print("birthday"+ request.POST["birthday"])
-            request.user.utilizador.birthday=request.POST["birthday"]
-            print("Depois birthday "+request.user.utilizador.birthday)
+            request.user.utilizador.email = request.POST["email"]
+            request.user.username = request.POST["username"]
+            print("birthday" + request.POST["birthday"])
+            request.user.utilizador.birthday = request.POST["birthday"]
+            print("Depois birthday " + request.user.utilizador.birthday)
             request.user.set_password(request.POST["password"])
             request.user.utilizador.save()
         except KeyError:
             pass
 
     if request.method == "POST" and request.FILES.get("myfile") is not None:
-        request.user.utilizador.profileImage= saveAndGetImage( request.FILES["myfile"],request.user,"no-profile-img.png")
+        request.user.utilizador.profileImage = saveAndGetImage(
+            request.FILES["myfile"], request.user, "no-profile-img.png"
+        )
         request.user.utilizador.save()
     utilizador = Utilizador.objects.get(user=request.user)
     return render(request, "website/profile.html", {"user": utilizador})
@@ -192,8 +194,48 @@ def detalhePlace(request, place_id):
     place = get_object_or_404(Place, id=place_id)
     tags = TagPlace.objects.filter(placeID=place).order_by("-likeNumber")[:15]
     reviews = Review.objects.filter(placeID=place)
-    return render(request, "website/detalhe.html", 
-                  {"place": place, "isFavorite": place.isFavoritePlace(request.user), "tags":tags,"reviews":reviews})
+    return render(
+        request,
+        "website/detalhe.html",
+        {
+            "place": place,
+            "isFavorite": place.isFavoritePlace(request.user),
+            "tags": tags,
+            "reviews": reviews,
+            "is_same_user": place.userID.user.username == request.user.username,
+        },
+    )
+
+
+def editarPlace(request, place_id):
+    place = get_object_or_404(Place, id=place_id)
+    if not (
+        request.user.is_superuser or place.userID.user.username == request.user.username
+    ):
+        return HttpResponseRedirect(reverse("website:index"))
+
+    if request.method == "POST":
+        try:
+            place.title = request.POST["title"]
+            place.location = request.POST["location"]
+            place.description = request.POST["description"]
+            image = request.POST["image"]
+            TagPlace.objects.filter(placeID=place).delete()
+            addTagsToPlace(request, place)
+        except KeyError:
+            pass
+
+        if image is not None:
+            place.mainImage = saveAndGetImage(image, request.user, "defaultPlace.jpg")
+
+        place.save()
+        return HttpResponseRedirect(reverse("website:index"))
+
+    return render(
+        request,
+        "website/editarPlace.html",
+        {"place": place},
+    )
 
 
 # File Functions
@@ -218,12 +260,6 @@ def isTextOfensive(text):
     )
     palavroes = list(filter(palavrao.match, text.split(" ")))
     return len(palavroes) >= 1
-    # textToFind = text.lower()
-    # bannedWords = searchOfensiveWords().split("\n")
-    # for word in bannedWords:
-    #     if word in textToFind and word and textToFind:
-    #         return True
-    # return False
 
 
 # SuperUser Functions

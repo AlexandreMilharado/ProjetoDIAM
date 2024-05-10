@@ -1,3 +1,5 @@
 backend/website/templates/website/
 
 backend/website/static/css/
+
+backend/website/static/js/detail.js
