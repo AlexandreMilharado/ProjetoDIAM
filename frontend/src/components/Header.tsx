@@ -1,16 +1,17 @@
-import LocationSVG from "../assets/LocationSVG"
+import Logo from "./Logo"
 
 const Header = () => {
+
+  const isLogged = false;
+
   return (
     <header>
-        <figure>
-            <LocationSVG/>
-            On<span className="detailed">Spot</span>
-        </figure>
+        <Logo/>
         <nav>
-            <a href='#'>Adicionados por mim</a>
-            <a href='#'>Favoritos</a>
-            <a href='#'>Log in</a>
+            <a href="/favorites">Favoritos</a>                
+            {!isLogged && <a href="/login">Log in</a> }
+            {isLogged && <a id="username-text" href="{/profile}">User</a>}
+            {isLogged && <a id="username-text" href="{/logout}">Logout</a>}
         </nav>
     </header>
   )
