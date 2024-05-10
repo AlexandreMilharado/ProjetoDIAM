@@ -215,15 +215,16 @@ def editarPlace(request, place_id):
         return HttpResponseRedirect(reverse("website:index"))
 
     if request.method == "POST":
+
         try:
             place.title = request.POST["title"]
             place.location = request.POST["location"]
             place.description = request.POST["description"]
-            image = request.POST["image"]
             TagPlace.objects.filter(placeID=place).delete()
             addTagsToPlace(request, place)
+            image = request.FILES["image"]
         except KeyError:
-            pass
+            image = None
 
         if image is not None:
             place.mainImage = saveAndGetImage(image, request.user, "defaultPlace.jpg")
