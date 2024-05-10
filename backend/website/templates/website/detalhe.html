@@ -69,7 +69,7 @@
             {% for review in reviews %}
             <li>
                 <figure>
-                    <img src="{% static review.userID.user.profileImage %}" alt="review user">
+                    <img src="{% static review.userID.profileImage %}" alt="review user">
                     <h5> {{review.userID.user.username}} </h5>
                     <div class="rating-container">
                         {% for star in review.getRatingRange %}
