@@ -1459,7 +1459,7 @@ header nav a:hover {
 
 }
 
-.tag-update {
+.remove-input-default {
   background: transparent;
   border: none;
 }
@@ -1485,13 +1485,15 @@ header nav a:hover {
   box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.4);
 }
 
-.dropdown-activate{
+.dropdown-update-delete-place {
   align-content: space-between;
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-end;
-  width: fit-content;
-  margin-right: 7px;
+  flex-direction: row-reverse;
+}
+
+.dropdown-activate {
+  width: min-content;
 }
 
 .dropdown-activate:hover #dropdown-options {
@@ -1516,3 +1518,30 @@ header nav a:hover {
   background-color: #ddd;
   border-radius:5px;
 }
+
+.btn-update-place {
+  width: auto;
+  padding: 0% 20px;
+  margin: auto;
+  color: white;
+  font-family: inherit;
+  border: none;
+  border-radius: 15px;
+  font-size: 1.5vw;
+  margin-left: 50%;
+}
+
+.container-update-delete-place {
+  display: flex;
+  flex-direction: row-reverse;
+  margin-right: 30%;
+}
+
+.titles {
+  font-size: 5vw;
+}
+
+.visible-input{
+  border: 1px solid var(--text-primary);
+}
+

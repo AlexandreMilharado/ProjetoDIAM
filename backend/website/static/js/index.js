@@ -128,6 +128,9 @@ function getOtherDependenciesAndInsert(places, i) {
     $.ajax({
       url: `api/${places[i].id}/getBestTags`,
       method: "GET",
+      data: {
+        limit: 3,
+      },
       success: function (response) {
         insertPlace(places, i, isFavorite, response.result);
       },

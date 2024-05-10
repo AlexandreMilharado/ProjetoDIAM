@@ -16,7 +16,7 @@ $(document).ready(function() {
           },
         });
       })
-    handleSubmit($("#dropdown-options"))
+    handleSubmit($("#dropdown-options"));
 });
 
 
@@ -25,7 +25,8 @@ function handleSubmit($form) {
     event.preventDefault();
     if($(this).find('input[type="submit"][name="submeter"]:focus').val() == "Apagar")
       deletePlace();
-    
+    else 
+      window.location.href = `/${place_id}/editPlace`;
   })
 }
 
