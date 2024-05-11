@@ -30,4 +30,5 @@ urlpatterns = [
     path("createTag", views.createTag, name="createTag"),
     path("<int:place_id>/detalhe", views.detalhePlace, name="detalhe"),
     path("<int:place_id>/editPlace", views.editarPlace, name="editarPlace"),
+    path("<int:place_id>/review", views.criarAlterarReview, name="criarAlterarReview"),
 ]

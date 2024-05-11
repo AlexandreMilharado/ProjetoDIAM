@@ -207,6 +207,14 @@ def detalhePlace(request, place_id):
     )
 
 
+def criarAlterarReview(request, place_id):
+    return render(
+        request,
+        "website/editCreateReview.html",
+        {"review": "", "placeId": place_id},
+    )
+
+
 def editarPlace(request, place_id):
     place = get_object_or_404(Place, id=place_id)
     if not (
