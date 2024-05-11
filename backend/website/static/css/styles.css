@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Varta:wght@300..700&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -29,29 +30,35 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-ul{
+ul {
   list-style: none;
 }
 
 h1 {
-  font-size: 4.21rem; /* 67.36px */
+  font-size: 4.21rem;
+  /* 67.36px */
 }
 
 h2 {
-  font-size: 3.158rem; /* 50.56px */
+  font-size: 3.158rem;
+  /* 50.56px */
 }
 
 h3 {
-  font-size: 2.369rem; /* 37.92px */
+  font-size: 2.369rem;
+  /* 37.92px */
 }
 
 h4 {
-  font-size: 1.777rem; /* 28.48px */
+  font-size: 1.777rem;
+  /* 28.48px */
 }
 
 h5 {
-  font-size: 1.333rem; /* 21.28px */
+  font-size: 1.333rem;
+  /* 21.28px */
 }
+
 h6 {
   font-size: 18px
 }
@@ -60,28 +67,35 @@ h1,
 h2,
 h3,
 h4,
-h5,h6 {
+h5,
+h6 {
   font-family: "Varta";
   font-weight: 700;
 }
+
 h1 {
-  font-size: 4.21rem; /* 67.36px */
+  font-size: 4.21rem;
+  /* 67.36px */
 }
 
 h2 {
-  font-size: 3.158rem; /* 50.56px */
+  font-size: 3.158rem;
+  /* 50.56px */
 }
 
 h3 {
-  font-size: 2.369rem; /* 37.92px */
+  font-size: 2.369rem;
+  /* 37.92px */
 }
 
 h4 {
-  font-size: 1.777rem; /* 28.48px */
+  font-size: 1.777rem;
+  /* 28.48px */
 }
 
 h5 {
-  font-size: 1.333rem; /* 21.28px */
+  font-size: 1.333rem;
+  /* 21.28px */
 }
 
 header {
@@ -128,7 +142,7 @@ header nav {
   width: 100%;
 
   &>* {
-    
+
     display: flex;
     justify-content: space-around;
     flex-grow: 1;
@@ -147,6 +161,7 @@ header nav a {
   align-items: center;
   text-align: center;
 }
+
 header nav a:hover {
   color: var(--text-primary);
   background-color: var(--primarybg-color);
@@ -216,6 +231,7 @@ header nav a:hover {
   0% {
     background-position-x: 1200px;
   }
+
   100% {
     background-positon-x: 0px;
   }
@@ -225,6 +241,7 @@ header nav a:hover {
   0% {
     background-position-x: -1200px;
   }
+
   100% {
     background-positon-x: 0px;
   }
@@ -251,6 +268,7 @@ header nav a:hover {
   border-radius: 6px;
   transition: cubic-bezier(0.165, 0.84, 0.44, 1) 150ms;
 }
+
 .place-card img:hover {
   scale: 1.05;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
@@ -329,9 +347,12 @@ header nav a:hover {
   align-items: center;
   background-image: linear-gradient(rgba(0, 0, 0, 0.21), rgba(0, 0, 0, 0.182)),
     url("https://upload.wikimedia.org/wikipedia/commons/f/f8/View_of_the_Alfama_quarter_in_Lisbon_Portugal.JPG");
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat; /* Do not repeat the image */
-  background-size: cover; /* Resize the background image to cover the entire container */
+  background-position: center;
+  /* Center the image */
+  background-repeat: no-repeat;
+  /* Do not repeat the image */
+  background-size: cover;
+  /* Resize the background image to cover the entire container */
 }
 
 .login form {
@@ -853,6 +874,53 @@ header nav a:hover {
   }
 }
 
+
+/* CSS */
+.button-30 {
+  align-items: center;
+  appearance: none;
+  background-color: #FCFCFD;
+  border-radius: 4px;
+  border-width: 0;
+  box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+  box-sizing: border-box;
+  color: #36395A;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: "JetBrains Mono", monospace;
+  height: 48px;
+  justify-content: center;
+  line-height: 1;
+  list-style: none;
+  overflow: hidden;
+  padding-left: 16px;
+  padding-right: 16px;
+  position: relative;
+  text-align: left;
+  text-decoration: none;
+  transition: box-shadow .15s, transform .15s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  will-change: box-shadow, transform;
+  font-size: 18px;
+}
+
+.button-30:focus {
+  box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+}
+
+.button-30:hover {
+  box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+  transform: translateY(-2px);
+}
+
+.button-30:active {
+  box-shadow: #D6D6E7 0 3px 7px inset;
+  transform: translateY(2px);
+}
+
 .btn-detalhe {
   display: flex;
   flex-direction: row;
@@ -860,6 +928,13 @@ header nav a:hover {
   color: var(--secondarybg-color);
   font-weight: bold;
   height: 30px;
+  border: 0px;
+  background-color: white;
+  text-decoration: underline;
+
+  &:hover {
+    background-color: rgb(245, 245, 245);
+  }
 
   &>svg {
     width: inherit;
@@ -976,16 +1051,16 @@ header nav a:hover {
 }
 
 
-.place-detail-title ul{
+.place-detail-title ul {
   display: flex;
   gap: 25px;
   align-items: center;
   color: #6b6b6b;
-  
-  
+
+
 }
 
-.place-detail-title ul li{
+.place-detail-title ul li {
   display: flex;
   align-items: start;
   gap: 5px;
@@ -993,7 +1068,7 @@ header nav a:hover {
 }
 
 
-.place-detail-title ul svg{
+.place-detail-title ul svg {
   width: 21px;
   height: auto;
 }
@@ -1072,7 +1147,7 @@ header nav a:hover {
 }
 
 .place-detail img {
-  object-fit:cover;
+  object-fit: cover;
   margin-top: 2rem;
   border-radius: 10px;
   max-height: 400px;
@@ -1081,10 +1156,11 @@ header nav a:hover {
 }
 
 .place-detail-info-container {
-  margin:2rem 0 ;
+  margin: 2rem 0;
   display: flex;
   flex-direction: row-reverse;
   gap: 2rem;
+
   & article {
     flex: 1;
 
@@ -1100,23 +1176,26 @@ header nav a:hover {
 
     & ul {
       overflow-y: auto;
+
       & li {
         margin: 1rem 0;
       }
 
-      & figure{
-        --profile:40px;
+      & figure {
+        --profile: 40px;
         display: flex;
         align-items: center;
         height: var(--profile);
         gap: 10px;
         margin-bottom: 5px;
+
         & img {
           margin: 0;
           width: var(--profile);
           height: 100%;
           border-radius: 100%;
         }
+
         & .rating-container svg {
           height: 20px;
           margin-right: -10px;
@@ -1124,39 +1203,42 @@ header nav a:hover {
       }
 
     }
-  
+
   }
-  
-  & .place-detail-ratings{
+
+  & .place-detail-ratings {
     max-width: 28%;
     min-width: 286px;
-    max-height:max-content;
+    max-height: max-content;
     align-self: flex-start;
-    flex-grow: 0; 
-    flex-shrink: 1; 
-    padding: 1rem 2rem ;
+    flex-grow: 0;
+    flex-shrink: 1;
+    padding: 1rem 2rem;
     border-radius: 15px;
     border: 1px solid rgba(90, 90, 90, 0.727);
-    
+
     & .rating-container {
       margin-top: 1rem;
       position: relative;
       align-items: flex-start;
-      & .reviews-number{
+
+      & .reviews-number {
         position: absolute;
         bottom: 2px;
         right: 12%;
       }
-      & .big-rating-number{
+
+      & .big-rating-number {
         font-size: 50px;
         font-weight: bold;
         margin-right: 20px;
       }
     }
+
     & ul {
       width: 100%;
     }
-  
+
   }
 
 
@@ -1273,16 +1355,16 @@ header nav a:hover {
 }
 
 
-.place-detail-title ul{
+.place-detail-title ul {
   display: flex;
   gap: 25px;
   align-items: center;
   color: #6b6b6b;
-  
-  
+
+
 }
 
-.place-detail-title ul li{
+.place-detail-title ul li {
   display: flex;
   align-items: start;
   gap: 5px;
@@ -1290,7 +1372,7 @@ header nav a:hover {
 }
 
 
-.place-detail-title ul svg{
+.place-detail-title ul svg {
   width: 21px;
   height: auto;
 }
@@ -1369,7 +1451,7 @@ header nav a:hover {
 }
 
 .place-detail img {
-  object-fit:cover;
+  object-fit: cover;
   margin-top: 2rem;
   border-radius: 10px;
   max-height: 400px;
@@ -1378,10 +1460,11 @@ header nav a:hover {
 }
 
 .place-detail-info-container {
-  margin:2rem 0 ;
+  margin: 2rem 0;
   display: flex;
   flex-direction: row-reverse;
   gap: 2rem;
+
   & article {
     flex: 1;
 
@@ -1397,23 +1480,26 @@ header nav a:hover {
 
     & ul {
       overflow-y: auto;
+
       & li {
         margin: 1rem 0;
       }
 
-      & figure{
-        --profile:40px;
+      & figure {
+        --profile: 40px;
         display: flex;
         align-items: center;
         height: var(--profile);
         gap: 10px;
         margin-bottom: 5px;
+
         & img {
           margin: 0;
           width: var(--profile);
           height: 100%;
           border-radius: 100%;
         }
+
         & .rating-container svg {
           height: 20px;
           margin-right: -10px;
@@ -1421,39 +1507,42 @@ header nav a:hover {
       }
 
     }
-  
+
   }
-  
-  & .place-detail-ratings{
+
+  & .place-detail-ratings {
     max-width: 28%;
     min-width: 286px;
-    max-height:max-content;
+    max-height: max-content;
     align-self: flex-start;
-    flex-grow: 0; 
-    flex-shrink: 1; 
-    padding: 1rem 2rem ;
+    flex-grow: 0;
+    flex-shrink: 1;
+    padding: 1rem 2rem;
     border-radius: 15px;
     border: 1px solid rgba(90, 90, 90, 0.727);
-    
+
     & .rating-container {
       margin-top: 1rem;
       position: relative;
       align-items: flex-start;
-      & .reviews-number{
+
+      & .reviews-number {
         position: absolute;
         bottom: 2px;
         right: 12%;
       }
-      & .big-rating-number{
+
+      & .big-rating-number {
         font-size: 50px;
         font-weight: bold;
         margin-right: 20px;
       }
     }
+
     & ul {
       width: 100%;
     }
-  
+
   }
 
 
@@ -1480,9 +1569,9 @@ header nav a:hover {
   display: none;
   position: absolute;
   overflow: auto;
-  background-color:#fff;
-  border-radius:5px;
-  box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.4);
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.4);
 }
 
 .dropdown-update-delete-place {
@@ -1508,7 +1597,7 @@ header nav a:hover {
   color: #000000;
   padding: 5px;
   text-decoration: none;
-  padding:20px 40px;
+  padding: 20px 40px;
   background-color: transparent;
   border: none;
 }
@@ -1516,7 +1605,7 @@ header nav a:hover {
 #dropdown-options input:hover {
   color: #0a0a23;
   background-color: #ddd;
-  border-radius:5px;
+  border-radius: 5px;
 }
 
 .btn-update-place {
@@ -1541,7 +1630,6 @@ header nav a:hover {
   font-size: 5vw;
 }
 
-.visible-input{
+.visible-input {
   border: 1px solid var(--text-primary);
 }
-
