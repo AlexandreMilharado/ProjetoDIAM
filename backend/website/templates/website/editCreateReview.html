@@ -6,16 +6,17 @@
     <section class="form-group">
         <form id="create-place-form" class="form-group create-place"  action="{% url 'website:criarAlterarReview' placeId %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <h1 class="place-title" >Editar o Lugar</h1>
+            {% if review %}
+                <h1 class="place-title" >Editar Review</h1>
+            {% else %}
+                <h1 class="place-title" >Criar Review</h1>
+            {% endif %}
             <br/>
-            <label  class="create-place-label" for="title">Título:<br />
-                <input class="form-control create-place-input" type="text" id="title" name="title" value="{{place.title}}" >
+            <label class="create-place-label" for="description">Comment:<br />
+                <textarea class="form-control create-place-input" id="description" name="comment" rows="3" value="{{review.comment}}"></textarea>
             </label>
             <label class="create-place-label" for="photo">Foto:<br />
-                <input class="create-place-input" type="file" id="photo" name="image" value="{{place.mainImage}}" accept="image/*">
-            </label>
-            <label class="create-place-label" for="location">Localização:<br />
-                <input class="form-control create-place-input" type="text" id="location" name="location" value="{{place.location}}">
+                <input class="create-place-input" type="file" id="photo" name="image" value="{{review.mainImage}}" accept="image/*">
             </label>
             <label class="create-place-label" for="tags">Tags:<br />
                 <button id="remove-tag" class="btn-svg" style="display:none" type="button"><svg class="svg-child" fill="#cc2e2e" width="800px" height="800px" viewBox="0 0 24 24" id="delete-alt" data-name="Flat Line" xmlns="http://www.w3.org/2000/svg" class="icon flat-line" stroke="#cc2e2e"><g id="SVGRepo_bgCarrier" stroke-width="0"/><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/><g id="SVGRepo_iconCarrier"><path id="secondary" d="M5,8H18a1,1,0,0,1,1,1V19a1,1,0,0,1-1,1H5a0,0,0,0,1,0,0V8A0,0,0,0,1,5,8Z" transform="translate(26 2) rotate(90)" style="fill: #ffffff; stroke-width: 2;"/><path id="primary" d="M16,7V4a1,1,0,0,0-1-1H9A1,1,0,0,0,8,4V7" style="fill: none; stroke: #000000; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"/><path id="primary-2" data-name="primary" d="M10,11v6m4-6v6M4,7H20M18,20V7H6V20a1,1,0,0,0,1,1H17A1,1,0,0,0,18,20Z" style="fill: none; stroke: #000000; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"/></g></svg></button>
@@ -23,11 +24,12 @@
                 <div id="tag-group">
                 </div>
             </label>
-
-            <label class="create-place-label" for="description">Descrição:<br />
-                <textarea class="form-control create-place-input" id="description" name="description" rows="3" value="{{place.description}}"></textarea>
-            </label>
-            <input type="submit" class="create-place-submit" value="Editar Lugar!">
+            <label class="create-place-label">Rating</label>
+            {% if review %}
+                <input type="submit" class="create-place-submit" value="Editar Review!">
+            {% else %}
+                <input type="submit" class="create-place-submit" value="Criar Review!">
+            {% endif %}
         </form>
     </section>
 
