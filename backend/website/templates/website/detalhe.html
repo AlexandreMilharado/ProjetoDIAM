@@ -65,7 +65,7 @@
         <textarea id="description-place"class="remove-input-default place-detail-description" name="description" value="{{ place.description }}" disabled></textarea>
         
         <h4>Reviews</h4>
-        <a href="{% url 'website:criarAlterarReview' place.id %}" ><p>Criar review!</p></a>
+        <a href="{% url 'website:criarReview' place.id %}" ><p>Criar review!</p></a>
         <ul class="reviews">
             {% for review in reviews %}
             <li>

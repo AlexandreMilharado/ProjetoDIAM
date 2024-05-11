@@ -207,31 +207,28 @@ def detalhePlace(request, place_id):
     )
 
 
-def criarAlterarReview(request, place_id):
+def criarReview(request, place_id):
     place = get_object_or_404(Place, pk=place_id)
-    context = {"review": "", "placeId": place_id}
-    review = Review.objects.filter(placeID=place, userID=request.user.utilizador)
+    context = {"placeId": place_id}
     if request.method == "POST":
         try:
-            Review(
-                comment=request.POST["comment"],
-                placeID=place,
-                userID=request.user.utilizador,
-            )
-            image = request.FILES["image"]
+            comment = request.POST["comment"]
+            rating = request.POST["rating"]
         except KeyError:
-            image = None
+            pass
 
-        if image is not None:
-            place.mainImage = saveAndGetImage(image, request.user, "None")
+        review = Review(
+            placeID=place,
+            userID=request.user.utilizador,
+            comment=comment,
+            rating=rating,
+        )
+        review.save()
 
         return HttpResponseRedirect(
             reverse("website:detalhe", kwargs={"place_id": place_id})
         )
 
-    if review:
-        context["review"] = {"id": "wtf"}
-        context["tags"] = {}
     return render(
         request,
         "website/editCreateReview.html",
