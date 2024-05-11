@@ -936,9 +936,15 @@ header nav a:hover {
     background-color: rgb(245, 245, 245);
   }
 
-  &>svg {
-    width: inherit;
-    height: fit-content;
+  &>a {
+    color: inherit;
+    display: flex;
+    align-items: center;
+
+    &>svg {
+      width: inherit;
+      height: fit-content;
+    }
   }
 }
 
