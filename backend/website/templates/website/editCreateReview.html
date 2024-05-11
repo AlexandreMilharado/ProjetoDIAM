@@ -24,7 +24,13 @@
                 <div id="tag-group">
                 </div>
             </label>
-            <label class="create-place-label">Rating</label>
+            <label class="create-place-label">
+                Rating:
+                <section class="rating-container" style="min-height: 30px;">
+
+                </section>
+                <input type="range" min="0" max="10" value="0" style="width:150px">
+            </label>
             {% if review %}
                 <input type="submit" class="create-place-submit" value="Editar Review!">
             {% else %}
@@ -40,5 +46,5 @@
 
 {% block scripts%}
     {{ block.super }}
-
+    <script type="text/javascript" src="{% static 'js/editCreateReview.js'%}"></script>
 {% endblock %}
