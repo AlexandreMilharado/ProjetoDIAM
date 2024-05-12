@@ -17,4 +17,5 @@ urlpatterns = [
     path(
         "<int:review_id>/operationReview", views.operationReview, name="operationReview"
     ),
+    path("getUser", views.getUser, name="getUser"),
 ]

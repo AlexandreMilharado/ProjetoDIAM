@@ -183,6 +183,18 @@ def operationReview(request, review_id):
     place.updateRating()
     return Response(status=status.HTTP_200_OK)
 
+@api_view(["GET"])
+def getUser(request):
+    if request.META.get("HTTP_AUTHORIZATION"):
+        try:
+            token = Token.objects.get(key=request.META.get("HTTP_AUTHORIZATION").split(" ")[1]                   )
+            user = token.user
+            return Response({"name":user.username})
+        except Token.DoesNotExist:
+            return Response({"user": "Anon" })       
+    return Response({"user": "Anon" }) 
+
+
 
 class LoginView(APIView):
     def post(self, request):
