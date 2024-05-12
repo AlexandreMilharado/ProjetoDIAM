@@ -15,13 +15,15 @@ type Place = TableEntry & {
     description : string,
     location : string,
     reviewNumber : number,
-    image : string,
+    mainImage : string,
+    userId? : number,
     reviews? : Review[]
     tags? : Tag[] 
 }
 
 type Tag = TableEntry & {
-    name : string
+    name : string,
+    likeNumber?: number
 }
 
 type Review = TableEntry & {
