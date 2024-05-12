@@ -62,9 +62,10 @@
 
     <article>
         <h4>Descrição</h4>
-        <textarea id="description-place"class="remove-input-default place-detail-description" name="description" value="{{ place.description }}" disabled></textarea>
+        <p id="description-place"class="remove-input-default place-detail-description" name="description" value="{{ place.description }}" disabled></p>
         
         <h4>Reviews</h4>
+        <a href="{% url 'website:criarReview' place.id %}" ><p>Criar review!</p></a>
         <ul class="reviews">
             {% for review in reviews %}
             <li>
@@ -98,6 +99,6 @@
     <script >
        var place_id="{{ place.id }}";
     </script>
-    <script type="text/javascript" src="{% static 'js/detail.js'%}" ></script>
+    <script type="module" src="{% static 'js/detail.js'%}" ></script>
     {{ block.super }}
 {% endblock %}

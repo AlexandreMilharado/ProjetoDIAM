@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-from django.db.models import Count
+from django.db.models import Count, Sum
 from django.contrib.auth.models import User
 
 
@@ -30,12 +30,19 @@ class Place(models.Model):
     userID = models.ForeignKey(Utilizador, null=True, on_delete=models.SET_NULL)
     favoritePlaces = models.ManyToManyField(Utilizador, related_name="favoritePlaces")
 
+    def updateRating(self):
+        reviews = Review.objects.filter(placeID=self)
+        self.rating = reviews.aggregate(total_rating=Sum("rating"))[
+            "total_rating"
+        ] / len(reviews)
+        self.save()
+
     def getRatingRange(self):
         return range(self.rating // 2)
 
     def hasOddRating(self):
         return self.rating % 2 == 1
-    
+
     def getRatingColor(self):
         if self.rating < 4:
             return "#cd2e2e"
@@ -71,17 +78,17 @@ class Place(models.Model):
 class Review(models.Model):
     comment = models.CharField(max_length=300, null=True)
     rating = models.SmallIntegerField(null=True)
-    mainImage = models.ImageField(default="")
     data = models.DateField(default=timezone.now)
     placeID = models.ForeignKey(Place, on_delete=models.CASCADE)
     userID = models.ForeignKey(Utilizador, on_delete=models.CASCADE)
-    reviewID = models.ForeignKey("self", on_delete=models.CASCADE, null=True)
     likedTags = models.ManyToManyField(Tag, related_name="likedTags")
 
     def __str__(self):
         return f"{self.placeID} {self.pk}"
+
     def getRatingRange(self):
         return range(self.rating // 2)
+
     def hasOddRating(self):
         return self.rating % 2 == 1
 

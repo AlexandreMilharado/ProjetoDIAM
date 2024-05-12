@@ -13,6 +13,7 @@ from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.utils import timezone
 import re
+from django.db.models import Sum
 
 
 # Test decorators
@@ -149,7 +150,7 @@ def myPlaces(request):
 
     context["isEmpty"] = Place.objects.filter(userID=request.user.id).count() == 0
     context["emptyPlaces"] = "Sem lugares? Crie um!"
-    context["mode"] = "MYPLACES"
+    context["mode1"] = "MYPLACES"
     return render(request, "website/myPlaces.html", context)
 
 
@@ -162,7 +163,7 @@ def favoritePlaces(request):
         {
             "isEmpty": size == 0,
             "emptyPlaces": "Sem lugares? Adicione um!",
-            "mode": "FAVORITE",
+            "mode1": "FAVORITE",
         },
     )
 
@@ -204,6 +205,40 @@ def detalhePlace(request, place_id):
             "reviews": reviews,
             "is_same_user": place.userID.user.username == request.user.username,
         },
+    )
+
+
+def criarReview(request, place_id):
+    place = get_object_or_404(Place, pk=place_id)
+    tags = TagPlace.objects.filter(placeID=place)
+    context = {"placeId": place_id}
+    if request.method == "POST":
+        try:
+            comment = request.POST["comment"]
+            rating = request.POST["rating"]
+        except KeyError:
+            pass
+
+        review = Review(
+            placeID=place,
+            userID=request.user.utilizador,
+            comment=comment,
+            rating=rating,
+        )
+        review.save()
+        place.reviewNumber += 1
+        place.updateRating()
+
+        addTagsToReview(request, place, review)
+
+        return HttpResponseRedirect(
+            reverse("website:detalhe", kwargs={"place_id": place_id})
+        )
+
+    return render(
+        request,
+        "website/editCreateReview.html",
+        context,
     )
 
 
@@ -291,3 +326,22 @@ def addTagsToPlace(request, place):
     for tagID in uniqueTagsID:
         t = TagPlace(placeID=place, tagID=get_object_or_404(Tag, id=tagID))
         t.save()
+
+
+def addTagsToReview(request, place, review):
+    tagsID = []
+    try:
+        for i in range(Tag.objects.all().count()):
+            if request.POST[f"tag-{i}"] != "None":
+                tagsID.append(request.POST[f"tag-{i}"])
+    except KeyError:
+        pass
+
+    uniqueTagsID = set(tagsID)
+    for tagID in uniqueTagsID:
+        t = get_object_or_404(Tag, id=tagID)
+        review.likedTags.add(t)
+        tagPlace = TagPlace(tagID=t, placeID=place)
+        tagPlace.likeNumber += 1
+        tagPlace.save()
+    review.save()
