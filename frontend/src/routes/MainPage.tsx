@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react"
 import axios from "axios";
 import LocationCard from "../components/LocationCard";
+import backendURL from "../api";
 
 const MainPage = () => {
 
-  const backendUrl = import.meta.env.VITE_BACKEND_URL
 
 
   const [places,setPlaces] = useState<Place[]>([]);
@@ -15,7 +15,7 @@ const MainPage = () => {
   useEffect(() => {
 
     async function fetchPlaces(){
-      const response = await axios.get(`${backendUrl}/api/getPlaces`,
+      const response = await axios.get(`${backendURL}/api/getPlaces`,
       {
         headers:{'Content-Type': 'application/json'},
         params: { search: searchFilter }
@@ -32,6 +32,7 @@ const MainPage = () => {
 
   return (
     <>
+      <h3 className="main-page-title">Lugares em destaque</h3>
      {!places.length ? <h1 className="message-no-places">Não foram encontrados lugares...</h1> :
       (
         <section id="places-section" className="places">
