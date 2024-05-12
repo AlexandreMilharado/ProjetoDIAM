@@ -90,7 +90,9 @@
                     </figure>
                     <p>{% if review.comment != ""%} {{review.comment}} {% else %} Sem comentário {% endif %}</p>
                 </section>
-                <img class="remove-review" review="{{review.id}}" src="{% static 'images/remove.png'%}"/>
+                {% if request.user.is_superuser or review.userID == request.user.utilizador %}
+                    <img class="remove-review" review="{{review.id}}" src="{% static 'images/remove.png'%}"/>
+                {% endif %}
             </li>
             {% endfor %}
         </ul>
