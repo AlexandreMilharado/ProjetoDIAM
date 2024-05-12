@@ -34,6 +34,7 @@ $(document).ready(function () {
             input.disabled = false;
         });
         $(this).hide();
+        document.querySelector(".birthday").type = "date";
         $("#submit-profile-description").show();
         $("#submit-profile-description").css({ "visibility": "visible", "opacity": "1" });
     });

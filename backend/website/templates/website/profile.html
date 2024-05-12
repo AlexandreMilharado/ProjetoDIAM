@@ -31,7 +31,7 @@
             </p>
             <p>
                 Birthday:
-                <input class="profile-description-input" type="date" value= "{{ request.user.utilizador.birthday }}" name ="birthday">
+                <input class="profile-description-input birthday" type="text" value= "{{ request.user.utilizador.birthday }}" name ="birthday">
             </p>
             <p>
                 Password:
@@ -51,5 +51,5 @@
 {% endblock %}
 {% block scripts %}
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-    <script type="module" src="{% static 'js/profile.js'%}"></script>
+    <script type="text/javascript" src="{% static 'js/profile.js'%}"></script>
 {% endblock %}

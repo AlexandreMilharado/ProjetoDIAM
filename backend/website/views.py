@@ -95,7 +95,6 @@ def profile(request):
             request.user.username = request.POST["username"]
             print("birthday" + request.POST["birthday"])
             request.user.utilizador.birthday = request.POST["birthday"]
-            print("Depois birthday " + request.user.utilizador.birthday)
             request.user.set_password(request.POST["password"])
             request.user.utilizador.save()
         except KeyError:
