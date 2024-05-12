@@ -43,5 +43,8 @@
 
 {% block scripts%}
     {{ block.super }}
-    <script type="text/javascript" src="{% static 'js/editCreateReview.js'%}"></script>
+    <script>
+        var place_id = {{placeId}};
+    </script>
+    <script type="module" src="{% static 'js/editCreateReview.js'%}"></>
 {% endblock %}

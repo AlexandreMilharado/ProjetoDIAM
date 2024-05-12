@@ -51,9 +51,13 @@
     {% block relevantInformation %} {% endblock %}
     {% block content %} {% endblock %}
 
-    {% block scripts%}
+    {% block scripts %}
+        <script>
+            var cachedTags = [];
+            var lastTag = 0;
+        </script>
         <script type="module" src="{% static 'js/utils.js'%}"></script>
-        <script type="text/javascript" src="{% static 'js/base.js'%}" ></script>
+        <script type="module" src="{% static 'js/base.js'%}" ></script>
     {% endblock %}
 
     {% comment %} <footer class="footer">

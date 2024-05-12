@@ -42,9 +42,9 @@
 {% block scripts%}
     {{ block.super }}
     <script>
-        var static = "{% get_static_prefix %}";
-        static = static.slice(0,-1)
-        var mode = "{{ mode }}"
+        var static1 = "{% get_static_prefix %}";
+        static1 = static1.slice(0,-1)
+        var mode1 = "{{ mode1 }}"
     </script>
-    <script type="text/javascript" src="{% static 'js/index.js'%}"></script>
+    <script type="module" src="{% static 'js/index1.js'%}"></script>
 {% endblock %}
