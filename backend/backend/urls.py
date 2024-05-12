@@ -19,11 +19,14 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from myapi.views import LoginView
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include("myapi.urls")),
     path("", include("website.urls")),
+    path("login/", LoginView.as_view(), name="login"),
 ]
 
 if settings.DEBUG:
