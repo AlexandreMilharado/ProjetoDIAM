@@ -1034,7 +1034,9 @@ header nav a:hover {
   padding-left: 0;
 }
 
-
+.hidden {
+  display: none;
+}
 
 .titles {
   font-size: 5vw;

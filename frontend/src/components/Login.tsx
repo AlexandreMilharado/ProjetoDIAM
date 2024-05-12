@@ -12,7 +12,8 @@ function Login() {
     axios
       .post(`http://localhost:8000/login/`, { username, password })
       .then((resp) => {
-        setMsg(resp.data);
+        // setMsg(resp.data);
+        console.log(resp.data)
       })
       .catch((error) => setError(error));
   }
