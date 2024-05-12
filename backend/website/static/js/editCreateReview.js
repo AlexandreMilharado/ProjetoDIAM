@@ -1,4 +1,4 @@
-import { addTagHTML } from "./utils.js";
+import { addTagHTML, showHideElement } from "./utils.js";
 
 $(document).ready(function () {
   setTags();
@@ -42,9 +42,13 @@ function setTags() {
   $.ajax({
     url: `/api/tags`,
     method: "GET",
+    data: {
+      place: place_id,
+    },
     success: function (response) {
       cachedTags = response.result;
       loadHTMLTag($("#tag-group"));
+      if (cachedTags.length > 0) $("#add-tag").hide();
     },
     error: function (xhr, _status, _error) {
       console.error(xhr.responseText);

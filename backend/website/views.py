@@ -210,6 +210,7 @@ def detalhePlace(request, place_id):
 
 def criarReview(request, place_id):
     place = get_object_or_404(Place, pk=place_id)
+    tags = TagPlace.objects.filter(placeID=place)
     context = {"placeId": place_id}
     if request.method == "POST":
         try:
@@ -227,6 +228,8 @@ def criarReview(request, place_id):
         review.save()
         place.reviewNumber += 1
         place.updateRating()
+
+        addTagsToReview(request, place, review)
 
         return HttpResponseRedirect(
             reverse("website:detalhe", kwargs={"place_id": place_id})
@@ -323,3 +326,22 @@ def addTagsToPlace(request, place):
     for tagID in uniqueTagsID:
         t = TagPlace(placeID=place, tagID=get_object_or_404(Tag, id=tagID))
         t.save()
+
+
+def addTagsToReview(request, place, review):
+    tagsID = []
+    try:
+        for i in range(Tag.objects.all().count()):
+            if request.POST[f"tag-{i}"] != "None":
+                tagsID.append(request.POST[f"tag-{i}"])
+    except KeyError:
+        pass
+
+    uniqueTagsID = set(tagsID)
+    for tagID in uniqueTagsID:
+        t = get_object_or_404(Tag, id=tagID)
+        review.likedTags.add(t)
+        tagPlace = TagPlace(tagID=t, placeID=place)
+        tagPlace.likeNumber += 1
+        tagPlace.save()
+    review.save()

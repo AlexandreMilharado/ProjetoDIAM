@@ -1,6 +1,7 @@
-import { addTagHTML } from "./utils.js";
+import { addTagHTML, showHideElement } from "./utils.js";
 
 $(document).ready(function () {
+  console.log(placeID);
   setTags();
   showHideElement($("#create-place-form"), $("#create-modal"));
   addTagHTML($("#add-tag"), $("#remove-tag"), $("#tag-group"));
@@ -31,7 +32,7 @@ function loadHTMLTag($target) {
   }
   function getTagsPlace() {
     $.ajax({
-      url: `/api/${place_id}/getBestTags`,
+      url: `/api/${placeID}/getBestTags`,
       method: "GET",
       success: function (response) {
         addHTML(response.result);

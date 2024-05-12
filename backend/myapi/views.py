@@ -44,7 +44,13 @@ def favoritePlace(request, place_id):
 
 @api_view(["GET"])
 def getTags(request):
-    serializer = TagSerializer(Tag.objects.all(), many=True)
+    place = request.query_params.get("place")
+    if place is not None:
+        serializer = TagSerializer(
+            Tag.objects.filter(tagplace__placeID=place), many=True
+        )
+    else:
+        serializer = TagSerializer(Tag.objects.all(), many=True)
     return Response({"result": serializer.data})
 
 
