@@ -130,7 +130,7 @@ def getPlaces(request):
 def getPlace(request, place_id):
     place = get_object_or_404(Place, pk=place_id)
     serializer = PlaceSerializer(place)
-    return Response({"place": serializer.data, "author": place.userID.user.username})
+    return Response({"place": serializer.data, "author": place.userID.user.username},status=status.HTTP_200_OK)
 
 
 @api_view(["GET"])
@@ -192,9 +192,19 @@ def getUser(request):
             return Response({"name":user.username})
         except Token.DoesNotExist:
             return Response({"user": "Anon" })       
-    return Response({"user": "Anon" }) 
+    return Response({"user": "Anon" },status=status.HTTP_200_OK) 
 
-
+@api_view(["GET"])
+def logout(request):
+    if request.META.get("HTTP_AUTHORIZATION"):
+        try:
+            token = Token.objects.get( key=request.META.get("HTTP_AUTHORIZATION").split(" ")[1])
+            token.delete()
+            return Response(status=status.HTTP_200_OK)
+        except Token.DoesNotExist:
+            pass
+    return Response(status=status.HTTP_404_NOT_FOUND)
+            
 
 class LoginView(APIView):
     def post(self, request):

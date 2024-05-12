@@ -21,7 +21,7 @@ function Login() {
       .catch(() => setError("Erro de autenticação!"));
   }
   return (
-    <section className="login" >
+    <main className="login" >
      
       <form onSubmit={handleLogin}>
         <figure>
@@ -39,7 +39,7 @@ function Login() {
         </section>
           <button type="submit">Login</button>
       </form>
-    </section>
+    </main>
   );
 }
 

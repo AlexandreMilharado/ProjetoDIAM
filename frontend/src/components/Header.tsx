@@ -26,7 +26,16 @@ const Header = () => {
     getUser()
   },[])
 
-  function logout() {
+  async function logout() {
+    try{
+      await axios.get(`${backendURL}/api/logout`,{
+        headers : {
+          'Authorization': `Bearer ${token}`
+        }
+      })
+    }catch(err){
+      console.log("Erro no logout")
+    }
     localStorage.removeItem('token');
     window.location.reload();
   }
