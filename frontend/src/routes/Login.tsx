@@ -16,8 +16,9 @@ function Login() {
       .then((response) => {
         localStorage.setItem('token', response.data.token);      
         navigate("/");
+        window.location.reload();
       })
-      .catch((error) => setError("Erro de autenticação!"));
+      .catch(() => setError("Erro de autenticação!"));
   }
   return (
     <section className="login" >
