@@ -10,14 +10,7 @@ from django.db.models import Count
 from rest_framework.views import APIView
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate
-
-
-# TODO Mudar bixo
-@api_view(["GET"])
-def hello_world(request):
-    get_object_or_404(Place, pk=1).delete()
-
-    return Response({"message": "Hello, world!"})
+from django.contrib.auth.models import User
 
 
 @api_view(["GET"])
@@ -33,7 +26,9 @@ def favoritePlace(request, place_id):
             user = request.user
             if not user.is_authenticated and request.META.get("HTTP_AUTHORIZATION"):
                 try:
-                    token = Token.objects.get(key=request.META.get("HTTP_AUTHORIZATION").split(" ")[1])
+                    token = Token.objects.get(
+                        key=request.META.get("HTTP_AUTHORIZATION").split(" ")[1]
+                    )
                     user = token.user
                 except Token.DoesNotExist:
                     pass
@@ -130,11 +125,13 @@ def getPlaces(request):
     serializer = PlaceSerializer(places, many=True)
     return Response({"result": serializer.data})
 
+
 @api_view(["GET"])
 def getPlace(request, place_id):
     place = get_object_or_404(Place, pk=place_id)
     serializer = PlaceSerializer(place)
-    return Response({"place":serializer.data}) 
+    return Response({"place": serializer.data, "author": place.userID.user.username})
+
 
 @api_view(["GET"])
 def getBestTags(request, place_id):
