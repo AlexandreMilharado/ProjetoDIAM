@@ -30,14 +30,37 @@ def favoritePlace(request, place_id):
     place = get_object_or_404(Place, pk=place_id)
     match request.method:
         case "GET":
-            return Response({"result": place.isFavoritePlace(request.user)})
+            user = request.user
+            if not user.is_authenticated and request.META.get("HTTP_AUTHORIZATION"):
+                try:
+                    token = Token.objects.get(key=request.META.get("HTTP_AUTHORIZATION").split(" ")[1])
+                    user = token.user
+                except Token.DoesNotExist:
+                    pass
+            return Response({"result": place.isFavoritePlace(user)})
 
         case "POST":
+
             if not request.user.is_authenticated:
+                if request.META.get("HTTP_AUTHORIZATION"):
+                    try:
+                        token = Token.objects.get(
+                            key=request.META.get("HTTP_AUTHORIZATION").split(" ")[1]
+                        )
+                    except Token.DoesNotExist:
+                        return Response(
+                            {"error": "Token not found"},
+                            status=status.HTTP_401_UNAUTHORIZED,
+                        )
+                    place.favoriteOrUnFavoritePlace(token.user.utilizador)
+                    return Response(
+                        {"result": place.isFavoritePlace(token.user.utilizador)}
+                    )
                 return Response(
                     status=status.HTTP_401_UNAUTHORIZED,
                     data="Faça login para guardar favoritos!",
                 )
+
             place.favoriteOrUnFavoritePlace(request.user.utilizador)
             return Response({"result": place.isFavoritePlace(request.user)})
 
