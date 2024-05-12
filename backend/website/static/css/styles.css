@@ -1313,3 +1313,15 @@ header svg {
 .visible-input {
   border: 1px solid var(--text-primary);
 }
+
+.remove-review {
+  width: 40px !important;
+  margin: 3px 3px !important;
+  height: 40px !important;
+}
+
+.container-spaced {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

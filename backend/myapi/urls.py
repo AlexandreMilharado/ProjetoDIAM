@@ -15,4 +15,7 @@ urlpatterns = [
     path("<int:tag_id>/operationTag", views.oprationTag, name="operationTag"),
     path("getPlaces", views.getPlaces, name="getPlaces"),
     path("<int:place_id>/operationPlace", views.operationPlace, name="operationPlace"),
+    path(
+        "<int:review_id>/operationReview", views.operationReview, name="operationReview"
+    ),
 ]

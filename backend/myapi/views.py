@@ -3,7 +3,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 import requests
 from django.shortcuts import get_object_or_404
-from myapi.models import Place, Tag
+from myapi.models import Place, Tag, Review, TagPlace
 from .serializers import *
 from rest_framework import status
 from django.db.models import Count
@@ -143,6 +143,20 @@ def operationPlace(request, place_id):
 
         case _:
             return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(["DELETE"])
+def operationReview(request, review_id):
+    review = get_object_or_404(Review, pk=review_id)
+    place = review.placeID
+    for likeTag in review.likedTags.all():
+        tagPlace = get_object_or_404(TagPlace, placeID=place, tagID=likeTag)
+        tagPlace.likeNumber -= 1
+        tagPlace.save()
+    place.reviewNumber -= 1
+    review.delete()
+    place.updateRating()
+    return Response(status=status.HTTP_200_OK)
 
 
 class LoginView(APIView):
