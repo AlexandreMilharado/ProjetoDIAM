@@ -631,10 +631,6 @@ header .menu-toggle{
   border-radius: 3rem;
   color: #8a8a8a;
   transition: all ease 0.4s;
-  & svg  {
-   
-    
-  }
 }
 
 
