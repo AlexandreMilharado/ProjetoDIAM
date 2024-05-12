@@ -5,8 +5,6 @@
   padding: 0;
   box-sizing: border-box;
   text-decoration: none;
-  cursor: auto;
-  /* This is annoying me */
 }
 
 html,
@@ -108,6 +106,9 @@ header {
     rgba(0, 0, 0, 0.07) 0px 8px 8px;
   border-bottom: 1px solid #969696;
   padding: 0 0 0 2%;
+  & legend {
+    cursor: pointer !important;
+  }
 
   &>.logo {
     font-family: "Kaushan Script";
@@ -241,62 +242,6 @@ header svg {
   100% {
     background-positon-x: 0px;
   }
-}
-
-.place-card {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  min-height: 380px;
-  background-color: var(--primarybg-color);
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  /* box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; */
-}
-
-.place-card img {
-  width: 100%;
-  height: 60%;
-  border-radius: 6px;
-  transition: cubic-bezier(0.165, 0.84, 0.44, 1) 150ms;
-}
-
-.place-card img:hover {
-  scale: 1.05;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
-    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
-    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-}
-
-.place-card:has(img:hover) {
-  opacity: 0.9;
-}
-
-.place-card p {
-  display: inline-block;
-  align-items: baseline;
-  cursor: pointer;
-  width: 100%;
-  margin: 10px 0 10px 0;
-  font-size: 20px;
-  gap: 3px;
-  color: #383838;
-  font-family: "Roboto", "Arial", sans-serif;
-}
-
-.place-card:hover p {
-  color: var(--secondarybg-color);
-}
-
-.place-card p svg {
-  width: 20px;
-  color: var(--detail-color);
-}
-
-.place-card p span {
-  font-weight: bold;
 }
 
 .rating-container {
@@ -1037,6 +982,7 @@ header svg {
   border-radius: 3rem;
   color: #8a8a8a;
   transition: all ease 0.4s;
+  cursor: pointer;
 }
 
 .button-like span {
