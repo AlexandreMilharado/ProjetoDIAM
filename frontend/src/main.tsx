@@ -2,10 +2,16 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './styles.css'
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { RouterProvider, createBrowserRouter, useParams } from 'react-router-dom';
 import ErrorPage from './routes/ErrorPage.tsx';
 import MainPage from './routes/MainPage.tsx';
 import Login from './routes/Login.tsx';
+import PlaceDetail from './routes/PlaceDetail.tsx';
+
+const PlaceDetailWrapper = () => {
+  const { id } = useParams();
+  return <PlaceDetail placeId={id}/>;
+};
 
 
 const router = createBrowserRouter([
@@ -17,6 +23,10 @@ const router = createBrowserRouter([
       {
         path: "",
         element: <MainPage />,
+      },
+      {
+        path: "/detail/:id",
+        element:<PlaceDetailWrapper/>,
       },
     ],
   },

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Logo from "./Logo"
 import { Link } from "react-router-dom";
-import backendURL from "../api";
+// import backendURL from "../api";
 
 const Header = () => {
 

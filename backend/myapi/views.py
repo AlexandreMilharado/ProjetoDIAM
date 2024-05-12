@@ -130,6 +130,11 @@ def getPlaces(request):
     serializer = PlaceSerializer(places, many=True)
     return Response({"result": serializer.data})
 
+@api_view(["GET"])
+def getPlace(request, place_id):
+    place = get_object_or_404(Place, pk=place_id)
+    serializer = PlaceSerializer(place)
+    return Response({"place":serializer.data}) 
 
 @api_view(["GET"])
 def getBestTags(request, place_id):
