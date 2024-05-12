@@ -32,7 +32,4 @@ type Review = TableEntry & {
     rating  : string,
     userId : string,
     date : Date,
-    image? : string,
-    reviewId? : number
-    likedTags? : Tag[]
 }
