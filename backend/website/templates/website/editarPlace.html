@@ -38,8 +38,8 @@
 
 {% block scripts%}
     {{ block.super }}
-    <script type="text/javascript">
+    <script type="module">
         var place_id = {{ place.id }};
     </script>
-    <script type="text/javascript" src="{% static 'js/editPlace.js'%}" ></script>
+    <script type="module" src="{% static 'js/editPlace.js'%}" ></script>
 {% endblock %}

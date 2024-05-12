@@ -13,6 +13,7 @@ from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.utils import timezone
 import re
+from django.db.models import Sum
 
 
 # Test decorators
@@ -149,7 +150,7 @@ def myPlaces(request):
 
     context["isEmpty"] = Place.objects.filter(userID=request.user.id).count() == 0
     context["emptyPlaces"] = "Sem lugares? Crie um!"
-    context["mode"] = "MYPLACES"
+    context["mode1"] = "MYPLACES"
     return render(request, "website/myPlaces.html", context)
 
 
@@ -162,7 +163,7 @@ def favoritePlaces(request):
         {
             "isEmpty": size == 0,
             "emptyPlaces": "Sem lugares? Adicione um!",
-            "mode": "FAVORITE",
+            "mode1": "FAVORITE",
         },
     )
 
@@ -224,6 +225,8 @@ def criarReview(request, place_id):
             rating=rating,
         )
         review.save()
+        place.reviewNumber += 1
+        place.updateRating()
 
         return HttpResponseRedirect(
             reverse("website:detalhe", kwargs={"place_id": place_id})

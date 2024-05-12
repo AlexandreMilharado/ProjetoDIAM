@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-from django.db.models import Count
+from django.db.models import Count, Sum
 from django.contrib.auth.models import User
 
 
@@ -29,6 +29,13 @@ class Place(models.Model):
     reviewNumber = models.IntegerField(default=0)
     userID = models.ForeignKey(Utilizador, null=True, on_delete=models.SET_NULL)
     favoritePlaces = models.ManyToManyField(Utilizador, related_name="favoritePlaces")
+
+    def updateRating(self):
+        reviews = Review.objects.filter(placeID=self)
+        self.rating = reviews.aggregate(total_rating=Sum("rating"))[
+            "total_rating"
+        ] / len(reviews)
+        self.save()
 
     def getRatingRange(self):
         return range(self.rating // 2)
