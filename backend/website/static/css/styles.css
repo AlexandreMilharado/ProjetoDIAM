@@ -668,6 +668,10 @@ header nav a:hover {
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   color: var(--text-primary);
+
+  &:hover {
+    background-color: rgb(245, 245, 245);
+  }
 }
 
 .form-control:focus {
@@ -680,6 +684,7 @@ header nav a:hover {
 
 .open-create-place {
   display: flex;
+  flex-direction: column;
   align-items: center;
   vertical-align: middle;
   margin: auto;
@@ -874,53 +879,6 @@ header nav a:hover {
   }
 }
 
-
-/* CSS */
-.button-30 {
-  align-items: center;
-  appearance: none;
-  background-color: #FCFCFD;
-  border-radius: 4px;
-  border-width: 0;
-  box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
-  box-sizing: border-box;
-  color: #36395A;
-  cursor: pointer;
-  display: inline-flex;
-  font-family: "JetBrains Mono", monospace;
-  height: 48px;
-  justify-content: center;
-  line-height: 1;
-  list-style: none;
-  overflow: hidden;
-  padding-left: 16px;
-  padding-right: 16px;
-  position: relative;
-  text-align: left;
-  text-decoration: none;
-  transition: box-shadow .15s, transform .15s;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  white-space: nowrap;
-  will-change: box-shadow, transform;
-  font-size: 18px;
-}
-
-.button-30:focus {
-  box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
-}
-
-.button-30:hover {
-  box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
-  transform: translateY(-2px);
-}
-
-.button-30:active {
-  box-shadow: #D6D6E7 0 3px 7px inset;
-  transform: translateY(2px);
-}
-
 .btn-detalhe {
   display: flex;
   flex-direction: row;
@@ -977,7 +935,6 @@ header nav a:hover {
       visibility: hidden;
       transition: visibility 0s, opacity 0.5s linear;
 
-
       &>img {
         position: absolute;
         bottom: 20px;
@@ -993,8 +950,6 @@ header nav a:hover {
           background-color: rgb(148, 147, 149);
         }
       }
-
-
     }
   }
 
@@ -1029,7 +984,6 @@ header nav a:hover {
       }
     }
 
-
     &>p {
       font-size: 1.5em;
       padding: 17px;
@@ -1056,14 +1010,11 @@ header nav a:hover {
   padding: 2rem 10%;
 }
 
-
 .place-detail-title ul {
   display: flex;
   gap: 25px;
   align-items: center;
   color: #6b6b6b;
-
-
 }
 
 .place-detail-title ul li {
@@ -1072,7 +1023,6 @@ header nav a:hover {
   gap: 5px;
   font-size: 18px;
 }
-
 
 .place-detail-title ul svg {
   width: 21px;
@@ -1207,9 +1157,7 @@ header nav a:hover {
           margin-right: -10px;
         }
       }
-
     }
-
   }
 
   & .place-detail-ratings {
@@ -1244,321 +1192,13 @@ header nav a:hover {
     & ul {
       width: 100%;
     }
-
   }
-
-
-}
-
-
-
-.profile {
-  height: 100%;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.45)), url("https://images.hdqwalls.com/download/best-nature-image-1920x1080.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-
-  &>#profile-photo figure {
-    position: relative;
-
-    &>img {
-      margin-top: 7vh;
-      width: max(13vw, 25vh);
-      height: max(13vw, 25vh);
-      object-fit: cover;
-      border-radius: 50%;
-      border: 5px solid var(--primarybg-color);
-    }
-
-    &>form button,
-    label {
-      opacity: 0;
-      visibility: hidden;
-      transition: visibility 0s, opacity 0.5s linear;
-
-
-      &>img {
-        position: absolute;
-        bottom: 20px;
-        width: 52px;
-        height: 52px;
-        right: 30px;
-        background-color: rgb(196, 196, 196);
-        object-fit: cover;
-        border-radius: 50%;
-        border: 3px solid var(--primarybg-color);
-
-        &:hover {
-          background-color: rgb(148, 147, 149);
-        }
-      }
-
-
-    }
-  }
-
-  &>#profile-description form {
-    position: relative;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    background-color: var(--primarybg-color);
-    border-radius: 10%;
-
-    &>button,
-    #submit-profile-description {
-      border: 0;
-      border-radius: 50%;
-      position: absolute;
-      right: 8px;
-      bottom: 12px;
-      outline: none;
-      opacity: 0;
-      transition: visibility 0s, opacity 0.5s linear;
-
-      &>img {
-        width: 30px;
-        height: 30px;
-        background-color: rgb(196, 196, 196);
-        object-fit: cover;
-        border-radius: 50%;
-        border: 3px solid var(--primarybg-color);
-
-        &:hover {
-          background-color: rgb(148, 147, 149);
-        }
-      }
-    }
-
-
-    &>p {
-      font-size: 1.5em;
-      padding: 17px;
-      color: var(--text-primary);
-
-      &>input {
-        border: 0;
-        background: transparent;
-        color: var(--text-primary);
-        font-size: 1em;
-        width: 90%;
-
-        &:hover {
-          background-color: rgb(242, 242, 242);
-        }
-      }
-    }
-  }
-}
-
-.place-detail {
-  width: 100%;
-  height: 100%;
-  padding: 2rem 10%;
-}
-
-
-.place-detail-title ul {
-  display: flex;
-  gap: 25px;
-  align-items: center;
-  color: #6b6b6b;
-
-
-}
-
-.place-detail-title ul li {
-  display: flex;
-  align-items: start;
-  gap: 5px;
-  font-size: 18px;
-}
-
-
-.place-detail-title ul svg {
-  width: 21px;
-  height: auto;
-}
-
-.button-like {
-  border: 2px solid #8a8a8a;
-  background-color: transparent;
-  margin-left: auto;
-  text-decoration: none;
-  padding: 8px 10px;
-  position: relative;
-  vertical-align: middle;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  border-radius: 3rem;
-  color: #8a8a8a;
-  transition: all ease 0.4s;
-}
-
-.button-like span {
-  margin-left: 0.5rem;
-}
-
-.button-like .fa,
-.button-like span {
-  transition: all ease 0.4s;
-}
-
-.button-like:focus {
-  background-color: transparent;
-}
-
-.button-like:focus .fa,
-.button-like:focus span {
-  color: #8a8a8a;
-}
-
-.button-like:hover {
-  border-color: #cc4b37;
-  background-color: transparent;
-}
-
-.button-like:hover .fa,
-.button-like:hover span {
-  color: #cc4b37;
-}
-
-.liked {
-  background-color: #cc4b37;
-  border-color: #cc4b37;
-}
-
-.liked .fa,
-.liked span {
-  color: #fefefe;
-}
-
-.liked:focus {
-  background-color: #cc4b37;
-}
-
-.liked:focus .fa,
-.liked:focus span {
-  color: #fefefe;
-}
-
-.liked:hover {
-  background-color: #cc4b37;
-  border-color: #cc4b37;
-}
-
-.liked:hover .fa,
-.liked:hover span {
-  color: #fefefe;
-}
-
-.place-detail img {
-  object-fit: cover;
-  margin-top: 2rem;
-  border-radius: 10px;
-  max-height: 400px;
-  width: 100%;
-  aspect-ratio: 4/3;
-}
-
-.place-detail-info-container {
-  margin: 2rem 0;
-  display: flex;
-  flex-direction: row-reverse;
-  gap: 2rem;
-
-  & article {
-    flex: 1;
-
-    & p {
-      text-indent: 50px;
-      color: #2a2a2a;
-      font-weight: 500;
-      font-size: 20px;
-      line-height: 25px;
-      text-align: justify;
-      margin-bottom: 2rem;
-    }
-
-    & ul {
-      overflow-y: auto;
-
-      & li {
-        margin: 1rem 0;
-      }
-
-      & figure {
-        --profile: 40px;
-        display: flex;
-        align-items: center;
-        height: var(--profile);
-        gap: 10px;
-        margin-bottom: 5px;
-
-        & img {
-          margin: 0;
-          width: var(--profile);
-          height: 100%;
-          border-radius: 100%;
-        }
-
-        & .rating-container svg {
-          height: 20px;
-          margin-right: -10px;
-        }
-      }
-
-    }
-
-  }
-
-  & .place-detail-ratings {
-    max-width: 28%;
-    min-width: 286px;
-    max-height: max-content;
-    align-self: flex-start;
-    flex-grow: 0;
-    flex-shrink: 1;
-    padding: 1rem 2rem;
-    border-radius: 15px;
-    border: 1px solid rgba(90, 90, 90, 0.727);
-
-    & .rating-container {
-      margin-top: 1rem;
-      position: relative;
-      align-items: flex-start;
-
-      & .reviews-number {
-        position: absolute;
-        bottom: 2px;
-        right: 12%;
-      }
-
-      & .big-rating-number {
-        font-size: 50px;
-        font-weight: bold;
-        margin-right: 20px;
-      }
-    }
-
-    & ul {
-      width: 100%;
-    }
-
-  }
-
-
 }
 
 .remove-input-default {
   background: transparent;
   border: none;
 }
-
 
 .place-detail-header {
   display: flex;
@@ -1569,7 +1209,6 @@ header nav a:hover {
   border: none;
   padding-left: 0;
 }
-
 
 #dropdown-options {
   display: none;
