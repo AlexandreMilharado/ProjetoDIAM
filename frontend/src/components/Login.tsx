@@ -11,9 +11,8 @@ function Login() {
     e.preventDefault();
     axios
       .post(`http://localhost:8000/login/`, { username, password })
-      .then((resp) => {
-        // setMsg(resp.data);
-        console.log(resp.data)
+      .then((response) => {
+        localStorage.setItem('token', response.data.token);       
       })
       .catch((error) => setError(error));
   }
@@ -21,7 +20,7 @@ function Login() {
     <section>
       <h2>Login</h2>
       {error && <p>{error}</p>}
-      {<p>{msg}</p>}
+      <p>{msg}</p>
       <form onSubmit={handleLogin}>
         <input
           type="text"

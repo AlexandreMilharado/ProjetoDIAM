@@ -41,7 +41,13 @@ const LocationCard = ({place} : LocationCardProps) => {
 
   async function likeOrUnlike() {
     setIsFavorite(!isFavorite);
-    const response =  await axios.post(`${backendUrl}/api/${place.id}/favorite`,{}    
+    const token = localStorage.getItem('token');
+    const response =  await axios.post(`${backendUrl}/api/${place.id}/favorite`,{},
+    {
+      headers: {
+        'Authorization': `Bearer ${token}`
+    }
+    }    
     )
     console.log(response);
   }
