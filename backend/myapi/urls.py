@@ -14,4 +14,7 @@ urlpatterns = [
     path("getPlaces", views.getPlaces, name="getPlaces"),
     path("getPlace/<int:place_id>", views.getPlace, name="getPlace"),
     path("<int:place_id>/operationPlace", views.operationPlace, name="operationPlace"),
+    path(
+        "<int:review_id>/operationReview", views.operationReview, name="operationReview"
+    ),
 ]

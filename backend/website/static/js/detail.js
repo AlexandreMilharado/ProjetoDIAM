@@ -17,6 +17,10 @@ $(document).ready(function() {
         });
       })
     handleSubmit($("#dropdown-options"));
+
+    $(".remove-review").each(function() {
+      bindRemoveReview($(this))
+    })
 });
 
 
@@ -46,6 +50,26 @@ function deletePlace() {
   });
 }
 
+function bindRemoveReview($target) {
+  function removeReview(review_id) {
+    $.ajax({
+      url: `/api/${review_id}/operationReview`,
+      method: "DELETE",
+      headers: {
+        "X-CSRFToken": $("#csrf-token").attr("content"),
+      },
+      success: function (_response) { window.location.href = `/${place_id}/detalhe`;},
+      error: function (xhr, _status, _error) {
+        console.error(xhr.responseText);
+      },
+    });
+  }
 
+  $target.click(function () {
+    const reviewID = $(this).attr("review");
+    removeReview(reviewID);
+    console.log( $(`#review-${reviewID}`))
+    $(`#review-${reviewID}`).remove();
+  });
+}
 
-  

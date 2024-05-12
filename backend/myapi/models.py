@@ -13,7 +13,7 @@ class Tag(models.Model):
 
 class Utilizador(models.Model):
     birthday = models.DateField()
-    profileImage = models.ImageField(default="")
+    profileImage = models.ImageField(default="/images/no-profile-img.png")
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -32,9 +32,8 @@ class Place(models.Model):
 
     def updateRating(self):
         reviews = Review.objects.filter(placeID=self)
-        self.rating = reviews.aggregate(total_rating=Sum("rating"))[
-            "total_rating"
-        ] / len(reviews)
+        totalRating = reviews.aggregate(total_rating=Sum("rating"))["total_rating"]
+        self.rating = totalRating / len(reviews) if totalRating is not None else 0
         self.save()
 
     def getRatingRange(self):
