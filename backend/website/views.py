@@ -292,7 +292,7 @@ def getExtension(file):
 
 def isTextOfensive(text):
     palavrao = re.compile(
-        r"((?i)\bm[e3]rd\S+\b)|(?i)\bb[o0]st\S+\b|(?i)\bput[^r]\S*\b|(?i)\bp[o0]rr[a@4]\S*\b|(?i)\bc[uú](\b|z\w+)|(?i)\bv[i1](nh)?[a@4]d[^u]\S*\b|(?i)\b[kc][o0a@4]?r[o0a@4]?l[hi]?[o0a@4]?\S*\b|(?i)\bf[o0u]d\S+\b|\b[fF](\.)?[dD](\.)?[pP]\b|\b[Pp](\.)?[Qq](\.)?[pP]\b|\b[Vv][Ss][Ff]\b|\b[Vv][Tt][Nn][Cc]\b|(?i)b[o0u]c[e3]t\S+\b|(?i)\bpunh[e3]t\S+\b|(?i)\bb[i1](ch|x)[a@4]s?\b|\b(?i)c[o0]c[0ô]s?\b|\b(?i)[e3]scr[o0]t\S+\b|(?i)\bb[a@4]b[a@4][qc]\S+\b|(?i)\bc[a@4]g\S+\b|(?i)\bs[a@4]c[a@4]n[a@4e31i]\S*\b|(?i)\bk[a@4]c[e3]?t[e3]?\S*\b"
+        r"(?i)((\bm[e3]rd\S+\b)|(\bb[o0]st\S+\b)|(\bput[^r]\S*\b)|(\bp[o0]rr[a@4]\S*\b)|(\bc[uú](\b|z\w+))|(\bv[i1](nh)?[a@4]d[^u]\S*\b)|(\b[kc][o0a@4]?r[o0a@4]?l[hi]?[o0a@4]?\S*\b)|(\bf[o0u]d\S+\b)|(\b[fF](\.)?[dD](\.)?[pP]\b)|(\b[Pp](\.)?[Qq](\.)?[pP]\b)|(\b[Vv][Ss][Ff]\b)|(\b[Vv][Tt][Nn][Cc]\b)|(\bb[o0u]c[e3]t\S+\b)|(\bpunh[e3]t\S+\b)|(\bb[i1](ch|x)[a@4]s?\b)|(\bc[o0]c[0ô]s?\b)|(\b[e3]scr[o0]t\S+\b)|(\bb[a@4]b[a@4][qc]\S+\b)|(\bc[a@4]g\S+\b)|(\bs[a@4]c[a@4]n[a@4e31i]\S*\b)|(\bk[a@4]c[e3]?t[e3]?\S*\b))"
     )
     palavroes = list(filter(palavrao.match, text.split(" ")))
     return len(palavroes) >= 1
