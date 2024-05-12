@@ -64,8 +64,15 @@
         <h4>Descrição</h4>
         <p id="description-place"class="remove-input-default place-detail-description" name="description" value="{{ place.description }}" disabled></p>
         
-        <h4>Reviews</h4>
-        <a href="{% url 'website:criarReview' place.id %}" ><p>Criar review!</p></a>
+        <h4>Reviews</h4>  
+        <section class="add-review">
+            <label>
+                Adicionar uma review
+            </label>
+            <a href="{% url 'website:criarReview' place.id %}" >
+                <img src="{% static 'images/plus.png'%}">
+            </a>
+        </section>
         <ul class="reviews">
             {% for review in reviews %}
             <li>
