@@ -1,12 +1,14 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Tag from "./Tag";
+import backendURL from "../api";
 
 interface LocationCardProps {
     place : Place;
 }
-const backendUrl = import.meta.env.VITE_BACKEND_URL
+ 
 
+const token = localStorage.getItem('token');
 
 
 const LocationCard = ({place} : LocationCardProps) => {
@@ -16,17 +18,30 @@ const LocationCard = ({place} : LocationCardProps) => {
   useEffect(() => {
     async function fetchTags() {
       const {data} = await 
-      axios.get(`${backendUrl}/api/${place.id}/getBestTags`,
+      axios.get(`${backendURL}/api/${place.id}/getBestTags`,
         {
           params: {
-            per_page: 3
+            limit: 3
           }
         })
       if(data){
         setTags(data.result);
       }    
     }
+    async function fetchIsFavorite() {
+      const {data} = await 
+      axios.get(`${backendURL}/api/${place.id}/favorite`,{
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      }
+      )
+      if(data){
+        setIsFavorite(data.result)
+      }    
+    }
     fetchTags()
+    fetchIsFavorite()
   },[])
 
 
@@ -41,8 +56,7 @@ const LocationCard = ({place} : LocationCardProps) => {
 
   async function likeOrUnlike() {
     setIsFavorite(!isFavorite);
-    const token = localStorage.getItem('token');
-    const response =  await axios.post(`${backendUrl}/api/${place.id}/favorite`,{},
+    const response =  await axios.post(`${backendURL}/api/${place.id}/favorite`,{},
     {
       headers: {
         'Authorization': `Bearer ${token}`
@@ -65,8 +79,7 @@ const LocationCard = ({place} : LocationCardProps) => {
         </div> 
       </aside>
       <figure className="place-image-container">
-        {/* <img src={"https://media.istockphoto.com/id/1354776457/vector/default-image-icon-vector-missing-picture-page-for-website-design-or-mobile-app-no-photo.jpg?s=612x612&w=0&k=20&c=w3OW0wX3LyiFRuDHo9A32Q0IUMtD4yjXEvQlqyYk9O4="} alt="place"/> */}
-        <img src={`${backendUrl}/static${place.mainImage}`} alt="place"/>
+        <img src={`${backendURL}/static${place.mainImage}`} alt="place"/>
           <svg onClick={() => likeOrUnlike()} style={{display:(isFavorite ?  "" : "none")}}  className="heart" width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#e42121" transform="rotate(0)"><g id="SVGRepo_bgCarrier" strokeWidth="0"/><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"/><g id="SVGRepo_iconCarrier"> <path d="M2 9.1371C2 14 6.01943 16.5914 8.96173 18.9109C10 19.7294 11 20.5 12 20.5C13 20.5 14 19.7294 15.0383 18.9109C17.9806 16.5914 22 14 22 9.1371C22 4.27416 16.4998 0.825464 12 5.50063C7.50016 0.825464 2 4.27416 2 9.1371Z" fill="#e42121"/> </g></svg>
           <svg onClick={() => likeOrUnlike()} style={{display:(!isFavorite ?  "" : "none")}} className="heart" width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fillRule="evenodd" clipRule="evenodd" d="M12 6.00019C10.2006 3.90317 7.19377 3.2551 4.93923 5.17534C2.68468 7.09558 2.36727 10.3061 4.13778 12.5772C5.60984 14.4654 10.0648 18.4479 11.5249 19.7369C11.6882 19.8811 11.7699 19.9532 11.8652 19.9815C11.9483 20.0062 12.0393 20.0062 12.1225 19.9815C12.2178 19.9532 12.2994 19.8811 12.4628 19.7369C13.9229 18.4479 18.3778 14.4654 19.8499 12.5772C21.6204 10.3061 21.3417 7.07538 19.0484 5.17534C16.7551 3.2753 13.7994 3.90317 12 6.00019Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path> </g></svg>                 
       </figure>

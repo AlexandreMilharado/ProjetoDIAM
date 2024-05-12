@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Header from "./components/Header";
-import Login from "./components/Login";
+import Login from "./routes/Login";
 
 function App() {
 

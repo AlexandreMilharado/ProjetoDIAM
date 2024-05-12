@@ -132,37 +132,59 @@ header .menu-toggle{
   height: auto;
 }
 
-header nav {
-  display: flex;
-  height: 100%;
-  align-items: center;
-  margin-left: 30%;
+.header-menu  {
   width: 100%;
+  height: 100%;
+  font-size: 30px;
+  font-weight: 500;
+  z-index: 900;
+  position: absolute;
+  top: 0;
+  right: 0;
+  transition: all ease-out 500ms;  
+  background-color: rgba(255, 255, 255, 0.916);
 
-  &>* {
-    
+  & figure {
+    width: 100%;
+    height: 15rem;
+    display:flex ;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    color: var(--secondarybg-color);
+    & svg {
+      width: 3rem;
+      animation: spin 2s linear infinite;
+    }
+  }
+
+  & .close-button {
+    position: absolute;
+    width: 2.5rem;
+    color: rgb(208, 59, 59);
+    top: 25px;
+    right: 18px;
+  }
+
+  & .menu-button {
+    width: 100%;
+    height: 6rem;
     display: flex;
-    justify-content: space-around;
-    flex-grow: 1;
+    font-size: 25px;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--secondarybg-color);
+    color: var(--primarybg-color);
   }
 }
 
-header nav a {
-  cursor: pointer;
-  color: white;
-  text-decoration: none;
-  white-space: nowrap;
-  font-size: 20px;
-  transition: ease 200ms;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  text-align: center;
+.header-menu.hidden {
+  right: -110%;
 }
-header nav a:hover {
-  color: var(--text-primary);
-  background-color: var(--primarybg-color);
-}
+
+
+
 
 
 .footer {
@@ -278,17 +300,20 @@ header nav a:hover {
 }
 
 .login {
-  width: 100vw;
+  width: 100lvw;
   height: 100vh;
+  padding: 10rem 10px;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: var(--primarybg-color);
   background-image: linear-gradient(rgba(0, 0, 0, 0.21), rgba(0, 0, 0, 0.182)),
-    url("https://upload.wikimedia.org/wikipedia/commons/f/f8/View_of_the_Alfama_quarter_in_Lisbon_Portugal.JPG");
+  url("https://upload.wikimedia.org/wikipedia/commons/f/f8/View_of_the_Alfama_quarter_in_Lisbon_Portugal.JPG");
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
   background-size: cover; /* Resize the background image to cover the entire container */
 }
+
 
 .login form {
   background-color: white;
@@ -1034,8 +1059,9 @@ header nav a:hover {
   padding-left: 0;
 }
 
-.hidden {
-  display: none;
+
+.main-page-title {
+  margin: 1rem 0 0  0.5rem;
 }
 
 .titles {

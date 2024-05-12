@@ -30,7 +30,14 @@ def favoritePlace(request, place_id):
     place = get_object_or_404(Place, pk=place_id)
     match request.method:
         case "GET":
-            return Response({"result": place.isFavoritePlace(request.user)})
+            user = request.user
+            if not user.is_authenticated and request.META.get("HTTP_AUTHORIZATION"):
+                try:
+                    token = Token.objects.get(key=request.META.get("HTTP_AUTHORIZATION").split(" ")[1])
+                    user = token.user
+                except Token.DoesNotExist:
+                    pass
+            return Response({"result": place.isFavoritePlace(user)})
 
         case "POST":
 
