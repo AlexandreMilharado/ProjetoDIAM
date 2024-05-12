@@ -42,7 +42,7 @@ def loginView(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                request.session["votos"] = 0  # TODO Retirar e meter outra coisa
+                request.session["incorrecoes"] = 0
                 reverseTo = request.environ["HTTP_REFERER"].split("=")
                 firstTimeLoginSuperUser(user)
                 return HttpResponseRedirect(
@@ -93,7 +93,6 @@ def profile(request):
         try:
             request.user.utilizador.email = request.POST["email"]
             request.user.username = request.POST["username"]
-            print("birthday" + request.POST["birthday"])
             request.user.utilizador.birthday = request.POST["birthday"]
             request.user.set_password(request.POST["password"])
             request.user.utilizador.save()
@@ -132,8 +131,10 @@ def myPlaces(request):
             or isTextOfensive(location)
             or isTextOfensive(description)
         ):
+            request.session["incorrecoes"] += 1
+            incorrecoes = request.session["incorrecoes"]
             context["modalMessage"] = {
-                "msg": "Texto previamente inserido é potencialmente ofensivo",
+                "msg": f"Texto previamente inserido é potencialmente ofensivo.\nNúmero de incorreções: {incorrecoes}",
                 "image": "/images/censorship.svg",
             }
         else:
@@ -173,6 +174,19 @@ def createTag(request):
         try:
             tagName = request.POST["tagName"]
             t = Tag(name=tagName)
+            if isTextOfensive(tagName):
+                request.session["incorrecoes"] += 1
+                incorrecoes = request.session["incorrecoes"]
+                return render(
+                    request,
+                    "website/createTag.html",
+                    {
+                        "modalMessage": {
+                            "msg": f"Texto previamente inserido é potencialmente ofensivo.\nNúmero de incorreções: {incorrecoes}",
+                            "image": "/images/censorship.svg",
+                        }
+                    },
+                )
             t.save()
         except KeyError:
             return render(
@@ -214,6 +228,20 @@ def criarReview(request, place_id):
         try:
             comment = request.POST["comment"]
             rating = request.POST["rating"]
+            if isTextOfensive(comment):
+                request.session["incorrecoes"] += 1
+                incorrecoes = request.session["incorrecoes"]
+                return render(
+                    request,
+                    "website/editCreateReview.html",
+                    {
+                        "modalMessage": {
+                            "msg": f"Texto previamente inserido é potencialmente ofensivo.\nNúmero de incorreções: {incorrecoes}",
+                            "image": "/images/censorship.svg",
+                        },
+                        "placeId": place_id,
+                    },
+                )
         except KeyError:
             pass
 
@@ -253,6 +281,24 @@ def editarPlace(request, place_id):
             place.title = request.POST["title"]
             place.location = request.POST["location"]
             place.description = request.POST["description"]
+            if (
+                isTextOfensive(place.title)
+                or isTextOfensive(place.location)
+                or isTextOfensive(place.description)
+            ):
+                request.session["incorrecoes"] += 1
+                incorrecoes = request.session["incorrecoes"]
+                return render(
+                    request,
+                    "website/editarPlace.html",
+                    {
+                        "modalMessage": {
+                            "msg": f"Texto previamente inserido é potencialmente ofensivo.\nNúmero de incorreções: {incorrecoes}",
+                            "image": "/images/censorship.svg",
+                        },
+                        "place": place,
+                    },
+                )
             TagPlace.objects.filter(placeID=place).delete()
             addTagsToPlace(request, place)
             image = request.FILES["image"]

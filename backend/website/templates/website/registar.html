@@ -10,7 +10,7 @@
     <title>OnSpot</title>
 </head>
 <body>
-    <section class="login" >
+    <main class="login" >
         <form action="{% url 'website:registar' %}" method="POST" autocomplete="off">
         {% csrf_token %}
             <a href="{% url 'website:login' %}">Log in</a>
@@ -31,25 +31,25 @@
           <p style="color:firebrick">{{error_message}} </p>
            {% endif %}
       
-           <div class="input-box">
+           <section class="input-box">
                <input id="email"  class="form-input" name="email" type="email" placeholder=" " required/>
                <label for="email" class="form-label">Email </label>
-           </div>
-           <div class="input-box">
+           </section>
+           <section class="input-box">
                <input id="usernameInput"  class="form-input" name="username" type="text" placeholder=" " required/>
                <label for="usernameInput" class="form-label">Username </label>
-           </div>
-           <div class="input-box">
+           </section>
+           <section class="input-box">
                <input id="birthdayInput"  class="form-input" name="birthday" type="date" placeholder=" " />
                <label for="birthdayInput" class="form-label">Birthday </label>
-           </div>
-           <div class="input-box">
+           </section>
+           <section class="input-box">
               <input id="passwordInput" class="form-input" name="password" type="password" placeholder=" " required/>
             <label for="passwordInput" class="form-label">Password</label>
-          </div>
+          </section>
           <button type="submit">Create User</button>
         </form>
-      </section>
+      </main>
     
 </body>
 </html>
